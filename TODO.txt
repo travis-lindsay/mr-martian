@@ -1,0 +1,32 @@
+TODO (Travis, Jared, or Derek):
+	- Add limitation to the tile the user can select, they should only be able to select those they are adjacent to (as of now, they can click/interact with anything)
+	- Create "Completed Building Dashboard", e.g. a menu that pops up when you click on one of your completed (i.e. no longer under construction) buildings
+		- I envision a modal, (similar to others that pop up for selecting which one to build, and construction), but that contain options for what you can do with it
+		- E.g. if you built a "Mine", and you click on it it will open a modal with a 'mine' button, that allows you to mine resources, as well as maybe some other upgrade options or whatever we dream up
+	- Build out the "Player inventory"
+		- Not quite sure how we want to do this... Maybe some small thumbnails of the items you have in the "inventory" section, or maybe another screen pops up with more details when you click some "view inventory" button
+	- Add some sort of "End Game" state, E.g. after X amount of sols passes by, the game ends (the ship arrives) and determine who wins the game
+	- Make the random ship crashes randomly occur at different moments in the game, (after some x amount of turns it happens)
+		- Make the ship carry some random inventory item
+	
+
+
+
+TODO (LINDSAY, or anyone else if they are feeling creative):
+
+(Images that need to be created)
+Note: Please make all images 100 X 100 px unless otherwise specified
+Note: Please make all images with a transparent background, and center the non transparent part, (so things don't look misaligned when placed in the game)
+
+	BUILDINGS:
+		- Shelter, (I envision a cave, a shanty little shack, and some metal shelter)
+		- Well, (whatever you want it to look like :D, upgrades could maybe just have a real big bucket ;)
+		- Farm, (tilled soil with small green plants coming out, upgrades having bigger plants, and maybe sprinklers :D
+		- Mine, (maybe just the rock with a pickaxe on it, or a mine cart... I dunno)
+		- Lab, (something with some beakers, or lab looking things)
+		
+		- Construction image, just a general one for all building under construction for now
+		  (I imagine possibly some cones, or some other generic construction stuff...)
+      
+
+    
