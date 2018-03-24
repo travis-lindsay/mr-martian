@@ -1,12 +1,13 @@
 class Mine {
 
-    constructor(player) {
+    constructor(player, coordinate) {
         this.name = "Mine";
         this.type = "Place";
         this.img = "./IMG/materials/stone.png";
         this.desc = "Open pit mine for extracting iron ore from the rusted crust.";
 
         this.player = player;
+        this.coordinate = coordinate;
 
         // Time to construct the Farm
         this.totalHoursToConstruct = 26;
@@ -26,6 +27,9 @@ class Mine {
     construct() {
         if (this.player.clock.getIsDone() || this.getIsConstructed()) {
             // Then don't let them construct anymore, and close the window
+            if (this.getIsConstructed()) {
+                removeImageFromCoordinate('CONSTRUCTION', this.coordinate);
+            }
             gameApp.closeConstructionPanel();
         }
         else {

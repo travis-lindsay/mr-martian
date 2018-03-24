@@ -1,12 +1,13 @@
 class Farm {
 
-    constructor(player) {
+    constructor(player, coordinate) {
         this.name = "Farm";
         this.type = "Place";
         this.img = "./IMG/materials/food.png";
         this.desc = "Rudimentary farm made of the finest dust on Mars. Requires water and fertilizer to grow.";
 
         this.player = player;
+        this.coordinate = coordinate;
 
         // Time to construct the Farm
         this.totalHoursToConstruct = 14;
@@ -26,6 +27,9 @@ class Farm {
     
     construct() {
         if (this.player.clock.getIsDone() || this.getIsConstructed()) {
+            if (this.getIsConstructed()) {
+                removeImageFromCoordinate('CONSTRUCTION', this.coordinate);
+            }
             // Then don't let them construct anymore, and close the window
             gameApp.closeConstructionPanel();
         }

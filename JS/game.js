@@ -170,21 +170,22 @@ window.onload = function() {
 			},
 			constructBuiding: function(place) {
 				if (!this.tileMap.getTile(this.lastClickedTileCoord.getYCoordinate(), this.lastClickedTileCoord.getXCoordinate()).hasBuilding()) {
+					let coordinate = new Coordinate(this.lastClickedTileCoord.getXCoordinate(), this.lastClickedTileCoord.getYCoordinate());
 					switch (place) {
 						case "well":
-							this.currentBuilding = new Well(this.currentPlayer);
+							this.currentBuilding = new Well(this.currentPlayer, coordinate);
 							break;
 						case "shelter":
-							this.currentBuilding = new Shelter(this.currentPlayer);
+							this.currentBuilding = new Shelter(this.currentPlayer, coordinate);
 							break;
 						case "mine":
-							this.currentBuilding = new Mine(this.currentPlayer);
+							this.currentBuilding = new Mine(this.currentPlayer, coordinate);
 							break;
 						case "lab":
-							this.currentBuilding = new Lab(this.currentPlayer);
+							this.currentBuilding = new Lab(this.currentPlayer, coordinate);
 							break;
 						case "farm":
-							this.currentBuilding = new Farm(this.currentPlayer);
+							this.currentBuilding = new Farm(this.currentPlayer, coordinate);
 							break;
 						default:
 							console.log("no place specified");
@@ -192,10 +193,10 @@ window.onload = function() {
 					this.tileMap.getTile(this.lastClickedTileCoord.getYCoordinate(), this.lastClickedTileCoord.getXCoordinate())
 						.setBuilding(this.currentBuilding);
 					// TODO, add img of building being constructed to tile
-					this.addImageToCoordinate(this.currentBuilding.img, this.lastClickedTileCoord);
-					//this.buildOptionVisible = false;
+					addImageToCoordinate("IMG/spaceman/corner" + this.currentPlayer.number + ".png", this.lastClickedTileCoord, 'CORNER');
+					addImageToCoordinate(this.currentBuilding.img, this.lastClickedTileCoord, 'IMG');
+					addImageToCoordinate("IMG/Construction.png", this.lastClickedTileCoord, 'CONSTRUCTION');
 					$("#buildOptionsModal").modal("hide");
-					// this.buildingConstructionVisible = true;
 					$("#constructionModal").modal("show");
 				}
 			},
@@ -209,14 +210,6 @@ window.onload = function() {
 			},
 			incrementSol: function() {
 				this.sol += 1;
-			},
-			addImageToCoordinate: function(imgPath, coord) {
-				var tiles = document.getElementById(coord.getYCoordinate() + '_' + coord.getXCoordinate());
-				var img = document.createElement("IMG");
-				img.src = imgPath;
-				img.classList.add("genericIMG");
-				img.id = coord.getYCoordinate() + '_' + coord.getXCoordinate() + '_IMG';
-				tiles.appendChild(img);
 			},
 			pickPlayers: function(numPlayers) {
 				for (var i = 0; i < numPlayers; i++) {
