@@ -92,6 +92,10 @@ p {
     left: 10px;
 }
 
+.itemStats {
+    color: #ee4a00;
+}
+
 .itemHeader {
     color: #c5c4c4;
 }

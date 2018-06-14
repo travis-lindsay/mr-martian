@@ -127,8 +127,7 @@ window.onload = function() {
 							$("#constructionModal").modal("show");
 						}
 						else {
-							// TODO, open the building specific panel
-							alert("this building is complete");
+							$("#placeActionsModal").modal("show");
 						}
 					} else {
 						// TODO, determine what the other players can do to your buildings
@@ -192,7 +191,6 @@ window.onload = function() {
 					}
 					this.tileMap.getTile(this.lastClickedTileCoord.getYCoordinate(), this.lastClickedTileCoord.getXCoordinate())
 						.setBuilding(this.currentBuilding);
-					// TODO, add img of building being constructed to tile
 					addImageToCoordinate("IMG/spaceman/corner" + this.currentPlayer.number + ".png", this.lastClickedTileCoord, 'CORNER');
 					addImageToCoordinate(this.currentBuilding.img, this.lastClickedTileCoord, 'IMG');
 					addImageToCoordinate("IMG/Construction.png", this.lastClickedTileCoord, 'CONSTRUCTION');

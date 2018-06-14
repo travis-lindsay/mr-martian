@@ -3,7 +3,7 @@ class Mine {
     constructor(player, coordinate) {
         this.name = "Mine";
         this.type = "Place";
-        this.img = "./IMG/materials/stone.png";
+        this.img = "./IMG/places/mine1.png";
         this.desc = "Open pit mine for extracting iron ore from the rusted crust.";
 
         this.player = player;

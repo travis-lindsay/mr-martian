@@ -118,19 +118,19 @@
                                             <div class="col buildOptionCell"
                                                  v-on:mouseover="updateDescription('shelter')"
                                                  @click="constructBuiding('shelter')">
-                                                <img class="buildOptionImage" src="./IMG/materials/wood.png">
+                                                <img class="buildOptionImage" src="./IMG/places/shelter1.png">
                                             </div>
                                             <div class="col buildOptionCell" v-on:mouseover="updateDescription('well')"
                                                  @click="constructBuiding('well')">
-                                                <img class="buildOptionImage" src="./IMG/materials/water.png">
+                                                <img class="buildOptionImage" src="./IMG/places/well1.png">
                                             </div>
                                             <div class="col buildOptionCell" v-on:mouseover="updateDescription('farm')"
                                                  @click="constructBuiding('farm')">
-                                                <img class="buildOptionImage" src="./IMG/roverparts/roverwheel.png">
+                                                <img class="buildOptionImage" src="./IMG/places/farm1.png">
                                             </div>
                                             <div class="col buildOptionCell" v-on:mouseover="updateDescription('mine')"
                                                  @click="constructBuiding('mine')">
-                                                <img class="buildOptionImage" src="./IMG/materials/stone.png">
+                                                <img class="buildOptionImage" src="./IMG/places/mine1.png">
                                             </div>
                                             <div class="col buildOptionCell" v-on:mouseover="updateDescription('lab')"
                                                  @click="constructBuiding('lab')">
@@ -176,6 +176,50 @@
                             <span> {{ hoveredBuildingDescription }} </span>
                         </div>
                     </div>-->
+
+                    <!-- Place Action Modal -->
+                    <div class="modal fade" id="placeActionsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content" style="max-width: 700px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 10px 20px 0 rgba(5, 5, 5, 0.19); background-color: rgba(50, 50, 50, 0.86); border: solid 1px gray;">
+                                <div class="modal-header" style="border-bottom: solid #a0421e 4px;">
+                                    <h3 class="modal-title" style="color: white;" id="exampleModalLongTitle">{{ currentBuilding.name }}</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+                                        <div class="row align-items-center">
+                                            <div class="col-3">
+                                                <img v-bind:src="currentBuilding.img">
+                                            </div>
+                                            <div class="col-9">
+                                                <div class="row justify-content-center">
+                                                    <span v-show="currentBuilding.totalResourceCount" class="col-12">
+                                                        <b class="itemHeader">Resources: </b>
+                                                        <span>{{ currentBuilding.totalResourceCount - currentBuilding.minedResourceCount }}</span>
+                                                    </span>
+                                                    <span v-show="currentBuilding.resourcePerHour" class="col-12">
+                                                        <b class="itemHeader">Harvest Rate: </b>
+                                                        <span>{{ currentBuilding.resourcePerHour }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer" style="border-top: solid #1d1c1c 2px;">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-info" @click="currentBuilding.mineResource();">
+                                        Harvest
+                                    </button>
+                                    <button type="button" class="btn btn-primary" @click="currentBuilding.upgrade();">
+                                        Upgrade
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Construction Modal -->
                     <div class="modal fade" id="constructionModal" tabindex="-1" role="dialog"

@@ -8,7 +8,10 @@ TODO (Travis, Jared, or Derek):
 	- Add some sort of "End Game" state, E.g. after X amount of sols passes by, the game ends (the ship arrives) and determine who wins the game
 	- Make the random ship crashes randomly occur at different moments in the game, (after some x amount of turns it happens)
 		- Make the ship carry some random inventory item
-	
+	- Add in some sort of "daily penalty/reward" functionality, that displays some sort of modal at the beginning of each players turn
+	  showing them any health penalties (from not being in their shelter or something), food and water consumption, other random events that happened to them.
+    - Travis: Play around with 'decorator' design pattern in Javascript to see about implementing it for the game as there are quite a few 'upgrade' options we'll be playing around with
+
 
 
 

@@ -3,7 +3,7 @@ class Shelter {
     constructor(player, coordinate) {
         this.name = "Shelter";
         this.type = "Place";
-        this.img = "./IMG/buildings/shelter.png";
+        this.img = "./IMG/places/shelter1.png";
         this.desc = "Necessary for survival in the harsh and unpredictable environment of Mars.";
 
         // take a player object, so we can assign an owner of the place, as well as manipulate the clock upon construction

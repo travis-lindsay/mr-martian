@@ -3,7 +3,7 @@ class Farm {
     constructor(player, coordinate) {
         this.name = "Farm";
         this.type = "Place";
-        this.img = "./IMG/materials/food.png";
+        this.img = "./IMG/places/farm1.png";
         this.desc = "Rudimentary farm made of the finest dust on Mars. Requires water and fertilizer to grow.";
 
         this.player = player;
@@ -36,7 +36,29 @@ class Farm {
         else {
             this.currentHoursConstructed += 1;
             this.currentHoursRemaining -= 1;
-            this.player.clock.incrementTimeUsed();
+            this.incrementPlayerClock();
         }
+    }
+
+    incrementPlayerClock() {
+        this.player.clock.incrementTimeUsed();
+    }
+
+    /* Returns number of resources gained */
+    harvest() {
+        this.totalResourceCount - this.resourcePerHour;
+        this.incrementPlayerClock();
+        return this.resourcePerHour;
+    }
+
+    /* Plants new stuff */
+    plantSeeds() {
+        // TODO, grab seeds from inventory
+        // TODO, figure out how we want to implement the farming stuff
+    }
+
+    waterSeeds() {
+        // TODO, take water from players inventory
+        // TODO, create plant class? Tracks water/fertilizer needs
     }
 }
