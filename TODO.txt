@@ -1,17 +1,14 @@
 TODO (Travis, Jared, or Derek):
 	- Add limitation to the tile the user can select, they should only be able to select those they are adjacent to (as of now, they can click/interact with anything)
-	- Create "Completed Building Dashboard", e.g. a menu that pops up when you click on one of your completed (i.e. no longer under construction) buildings
-		- I envision a modal, (similar to others that pop up for selecting which one to build, and construction), but that contain options for what you can do with it
-		- E.g. if you built a "Mine", and you click on it it will open a modal with a 'mine' button, that allows you to mine resources, as well as maybe some other upgrade options or whatever we dream up
-	- Build out the "Player inventory"
+    - Build out the "Player inventory"
 		- Not quite sure how we want to do this... Maybe some small thumbnails of the items you have in the "inventory" section, or maybe another screen pops up with more details when you click some "view inventory" button
 	- Add some sort of "End Game" state, E.g. after X amount of sols passes by, the game ends (the ship arrives) and determine who wins the game
 	- Make the random ship crashes randomly occur at different moments in the game, (after some x amount of turns it happens)
 		- Make the ship carry some random inventory item
 	- Add in some sort of "daily penalty/reward" functionality, that displays some sort of modal at the beginning of each players turn
-	  showing them any health penalties (from not being in their shelter or something), food and water consumption, other random events that happened to them.
+	  showing them any health] penalties (from not being in their shelter or something), food and water consumption, other random events that happened to them.
     - Travis: Play around with 'decorator' design pattern in Javascript to see about implementing it for the game as there are quite a few 'upgrade' options we'll be playing around with
-
+    - Travis: Add construction modal for upgrades as well
 
 
 

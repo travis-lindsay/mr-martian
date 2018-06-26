@@ -117,24 +117,24 @@
                                         <div class="row">
                                             <div class="col buildOptionCell"
                                                  v-on:mouseover="updateDescription('shelter')"
-                                                 @click="constructBuiding('shelter')">
+                                                 @click="constructBuilding('shelter')">
                                                 <img class="buildOptionImage" src="./IMG/places/shelter1.png">
                                             </div>
                                             <div class="col buildOptionCell" v-on:mouseover="updateDescription('well')"
-                                                 @click="constructBuiding('well')">
+                                                 @click="constructBuilding('well')">
                                                 <img class="buildOptionImage" src="./IMG/places/well1.png">
                                             </div>
                                             <div class="col buildOptionCell" v-on:mouseover="updateDescription('farm')"
-                                                 @click="constructBuiding('farm')">
+                                                 @click="constructBuilding('farm')">
                                                 <img class="buildOptionImage" src="./IMG/places/farm1.png">
                                             </div>
                                             <div class="col buildOptionCell" v-on:mouseover="updateDescription('mine')"
-                                                 @click="constructBuiding('mine')">
+                                                 @click="constructBuilding('mine')">
                                                 <img class="buildOptionImage" src="./IMG/places/mine1.png">
                                             </div>
                                             <div class="col buildOptionCell" v-on:mouseover="updateDescription('lab')"
-                                                 @click="constructBuiding('lab')">
-                                                <img class="buildOptionImage" src="./IMG/roverparts/roverengine.png">
+                                                 @click="constructBuilding('lab')">
+                                                <img class="buildOptionImage" src="./IMG/places/lab1.png">
                                             </div>
                                         </div>
                                         <div class="row" style="min-height: 120px;">
@@ -162,11 +162,11 @@
                         <div class="buildOptions text-center">
                             <table>
                                 <tr>
-                                    <td class="buildOptionCell" v-on:mouseover="updateDescription('shelter')" @click="constructBuiding('shelter')"><img src="./IMG/materials/wood.png"></td>
-                                    <td class="buildOptionCell" v-on:mouseover="updateDescription('well')" @click="constructBuiding('well')"><img src="./IMG/materials/water.png"></td>
-                                    <td class="buildOptionCell" v-on:mouseover="updateDescription('farm')" @click="constructBuiding('farm')"><img src="./IMG/materials/food.png"></td>
-                                    <td class="buildOptionCell" v-on:mouseover="updateDescription('mine')" @click="constructBuiding('mine')"><img src="./IMG/materials/stone.png"></td>
-                                    <td class="buildOptionCell" v-on:mouseover="updateDescription('lab')" @click="constructBuiding('lab')"><img src="./IMG/roverparts/roverengine.png"></td>
+                                    <td class="buildOptionCell" v-on:mouseover="updateDescription('shelter')" @click="constructBuilding('shelter')"><img src="./IMG/materials/wood.png"></td>
+                                    <td class="buildOptionCell" v-on:mouseover="updateDescription('well')" @click="constructBuilding('well')"><img src="./IMG/materials/water.png"></td>
+                                    <td class="buildOptionCell" v-on:mouseover="updateDescription('farm')" @click="constructBuilding('farm')"><img src="./IMG/materials/food.png"></td>
+                                    <td class="buildOptionCell" v-on:mouseover="updateDescription('mine')" @click="constructBuilding('mine')"><img src="./IMG/materials/stone.png"></td>
+                                    <td class="buildOptionCell" v-on:mouseover="updateDescription('lab')" @click="constructBuilding('lab')"><img src="./IMG/roverparts/roverengine.png"></td>
                                 </tr>
                             </table>
                         </div>
@@ -210,10 +210,10 @@
                                 </div>
                                 <div class="modal-footer" style="border-top: solid #1d1c1c 2px;">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-info" @click="currentBuilding.mineResource();">
+                                    <button v-show="currentBuilding.mineResource" type="button" class="btn btn-info" @click="currentBuilding.mineResource();">
                                         Harvest
                                     </button>
-                                    <button type="button" class="btn btn-primary" @click="currentBuilding.upgrade();">
+                                    <button v-show="currentBuilding.getCanUpgrade()" type="button" class="btn btn-primary" @click="currentBuilding.upgrade();">
                                         Upgrade
                                     </button>
                                 </div>
@@ -245,7 +245,7 @@
                                                     <div class="col-md-auto">
                                                         <span v-for="filled in currentBuilding.currentHoursConstructed"
                                                               class="constructionCellFilled"></span>
-                                                        <span v-for="empty in currentBuilding.currentHoursRemaining"
+                                                        <span v-for="empty in currentBuilding.totalHoursToConstruct - currentBuilding.currentHoursConstructed"
                                                               class="constructionCellEmpty"></span>
                                                     </div>
                                                 </div>

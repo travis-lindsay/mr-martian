@@ -6,12 +6,17 @@
     String id: string identifier to help access the image for future instances (e.g. document.getElementById("uniqueID"))
  */
 function addImageToCoordinate(imgPath, coord, id) {
-    var tiles = document.getElementById(coord.getYCoordinate() + '_' + coord.getXCoordinate());
-    var img = document.createElement("IMG");
-    img.src = imgPath;
-    img.classList.add("genericIMG");
-    img.id = coord.getYCoordinate() + '_' + coord.getXCoordinate() + '_' + id;
-    tiles.appendChild(img);
+    let existingImage = document.getElementById(coord.getYCoordinate() + '_' + coord.getXCoordinate() + '_' + id);
+    if (existingImage) {
+        existingImage.src = imgPath;
+    } else {
+        var tiles = document.getElementById(coord.getYCoordinate() + '_' + coord.getXCoordinate());
+        var img = document.createElement("IMG");
+        img.src = imgPath;
+        img.classList.add("genericIMG");
+        img.id = coord.getYCoordinate() + '_' + coord.getXCoordinate() + '_' + id;
+        tiles.appendChild(img);
+    }
 }
 
 /*

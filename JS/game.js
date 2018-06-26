@@ -92,10 +92,18 @@ window.onload = function() {
 					this.handlePlace(new Coordinate(x, y));
 				}
 			},
-			closeConstructionPanel: function() {
-				//this.buildingConstructionVisible = false;
-				$("#constructionModal").modal("hide");
-			},
+			closeConstructionModal: function() {
+                $("#constructionModal").modal("hide");
+            },
+            openConstructionModal: function() {
+                $("#constructionModal").modal("show");
+            },
+            closePlaceActionsModal: function() {
+                $("#placeActionsModal").modal("hide");
+            },
+            openPlaceActionsModal: function() {
+                $("#placeActionsModal").modal("show");
+            },
 			movePlayerTo: function(x, y) {
 				var currentCoord = this.currentPlayer.getCoordinate();
 				var destinationCoord = new Coordinate(x, y);
@@ -167,7 +175,7 @@ window.onload = function() {
 				}
 
 			},
-			constructBuiding: function(place) {
+			constructBuilding: function(place) {
 				if (!this.tileMap.getTile(this.lastClickedTileCoord.getYCoordinate(), this.lastClickedTileCoord.getXCoordinate()).hasBuilding()) {
 					let coordinate = new Coordinate(this.lastClickedTileCoord.getXCoordinate(), this.lastClickedTileCoord.getYCoordinate());
 					switch (place) {
