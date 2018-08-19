@@ -7,9 +7,10 @@ TODO (Travis, Jared, or Derek):
 		- Make the ship carry some random inventory item
 	- Add in some sort of "daily penalty/reward" functionality, that displays some sort of modal at the beginning of each players turn
 	  showing them any health] penalties (from not being in their shelter or something), food and water consumption, other random events that happened to them.
-    - Travis: Play around with 'decorator' design pattern in Javascript to see about implementing it for the game as there are quite a few 'upgrade' options we'll be playing around with
-    - Travis: Add construction modal for upgrades as well
-
+	- Build out the Shelter to have some sort of "sleep/rest/take-shelter" button instead of harvest
+	- Build out the Farm to possibly require some sort of "plowing/seeding/watering/harvesting" functionality
+	- Build out the Lab to require different materials for research, etc.
+	-
 
 
 TODO (LINDSAY, or anyone else if they are feeling creative):
@@ -18,15 +19,7 @@ TODO (LINDSAY, or anyone else if they are feeling creative):
 Note: Please make all images 100 X 100 px unless otherwise specified
 Note: Please make all images with a transparent background, and center the non transparent part, (so things don't look misaligned when placed in the game)
 
-	BUILDINGS:
-		- Shelter, (I envision a cave, a shanty little shack, and some metal shelter)
-		- Well, (whatever you want it to look like :D, upgrades could maybe just have a real big bucket ;)
-		- Farm, (tilled soil with small green plants coming out, upgrades having bigger plants, and maybe sprinklers :D
-		- Mine, (maybe just the rock with a pickaxe on it, or a mine cart... I dunno)
-		- Lab, (something with some beakers, or lab looking things)
-		
-		- Construction image, just a general one for all building under construction for now
-		  (I imagine possibly some cones, or some other generic construction stuff...)
-      
-
-    
+INVENTORY:
+    - Water icon
+    - Stone icon
+    - Etc...

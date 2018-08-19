@@ -55,6 +55,7 @@ class Well
     mineResource() {
         if (!this.getIsEmpty()) {
             this.incrementPlayerClock();
+            this.player.addWater(this.resourcePerHour);
             this.minedResourceCount += this.resourcePerHour;
             if (this.minedResourceCount > this.totalResourceCount) {
                 this.minedResourceCount = this.totalResourceCount;

@@ -56,6 +56,7 @@ class Farm {
     mineResource() {
         if (!this.getIsEmpty()) {
             this.incrementPlayerClock();
+            this.player.addFood(this.resourcePerHour);
             this.minedResourceCount += this.resourcePerHour;
             if (this.minedResourceCount > this.totalResourceCount) {
                 this.minedResourceCount = this.totalResourceCount;
