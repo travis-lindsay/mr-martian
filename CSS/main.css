@@ -9,6 +9,7 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    padding-right: 0 !important; /* This is to fix a weird issue with the bootstrap modal that adds padding-right everytime you open it */
 }
 
 td {

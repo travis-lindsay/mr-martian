@@ -53,6 +53,11 @@ class Well
     }
     
     mineResource() {
+        if (this.player.clock.getIsDone()) {
+            this.player.clock.resetClock(); // TODO, find a better approach, some sort of time controller / model pattern
+            gameApp.closeAllModals();
+            return;
+        }
         if (!this.getIsEmpty()) {
             this.incrementPlayerClock();
             this.player.addWater(this.resourcePerHour);

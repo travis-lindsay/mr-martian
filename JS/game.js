@@ -92,6 +92,10 @@ window.onload = function() {
 					this.handlePlace(new Coordinate(x, y));
 				}
 			},
+			closeAllModals: function() {
+				this.closePlaceActionsModal();
+				this.closeConstructionModal();
+			},
 			closeConstructionModal: function() {
                 $("#constructionModal").modal("hide");
             },

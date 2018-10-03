@@ -47,6 +47,11 @@ class Lab {
     }
 
     mineResource() {
+        if (this.player.clock.getIsDone()) {
+            this.player.clock.resetClock();
+            gameApp.closeAllModals();
+            return;
+        }
         if (!this.getIsEmpty()) {
             this.incrementPlayerClock();
             this.minedResourceCount += this.resourcePerHour;

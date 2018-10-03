@@ -6,12 +6,15 @@ TODO (Travis, Jared, or Derek):
 	- Make the random ship crashes randomly occur at different moments in the game, (after some x amount of turns it happens)
 		- Make the ship carry some random inventory item
 	- Add in some sort of "daily penalty/reward" functionality, that displays some sort of modal at the beginning of each players turn
-	  showing them any health] penalties (from not being in their shelter or something), food and water consumption, other random events that happened to them.
+	  showing them any health penalties (from not being in their shelter or something), food and water consumption, other random events that happened to them.
 	- Build out the Shelter to have some sort of "sleep/rest/take-shelter" button instead of harvest
 	- Build out the Farm to possibly require some sort of "plowing/seeding/watering/harvesting" functionality
 	- Build out the Lab to require different materials for research, etc.
 	-
 
+BUG Fixes:
+    - Fix the issue with the player clock that doesn't make it the other players turn once your "day" is up until you click somewhere else
+    -
 
 TODO (LINDSAY, or anyone else if they are feeling creative):
 

@@ -9,9 +9,13 @@ class Clock {
         if (!this.getIsDone()) {
             this.usedTime += 1;
         } else {
-            this.usedTime = 0;
-            gameApp.changeCurrentPlayer();
+            this.resetClock();
         }
+    }
+
+    resetClock() {
+        this.usedTime = 0;
+        gameApp.changeCurrentPlayer();
     }
     
     // For manually taking away time from player
