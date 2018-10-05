@@ -14,7 +14,9 @@ class Player {
         {
             this.health = 100;
             this.food = 10;
+            this.foodRation = 3;
             this.water = 10;
+            this.waterRation = 4;
             this.morale = 5;
             this.suppliesList = "empty";
             this.supplies = [null];

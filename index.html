@@ -100,13 +100,14 @@
                 </div>
                 <clockpanel :time="currentPlayer.clock.usedTime">
                 </clockpanel>
+                <button class="btn btn-dark" style="margin-top: 15px;" @click="openTurnResultsModal">Mission Progress</button>
             </div>
             <!-- Middle Column Containing Main Screens-->
             <div class="col-md-8 mainColumn">
                 <div class="row eventRow">
 
 
-                    <!-- Travis' rad build selection panel modal prototype thingy -->
+                    <!-- Build Selection Modal -->
                     <div class="modal fade" id="buildOptionsModal" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -156,27 +157,6 @@
                         </div>
                     </div>
 
-
-                    <!--	<div v-show="buildOptionVisible" id="buildOptionPanel" class="buildOptionsContainer">
-                        <div @click="buildOptionVisible = false"><span class="closeOptions">Close X</span></div>
-                        <div class="buildOptions text-center">
-                            <table>
-                                <tr>
-                                    <td class="buildOptionCell" v-on:mouseover="updateDescription('shelter')" @click="constructBuilding('shelter')"><img src="./IMG/materials/wood.png"></td>
-                                    <td class="buildOptionCell" v-on:mouseover="updateDescription('well')" @click="constructBuilding('well')"><img src="./IMG/materials/water.png"></td>
-                                    <td class="buildOptionCell" v-on:mouseover="updateDescription('farm')" @click="constructBuilding('farm')"><img src="./IMG/materials/food.png"></td>
-                                    <td class="buildOptionCell" v-on:mouseover="updateDescription('mine')" @click="constructBuilding('mine')"><img src="./IMG/materials/stone.png"></td>
-                                    <td class="buildOptionCell" v-on:mouseover="updateDescription('lab')" @click="constructBuilding('lab')"><img src="./IMG/roverparts/roverengine.png"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="buildDescriptionPanel">
-                            <h3> {{ hoveredBuildingName }} </h3>
-                            <span style="color: orange;">Build Time: {{ hoveredBuildingBuildTime }} </span><br>
-                            <span> {{ hoveredBuildingDescription }} </span>
-                        </div>
-                    </div>-->
-
                     <!-- Place Action Modal -->
                     <div class="modal fade" id="placeActionsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -194,15 +174,25 @@
                                                 <img v-bind:src="currentBuilding.img">
                                             </div>
                                             <div class="col-9">
-                                                <div class="row justify-content-center">
-                                                    <span v-show="currentBuilding.totalResourceCount" class="col-12">
-                                                        <b class="itemHeader">Resources: </b>
-                                                        <span>{{ currentBuilding.totalResourceCount - currentBuilding.minedResourceCount }}</span>
-                                                    </span>
-                                                    <span v-show="currentBuilding.resourcePerHour" class="col-12">
-                                                        <b class="itemHeader">Harvest Rate: </b>
-                                                        <span>{{ currentBuilding.resourcePerHour }}</span>
-                                                    </span>
+                                                <div class="row">
+                                                    <table style="margin-left: 25px;">
+                                                        <tr v-show="currentBuilding.totalResourceCount">
+                                                            <td style="min-width: 115px;">
+                                                                <span class="itemHeader">Resources: </span>
+                                                            </td>
+                                                            <td>
+                                                                <span class="itemValue">{{ currentBuilding.totalResourceCount - currentBuilding.minedResourceCount }}</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr v-show="currentBuilding.resourcePerHour">
+                                                            <td>
+                                                                <span class="itemHeader">Harvest Rate: </span>
+                                                            </td>
+                                                            <td>
+                                                                <span class="itemValue">{{ currentBuilding.resourcePerHour }}</span>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
@@ -263,6 +253,92 @@
                         </div>
                     </div>
 
+                    <!-- Turn results modal -->
+                    <div class="modal fade" id="turnResultsModal" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content"
+                                 style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 10px 20px 0 rgba(5, 5, 5, 0.19); background-color: rgba(50, 50, 50, 0.86); border: solid 1px gray;">
+                                <div class="modal-header" style="border-bottom: solid #a0421e 4px;">
+                                    <h3 class="modal-title" style="color: white;">
+                                        <span>{{ currentPlayer.name }}</span>
+                                        <span style="color: orangered; font-weight: bolder;"> - </span>
+                                        <span>Mission Progress</span>
+                                    </h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+                                        <div class="row align-items-center">
+                                            <div class="col-12">
+                                                <span id="turnResultSols" style="color: orangered; font-weight: bolder; font-size: 20px;">Sol {{ sol }} </span>
+                                            </div>
+                                            <div class="col-12" style="padding-bottom: 15px;">
+                                                <span id="turnResultDesc" style="color: #cdcccc;">
+                                                    To do... insert some list of items that happened to the player, explaining losses of health,
+                                                    or other random events that occurred to them that explain changes to inventory, or other stats.
+                                                    <ul>
+                                                        <li>Due to inclement weather, your shelter caved in and broke your leg.
+                                                            <span class="badNews">-27 Health</span>
+                                                        </li>
+                                                        <li>You forgot to place your extra potato in a tuppeware container.
+                                                            <span class="badNews">-4 Food</span>
+                                                        </li>
+                                                        <li>You're not eating well, and got scurvy. You should increase your rations.
+                                                            <span class="badNews">-12 Health</span>
+                                                        </li>
+                                                    </ul>
+                                                </span>
+                                            </div>
+                                            <div class="col-12 menuItemSeparated" style="background-color: #5c545130; padding-left: 0px;">
+                                                <div class="col-12">
+                                                    <h5 style="color: white;">Used resources</h5>
+                                                </div>
+                                                <div class="col-12" style="padding-bottom: 15px; padding-left: 38px;">
+                                                    <span class="itemHeader">Water: </span>
+                                                    <span class="itemValue">14</span>
+                                                    <br>
+                                                    <span class="itemHeader">Food: </span>
+                                                    <span class="itemValue">3</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 menuItemSeparated">
+                                                <h5 style="color: white;">Rations</h5>
+                                            </div>
+                                            <div class="col-12" style="padding-left: 38px; padding-bottom: 15px;">
+                                                <table>
+                                                    <tr>
+                                                        <td class="itemHeader">Daily Food:</td>
+                                                        <td class="itemValue text-center" style="width: 40px; "> {{ currentPlayer.foodRation }} </td>
+                                                        <td style="padding-left: 5px; width: 300px;"><input type="range" v-model="currentPlayer.foodRation" min="0" v-bind:max="currentPlayer.food" class="slider" id="foodRationSlider"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="itemHeader" style="padding-top: 5px;">Daily Water:</td>
+                                                        <td class="itemValue text-center" style="width: 40px; padding-top: 5px;"> {{ currentPlayer.waterRation }} </td>
+                                                        <td style="padding-left: 5px; width: 300px; padding-top: 5px;"><input type="range" v-model="currentPlayer.waterRation" min="0" v-bind:max="currentPlayer.water" class="slider" id="waterRationSlider"></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="col-12 menuItemSeparated" style="background-color: #68210530; padding-bottom: 15px; padding-left: 0px;">
+                                                <div class="col-12">
+                                                    <h5 style="color: white;">Scientific Research Progress</h5>
+                                                </div>
+                                                <div class="col-12" style="color: #d3d2d2;">
+                                                    Still not quite sure how we want to do this part... But we have a lab, so I figured we could either give them points for research they do, or make it required, show progress on their rover, etc. TODO
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer" style="border-top: solid #1d1c1c 2px;">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Game Tiles -->
                     <table class="gameTileTable">
                         <tbody id="tileMapTable">
                         <tr>

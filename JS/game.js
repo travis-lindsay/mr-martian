@@ -108,6 +108,12 @@ window.onload = function() {
             openPlaceActionsModal: function() {
                 $("#placeActionsModal").modal("show");
             },
+			openTurnResultsModal: function() {
+				$("#turnResultsModal").modal("show");
+			},
+            closeTurnResultsModal: function() {
+                $("#turnResultsModal").modal("hide");
+            },
 			movePlayerTo: function(x, y) {
 				var currentCoord = this.currentPlayer.getCoordinate();
 				var destinationCoord = new Coordinate(x, y);
@@ -217,6 +223,10 @@ window.onload = function() {
 					this.incrementSol();
 				}
 				this.currentPlayer = this.Players[this.currentPlayerIndex];
+				// Show the 'mission progress' dialog
+				if (this.sol > 0) {
+					this.openTurnResultsModal();
+				}
 			},
 			incrementSol: function() {
 				this.sol += 1;

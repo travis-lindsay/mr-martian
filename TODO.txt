@@ -5,16 +5,18 @@ TODO (Travis, Jared, or Derek):
 	- Add some sort of "End Game" state, E.g. after X amount of sols passes by, the game ends (the ship arrives) and determine who wins the game
 	- Make the random ship crashes randomly occur at different moments in the game, (after some x amount of turns it happens)
 		- Make the ship carry some random inventory item
-	- Add in some sort of "daily penalty/reward" functionality, that displays some sort of modal at the beginning of each players turn
+	- Add in some sort of "daily penalty/reward" functionality, that displays some sort of modal at the beginning of each players turn (Tycoon Jones style)
 	  showing them any health penalties (from not being in their shelter or something), food and water consumption, other random events that happened to them.
 	- Build out the Shelter to have some sort of "sleep/rest/take-shelter" button instead of harvest
 	- Build out the Farm to possibly require some sort of "plowing/seeding/watering/harvesting" functionality
 	- Build out the Lab to require different materials for research, etc.
-	-
+	- Figure out what players can do to interact with other players buildings, (e.g. destroy them, steal from them, do nothing to them, etc)
+	    - Just brainstorming, I was leaning towards being able to steal from them, and making the players add security components to their buildings.
+	- Add ability to input custom player names on menu screen.
 
 BUG Fixes:
-    - Fix the issue with the player clock that doesn't make it the other players turn once your "day" is up until you click somewhere else
-    -
+    - Figure out how to handle two players being on the same tile, (e.g. have one peek out a little so they don't overlap).
+    - If player clicks on tile they are currently on, change it so they don't move a tile away then back again.
 
 TODO (LINDSAY, or anyone else if they are feeling creative):
 
@@ -23,6 +25,6 @@ Note: Please make all images 100 X 100 px unless otherwise specified
 Note: Please make all images with a transparent background, and center the non transparent part, (so things don't look misaligned when placed in the game)
 
 INVENTORY:
-    - Water icon
+    - Water icon (like a water droplet, with some sort of circular backdrop I think would look rad)
     - Stone icon
     - Etc...

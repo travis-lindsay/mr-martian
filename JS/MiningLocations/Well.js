@@ -27,7 +27,12 @@ class Well
     }
     
     construct() {
-        if (this.player.clock.getIsDone() || this.getIsConstructed()) {
+        if (this.player.clock.getIsDone()) {
+            this.player.clock.resetClock();
+            gameApp.closeAllModals();
+            return;
+        }
+        if (this.getIsConstructed()) {
             // Then don't let them construct anymore, and close the window
             if (this.getIsConstructed()) {
                 removeImageFromCoordinate('CONSTRUCTION', this.coordinate);
