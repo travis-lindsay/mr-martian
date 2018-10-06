@@ -88,10 +88,31 @@ window.onload = function() {
 				if (isRoad) {
 					this.movePlayerTo(x, y);
 				}
-				else {
-					this.handlePlace(new Coordinate(x, y));
+                else {
+                    
+                    if (this.checkIfInActionRange(parseInt(x), parseInt(y))) {
+                        this.handlePlace(new Coordinate(x, y));
+                    }					
 				}
-			},
+            },
+            checkIfInActionRange: function (x, y) {
+                var PlayerCoord = this.currentPlayer.getCoordinate();
+                if (PlayerCoord.x == x + 1 && PlayerCoord.y == y) {
+                    return true;
+                }
+                else if (PlayerCoord.x == x - 1 && PlayerCoord.y == y) {
+                    return true;
+                }
+                else if (PlayerCoord.x == x && PlayerCoord.y == y + 1) {
+                    return true;
+                }
+                else if (PlayerCoord.x == x && PlayerCoord.y == y - 1) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            },
 			closeAllModals: function() {
 				this.closePlaceActionsModal();
 				this.closeConstructionModal();
@@ -260,16 +281,20 @@ window.onload = function() {
 				tiles.appendChild(shipIMG);
 				var self = this;
 				var stuff = this.Ships[0].GetAllStuff();
-				shipIMG.onclick = function() {
-					self.currentPlayer.addFood(stuff[3]);
-					stuff[3] = 0;
-					self.currentPlayer.addWater(stuff[2]);
-					stuff[2] = 0;
-					self.currentPlayer.addSupply(stuff[0]);
-					self.currentPlayer.addSupply(stuff[1]);
-					self.currentPlayer.SupplyToString();
-					shipIMG.classList.remove("shipIMG");
-					tiles.removeChild(shipIMG);
+                shipIMG.onclick = function () {
+
+                    if(self.checkIfInActionRange(parseInt(coord.x), parseInt(coord.y)))
+                    {
+                        self.currentPlayer.addFood(stuff[3]);
+                        stuff[3] = 0;
+                        self.currentPlayer.addWater(stuff[2]);
+                        stuff[2] = 0;
+                        self.currentPlayer.addSupply(stuff[0]);
+                        self.currentPlayer.addSupply(stuff[1]);
+                        self.currentPlayer.SupplyToString();
+                        shipIMG.classList.remove("shipIMG");
+                        tiles.removeChild(shipIMG);
+                    }				
 				};
 			}
 		}
