@@ -7,7 +7,7 @@ class PlayerAnimation {
         this.counter = 0;
     }
 
-    animatePlayerMovement() {
+    animatePlayerMovement(highlightTilesFunc) {
         // Add the players current position to path array
         this.coordinateArray.unshift(this.player.getCoordinate());
         let self = this;
@@ -29,9 +29,9 @@ class PlayerAnimation {
                 // stop the animation interval
                 clearInterval(interval);
                 self.player.setCoordinate(self.coordinateArray[self.counter]);
+                highlightTilesFunc();
             }
         }, 250);
-
     }
 
     removePlayerIMG(coordinate) {

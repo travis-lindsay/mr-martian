@@ -113,6 +113,15 @@ window.onload = function() {
                     return false;
                 }
             },
+			highlightClickableTiles() {
+				var surfaces = $('.surface');
+				for (var surface of surfaces) {
+					var id = surface.id.split('_');
+					(this.checkIfInActionRange(parseInt(id[1]), parseInt(id[0])))
+						? surface.classList.add('clickable')
+                		: surface.classList.remove('clickable');
+				}
+			},
 			closeAllModals: function() {
 				this.closePlaceActionsModal();
 				this.closeConstructionModal();
@@ -147,7 +156,7 @@ window.onload = function() {
 				}
 				console.log(coordinatePath);
 				var animation = new PlayerAnimation(this.currentPlayer, coordinatePath);
-				animation.animatePlayerMovement();
+				animation.animatePlayerMovement(this.highlightClickableTiles);
 			},
 			handlePlace: function(tileCoordinate) {
 				
