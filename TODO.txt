@@ -1,5 +1,4 @@
 TODO (Travis, Jared, or Derek):
-	- Add limitation to the tile the user can select, they should only be able to select those they are adjacent to (as of now, they can click/interact with anything)
     - Build out the "Player inventory"
 		- Not quite sure how we want to do this... Maybe some small thumbnails of the items you have in the "inventory" section, or maybe another screen pops up with more details when you click some "view inventory" button
 	- Add some sort of "End Game" state, E.g. after X amount of sols passes by, the game ends (the ship arrives) and determine who wins the game
@@ -13,6 +12,8 @@ TODO (Travis, Jared, or Derek):
 	- Figure out what players can do to interact with other players buildings, (e.g. destroy them, steal from them, do nothing to them, etc)
 	    - Just brainstorming, I was leaning towards being able to steal from them, and making the players add security components to their buildings.
 	- Add ability to input custom player names on menu screen.
+	- Figure out if switching to Typescript is a good idea, (more intuitive inheritance, OOP stuff)?
+	- Figure out what we want to do when a player dies, (e.g. skip their turn and change player icon? Let them play as an alien? Etc).
 
 BUG Fixes:
     - Figure out how to handle two players being on the same tile, (e.g. have one peek out a little so they don't overlap).

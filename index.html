@@ -44,6 +44,7 @@
     <script src="./JS/RoverParts/Frame.js"></script>
     <script src="./JS/RoverParts/Wheel.js"></script>
     <script src="./JS/Utils.js"></script>
+    <script src="./JS/SolEvent.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -253,7 +254,7 @@
                         </div>
                     </div>
 
-                    <!-- Turn results modal -->
+                    <!-- Turn results / Mission Progress modal -->
                     <div class="modal fade" id="turnResultsModal" tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered modal-lg">
                             <div class="modal-content"
@@ -279,14 +280,15 @@
                                                     To do... insert some list of items that happened to the player, explaining losses of health,
                                                     or other random events that occurred to them that explain changes to inventory, or other stats.
                                                     <ul>
-                                                        <li>Due to inclement weather, your shelter caved in and broke your leg.
-                                                            <span class="badNews">-27 Health</span>
-                                                        </li>
-                                                        <li>You forgot to place your extra potato in a tuppeware container.
-                                                            <span class="badNews">-4 Food</span>
-                                                        </li>
-                                                        <li>You're not eating well, and got scurvy. You should increase your rations.
-                                                            <span class="badNews">-12 Health</span>
+                                                        <li v-for="solEvent in solEvents">
+                                                            <span v-if="solEvent.badEvent">
+                                                                {{ solEvent.desc }}
+                                                                <span class="badNews">-{{ solEvent.points }} {{ solEvent.category }}</span>
+                                                            </span>
+                                                            <span v-else>
+                                                                {{ solEvent.desc }}
+                                                                <span class="goodNews">{{ solEvent.points }} {{ solEvent.category }}</span>
+                                                            </span>
                                                         </li>
                                                     </ul>
                                                 </span>
@@ -296,11 +298,11 @@
                                                     <h5 style="color: white;">Used resources</h5>
                                                 </div>
                                                 <div class="col-12" style="padding-bottom: 15px; padding-left: 38px;">
-                                                    <span class="itemHeader">Water: </span>
-                                                    <span class="itemValue">14</span>
-                                                    <br>
                                                     <span class="itemHeader">Food: </span>
-                                                    <span class="itemValue">3</span>
+                                                    <span class="itemValue">{{ currentPlayer.usedFoodRation }}</span>
+                                                    <br>
+                                                    <span class="itemHeader">Water: </span>
+                                                    <span class="itemValue">{{ currentPlayer.usedWaterRation }}</span>
                                                 </div>
                                             </div>
                                             <div class="col-12 menuItemSeparated">

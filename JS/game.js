@@ -59,7 +59,8 @@ window.onload = function() {
 			lastClickedTileCoord: new Coordinate(0, 0),
 			hoveredBuildingDescription: "",
 			hoveredBuildingBuildTime: 0,
-			hoveredBuildingName: ""
+			hoveredBuildingName: "",
+            solEvents: [],
 		},
 		components: {
 			'clockpanel': clockpanel,
@@ -255,9 +256,57 @@ window.onload = function() {
 				this.currentPlayer = this.Players[this.currentPlayerIndex];
 				// Show the 'mission progress' dialog
 				if (this.sol > 0) {
+                    this.calcRationUsageAndEvents();
 					this.openTurnResultsModal();
 				}
 			},
+            calcRationUsageAndEvents() { // break this and other event code into other files
+			    const HEALTHY_FOOD_RATION = 4;
+			    const HEALTHY_WATER_RATION = 4;
+			    const HEALTH_DEDUCTION = 2;
+
+                let p = this.currentPlayer;
+                if (p.water - p.waterRation < 0) {
+                    p.water = 0;
+                    p.waterRation = 0;
+                    p.usedWaterRation = p.water;
+                } else {
+                    p.water -= p.waterRation;
+                    p.usedWaterRation = p.waterRation;
+                }
+                if (p.food - p.foodRation < 0) {
+                    p.food = 0;
+                    p.foodRation = 0;
+                    p.usedFoodRation = p.food;
+                } else {
+                    p.food -= p.foodRation;
+                    p.usedFoodRation = p.foodRation;
+                }
+
+                // If the ration is below the healthy amount, then subtract health
+                let healthMultiplier = p.usedFoodRation - HEALTHY_FOOD_RATION;
+                p.health += healthMultiplier * HEALTH_DEDUCTION;
+                healthMultiplier = p.usedWaterRation - HEALTHY_WATER_RATION;
+                p.health += healthMultiplier * HEALTH_DEDUCTION;
+
+                this.solEvents = []; // reset events
+                this.solEvents.push(new SolEvent(
+                    "You gained",
+                    "Health",
+                    false,
+                    healthMultiplier * HEALTH_DEDUCTION
+                ));
+                this.solEvents.push(new SolEvent(
+                    "Something catastrophic happened, and you lost",
+                    "Limbs",
+                    true,
+                    13
+                ));
+
+                if (p.health <= 0) {
+                    p.alive = false; // TODO, figure out what to do when somebody dies.
+                }
+            },
 			incrementSol: function() {
 				this.sol += 1;
 			},
