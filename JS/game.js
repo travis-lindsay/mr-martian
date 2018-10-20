@@ -281,7 +281,8 @@ window.onload = function() {
                 } else {
                     p.food -= p.foodRation;
                     p.usedFoodRation = p.foodRation;
-                }
+				}
+				// Derek Test
 
                 // If the ration is below the healthy amount, then subtract health
                 let healthMultiplier = p.usedFoodRation - HEALTHY_FOOD_RATION;
