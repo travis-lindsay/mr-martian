@@ -558,7 +558,7 @@
             <!-- Right Details Column -->
             <div class="col-md-2 inventoryColumn text-center" style="padding: 0px;">
                 <h2 style="color: white; padding: 5px;"><span class="itemStats">{{ currentPlayer.name }}</span></h2>
-                <img v-bind:src="'./IMG/spaceman/' + currentPlayer.imagePath">
+                <div id="mainPlayerIMG" class="mainPlayerIMG" v-bind:style="{ 'background-image': 'url(./IMG/spaceman/' + currentPlayer.imagePath + ')' }"></div>
                 <div class="col-sm-12" style="margin-top: 15px; color: #ee4a00;">
                     <b class="itemHeader">Health: </b><span class="itemStats">{{ currentPlayer.health }}</span>
                 </div>

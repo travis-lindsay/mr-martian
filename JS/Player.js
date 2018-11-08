@@ -23,7 +23,7 @@ class Player {
             this.suppliesList = "empty";
             this.supplies = [null];
             this.isDead = false;
-            this.imagePath = "spaceman" + num + ".png";
+            this.imagePath = "spaceman" + num + "_sprite.png";
             this.name = "Player " + (num + 1);
             this.number = num;
             this.clock = new Clock();

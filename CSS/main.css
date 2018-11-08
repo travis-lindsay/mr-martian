@@ -75,13 +75,25 @@ p {
     position: relative;
 }
 
+.mainPlayerIMG {
+    background-position: 0px 0px;
+    height: 100px;
+    width: 100px;
+    margin: auto;
+}
+
 .playerIMG {
-    width: 60px;
-    height: 60px;
+    -webkit-transform: scale(0.6); /* Scaling to 60% of original image for grid */
+    -moz-transform: scale(0.6);
+    -ms-transform: scale(0.6);
+    -o-transform: scale(0.6);
+    transform: scale(0.6);
+    width: 100px;
+    height: 100px;
     position: absolute;
     z-index: 50;
-    top: 5px;
-    left: 10px;
+    top: -14px;
+    left: -12px;
 }
 
 .shipIMG

@@ -317,8 +317,9 @@ window.onload = function() {
 					// TODO, clean this up, abstract it to a different class
 					var coord = this.Players[i].getCoordinate();
 					var tiles = document.getElementById(coord.getYCoordinate() + '_' + coord.getXCoordinate());
-					var playerIMG = document.createElement("IMG");
-					playerIMG.src = './IMG/spaceman/' + this.Players[i].getImagePath();
+					var playerIMG = document.createElement("DIV");
+					playerIMG.style.backgroundImage = 'url(\'./IMG/spaceman/' + this.Players[i].getImagePath() + '\')';
+					playerIMG.style.backgroundPosition = `0px 0px`;
 					playerIMG.classList.add("playerIMG");
 					playerIMG.id = coord.getYCoordinate() + '_' + coord.getXCoordinate() + '_IMG_' + this.Players[i].number;
 					tiles.appendChild(playerIMG);
