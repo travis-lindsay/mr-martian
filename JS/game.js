@@ -146,6 +146,7 @@ window.onload = function() {
                 $("#turnResultsModal").modal("hide");
             },
 			movePlayerTo: function(x, y) {
+			    this.currentPlayer.removePlayerFromShelter();
 				var currentCoord = this.currentPlayer.getCoordinate();
 				var destinationCoord = new Coordinate(x, y);
 				var calculator = new ShortestPathCalculator(currentCoord, destinationCoord);
@@ -285,11 +286,20 @@ window.onload = function() {
 
                 // If the ration is below the healthy amount, then subtract health
                 let healthMultiplier = p.usedFoodRation - HEALTHY_FOOD_RATION;
-                p.health += healthMultiplier * HEALTH_DEDUCTION;
+                p.changeHealth(healthMultiplier * HEALTH_DEDUCTION);
                 healthMultiplier = p.usedWaterRation - HEALTHY_WATER_RATION;
-                p.health += healthMultiplier * HEALTH_DEDUCTION;
+                p.changeHealth(healthMultiplier * HEALTH_DEDUCTION);
 
                 this.solEvents = []; // reset events
+                if (!this.currentPlayer.isPlayerInShelter()) {
+                    this.solEvents.push(new SolEvent(
+                        "You spent a miserable night braving the harsh Mars elements",
+                        "Health",
+                        true,
+                        25
+                    ));
+                    this.currentPlayer.changeHealth(-25);
+                }
                 this.solEvents.push(new SolEvent(
                     "You gained",
                     "Health",
@@ -303,8 +313,10 @@ window.onload = function() {
                     13
                 ));
 
-                if (p.health <= 0) {
-                    p.alive = false; // TODO, figure out what to do when somebody dies.
+
+                // Check if player has bit the bucket
+                if (p.isPlayerDead()) {
+                    alert(p.name + ' died a terrible death'); // TODO, figure out to do when player dies
                 }
             },
 			incrementSol: function() {

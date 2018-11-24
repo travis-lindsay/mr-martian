@@ -200,7 +200,12 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer" style="border-top: solid #1d1c1c 2px;">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                    <button v-show="currentBuilding.type == 'Shelter'" type="button" class="btn btn-info" @click="currentBuilding.takeShelter();">
+                                        Take Shelter
+                                    </button>
                                     <button v-show="currentBuilding.mineResource" type="button" class="btn btn-info" @click="currentBuilding.mineResource();">
                                         Harvest
                                     </button>

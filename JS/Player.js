@@ -26,6 +26,7 @@ class Player {
             this.imagePath = "spaceman" + num + "_sprite.png";
             this.name = "Player " + (num + 1);
             this.number = num;
+            this.inShelter = false;
             this.clock = new Clock();
             switch(num) {
                 case 0:
@@ -44,7 +45,19 @@ class Player {
                     this.coordinate = new Coordinate(0,0);
             }
         };
-        
+
+        putPlayerInShelter() {
+            this.inShelter = true;
+        }
+
+        removePlayerFromShelter() {
+            this.inShelter = false;
+        }
+
+        isPlayerInShelter() {
+            return this.inShelter;
+        }
+
         SupplyToString()
         {
             this.suppliesList = "filled";
@@ -104,20 +117,14 @@ class Player {
             }
         };
         
-        addHealth(plusHealth)
+        changeHealth(health)
         {
-            this.health += plusHealth;
-        }
-        
-        substractHealth(minusHealth)
-        {
-            this.health -= minusHealth;
+            this.health += health;
             if(this.health <= 0)
             {
                 this.isDead = true;
                 this.health = 0;
             }
-            return this.health;
         };
         
         getFood()   // returns the current food value
@@ -179,4 +186,8 @@ class Player {
         {
             return this.morale -= minusMorale;
         };
+
+        isPlayerDead() {
+            return this.isDead;
+        }
 }

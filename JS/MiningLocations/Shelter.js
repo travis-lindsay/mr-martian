@@ -2,7 +2,7 @@ class Shelter {
 
     constructor(player, coordinate) {
         this.name = "Shelter";
-        this.type = "Place";
+        this.type = "Shelter";
         this.img = "./IMG/places/shelter1.png";
         this.desc = "Necessary for survival in the harsh and unpredictable environment of Mars.";
         this.maxUpgradeLevel = 3;
@@ -14,9 +14,15 @@ class Shelter {
         this.totalHoursToConstruct = 5;
         this.currentHoursConstructed = 0;
         this.currentHoursRemaining = this.totalHoursToConstruct;
-
     }
-    
+
+    takeShelter() {
+        this.player.putPlayerInShelter();
+        // Move clock to being finished, and finish off the day.
+        this.player.clock.resetClock();
+        gameApp.closeAllModals();
+    }
+
     getIsConstructed() {
         return this.currentHoursConstructed >= this.totalHoursToConstruct;
     }

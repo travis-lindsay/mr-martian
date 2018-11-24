@@ -30,4 +30,8 @@ class Clock {
     getIsDone() {
         return this.usedTime >= this.totalTime;
     }
+
+    setClockToDone() {
+        this.usedTime = this.totalTime;
+    }
 }
