@@ -14,10 +14,11 @@ class Player {
         {
             this.health = 100;
             this.food = 10;
-            this.foodRation = 3;
+            this.foodRation = 4;
             this.usedFoodRation = 0;
             this.water = 10;
             this.waterRation = 4;
+            this.stone = 0;
             this.usedWaterRation = 0;
             this.morale = 5;
             this.suppliesList = "empty";
@@ -125,6 +126,9 @@ class Player {
                 this.isDead = true;
                 this.health = 0;
             }
+            if (this.health > 100) {
+                this.health = 100;
+            }
         };
         
         getFood()   // returns the current food value
@@ -166,6 +170,11 @@ class Player {
         {
             this.water -= minusWater;
         };
+
+        addStone(stone)
+        {
+            this.stone += stone;
+        }
         
         
         getMorale() //returns the current morale value

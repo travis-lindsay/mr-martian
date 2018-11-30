@@ -45,6 +45,7 @@ class Mine {
         }
         if (!this.getIsEmpty()) {
             this.incrementPlayerClock();
+            this.player.addStone(this.resourcePerHour);
             this.minedResourceCount += this.resourcePerHour;
             if (this.minedResourceCount > this.totalResourceCount) {
                 this.minedResourceCount = this.totalResourceCount;

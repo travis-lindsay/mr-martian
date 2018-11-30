@@ -272,12 +272,24 @@ p {
     border: solid #d3d3d3 2px;
 }
 
-.slider#waterRationSlider::-webkit-slider-thumb {
-    background: #003e80;
+.slider.bad::-webkit-slider-thumb {
+    background: #af3c05;
 }
 
-.slider#waterRationSlider::-moz-range-thumb {
-    background: #003e80;
+.slider.low::-webkit-slider-thumb {
+    background: #af6602;
+}
+
+.slider.meh::-webkit-slider-thumb {
+    background: #9aaf00;
+}
+
+.slider.good::-webkit-slider-thumb {
+    background: #3eb700;
+}
+
+.slider.great::-webkit-slider-thumb {
+    background: #007813;
 }
 
 .slider::-moz-range-thumb {

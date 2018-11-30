@@ -282,13 +282,12 @@
                                             </div>
                                             <div class="col-12" style="padding-bottom: 15px;">
                                                 <span id="turnResultDesc" style="color: #cdcccc;">
-                                                    To do... insert some list of items that happened to the player, explaining losses of health,
-                                                    or other random events that occurred to them that explain changes to inventory, or other stats.
+                                                    <!-- Maybe insert some random paragraph of text depending on what sol it is -->
                                                     <ul>
                                                         <li v-for="solEvent in solEvents">
                                                             <span v-if="solEvent.badEvent">
                                                                 {{ solEvent.desc }}
-                                                                <span class="badNews">-{{ solEvent.points }} {{ solEvent.category }}</span>
+                                                                <span class="badNews">{{ solEvent.points }} {{ solEvent.category }}</span>
                                                             </span>
                                                             <span v-else>
                                                                 {{ solEvent.desc }}
@@ -318,12 +317,27 @@
                                                     <tr>
                                                         <td class="itemHeader">Daily Food:</td>
                                                         <td class="itemValue text-center" style="width: 40px; "> {{ currentPlayer.foodRation }} </td>
-                                                        <td style="padding-left: 5px; width: 300px;"><input type="range" v-model="currentPlayer.foodRation" min="0" v-bind:max="currentPlayer.food" class="slider" id="foodRationSlider"></td>
+                                                        <td style="padding-left: 5px; width: 300px;">
+                                                            <input type="range" v-model="currentPlayer.foodRation" min="0" v-bind:max="currentPlayer.food"
+                                                                   class="slider" v-bind:class="{
+                                                                   'bad': currentPlayer.foodRation < 3,
+                                                                   'low': currentPlayer.foodRation == 3,
+                                                                   'meh': currentPlayer.foodRation == 4,
+                                                                   'good': currentPlayer.foodRation == 5,
+                                                                   'great': currentPlayer.foodRation > 5}" id="foodRationSlider">
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td class="itemHeader" style="padding-top: 5px;">Daily Water:</td>
                                                         <td class="itemValue text-center" style="width: 40px; padding-top: 5px;"> {{ currentPlayer.waterRation }} </td>
-                                                        <td style="padding-left: 5px; width: 300px; padding-top: 5px;"><input type="range" v-model="currentPlayer.waterRation" min="0" v-bind:max="currentPlayer.water" class="slider" id="waterRationSlider"></td>
+                                                        <td style="padding-left: 5px; width: 300px; padding-top: 5px;">
+                                                            <input type="range" v-model="currentPlayer.waterRation" min="0" v-bind:max="currentPlayer.water" class="slider" v-bind:class="{
+                                                                   'bad': currentPlayer.waterRation < 3,
+                                                                   'low': currentPlayer.waterRation == 3,
+                                                                   'meh': currentPlayer.waterRation == 4,
+                                                                   'good': currentPlayer.waterRation == 5,
+                                                                   'great': currentPlayer.waterRation > 5}" id="waterRationSlider">
+                                                        </td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -575,6 +589,9 @@
                 </div>
                 <div class="col-sm-12" style="margin-top: 15px; color: #ee4a00;">
                     <b class="itemHeader">Water: </b><span class="itemStats">{{ currentPlayer.water }}</span>
+                </div>
+                <div class="col-sm-12" style="margin-top: 15px; color: #ee4a00;">
+                    <b class="itemHeader">Stone: </b><span class="itemStats">{{ currentPlayer.stone }}</span>
                 </div>
                 <div class="col-sm-12" style="margin-top: 15px; color: #ee4a00;">
                     <hr>

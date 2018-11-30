@@ -261,12 +261,15 @@ window.onload = function() {
 					this.openTurnResultsModal();
 				}
 			},
-            calcRationUsageAndEvents() { // break this and other event code into other files
+            calcRationUsageAndEvents() { // TODO, break this and other event code into other files
 			    const HEALTHY_FOOD_RATION = 4;
 			    const HEALTHY_WATER_RATION = 4;
 			    const HEALTH_DEDUCTION = 2;
+			    let totalHealthChange = 0;
+                this.solEvents = []; // reset events
 
                 let p = this.currentPlayer;
+			    let previousHealth = p.health;
                 if (p.water - p.waterRation < 0) {
                     p.water = 0;
                     p.waterRation = 0;
@@ -286,33 +289,69 @@ window.onload = function() {
 
                 // If the ration is below the healthy amount, then subtract health
                 let healthMultiplier = p.usedFoodRation - HEALTHY_FOOD_RATION;
-                p.changeHealth(healthMultiplier * HEALTH_DEDUCTION);
-                healthMultiplier = p.usedWaterRation - HEALTHY_WATER_RATION;
-                p.changeHealth(healthMultiplier * HEALTH_DEDUCTION);
+                totalHealthChange += healthMultiplier * HEALTH_DEDUCTION;
+                // TODO, take into account if the player's health is already at 100%
+                if (healthMultiplier > 0) {
+                    this.solEvents.push(new SolEvent(
+                        "Due to excellent food consumption you gained",
+                        "Health",
+                        false,
+                        healthMultiplier * HEALTH_DEDUCTION
+                    ))
+                } else if (healthMultiplier < 0){
+                    this.solEvents.push(new SolEvent(
+                        "Due to poor food consumption you lost",
+                        "Health",
+                        true,
+                        healthMultiplier * HEALTH_DEDUCTION
+                    ))
+                }
 
-                this.solEvents = []; // reset events
+                healthMultiplier = p.usedWaterRation - HEALTHY_WATER_RATION;
+                totalHealthChange += healthMultiplier * HEALTH_DEDUCTION;
+                if (healthMultiplier > 0) {
+                    this.solEvents.push(new SolEvent(
+                        "Due to copious water consumption you gained",
+                        "Health",
+                        false,
+                        healthMultiplier * HEALTH_DEDUCTION
+                    ))
+                } else if (healthMultiplier < 0){
+                    this.solEvents.push(new SolEvent(
+                        "Due to a lack of water consumption you lost",
+                        "Health",
+                        true,
+                        healthMultiplier * HEALTH_DEDUCTION
+                    ))
+                }
+
                 if (!this.currentPlayer.isPlayerInShelter()) {
                     this.solEvents.push(new SolEvent(
                         "You spent a miserable night braving the harsh Mars elements",
                         "Health",
                         true,
-                        25
+                        -25
                     ));
-                    this.currentPlayer.changeHealth(-25);
+                    totalHealthChange -= 25;
                 }
-                this.solEvents.push(new SolEvent(
-                    "You gained",
-                    "Health",
-                    false,
-                    healthMultiplier * HEALTH_DEDUCTION
-                ));
-                this.solEvents.push(new SolEvent(
-                    "Something catastrophic happened, and you lost",
-                    "Limbs",
-                    true,
-                    13
-                ));
-
+                // Now change the health, then calculate the difference
+                p.changeHealth(totalHealthChange);
+                let healthDifference = p.health - previousHealth;
+                if (healthDifference > 0) {
+                    this.solEvents.push(new SolEvent(
+                        "Overall, you gained",
+                        "Health",
+                        false,
+                        healthDifference
+                    ));
+                } else if (healthDifference < 0) {
+                    this.solEvents.push(new SolEvent(
+                        "Overall, you lost",
+                        "Health",
+                        true,
+                        healthDifference
+                    ));
+                }
 
                 // Check if player has bit the bucket
                 if (p.isPlayerDead()) {
