@@ -1,0 +1,29 @@
+{
+  "name": "mr-martian",
+  "version": "1.0.0",
+  "description": "Mr Martian - Web based game",
+  "main": "index.js",
+  "module": "dist/vue.runtime.esm.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "devDependencies": {
+    "@types/bootstrap": "^4.1.2",
+    "awesome-typescript-loader": "3.4.1",
+    "typescript": "2.6.2",
+    "vue": "^2.5.17",
+    "webpack": "3.10.0",
+    "webpack-dev-server": "2.9.7"
+  },
+  "author": "Travis, Jared, & Derek",
+  "license": "MIT",
+  "dependencies": {
+    "@types/jquery": "^3.3.22",
+    "@types/node": "^10.12.11",
+    "vue": "^2.5.17"
+  }
+}
