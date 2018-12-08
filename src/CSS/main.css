@@ -335,3 +335,7 @@ p {
 .disabled {
     cursor: not-allowed;
 }
+
+.btn.disabled, .btn:disabled {
+    opacity: .3;
+}
