@@ -1,5 +1,11 @@
 import { Clock } from "./Clock";
 import { Coordinate } from "./Maps/Coordinate";
+import { InventoryItem } from "./InventoryItem";
+import { Shovel } from "./Tools/Shovel";
+import { PickAxe } from "./Tools/PickAxe";
+import { Wheel } from "./RoverParts/Wheel";
+import { Engine } from "./RoverParts/Engine";
+import { Frame } from "./RoverParts/Frame";
 
 export class Player {
   
@@ -12,7 +18,7 @@ export class Player {
     stone : number = 0;
     usedWaterRation : number = 0;
     morale : number = 5;
-    suppliesList : string = "empty";
+    suppliesList : InventoryItem[] = new Array<InventoryItem>();
     supplies : any = [null];
     isDead : boolean = false;
     imagePath : string;
@@ -57,31 +63,31 @@ export class Player {
     isPlayerInShelter() {
         return this.inShelter;
     }
-
-    SupplyToString()
-    {
-        this.suppliesList = "filled";
-        // var MyItems[];
-        
-        // for(int i = 0; i < this.supplies.length(); i++)
-        // {
-        //     MyItems.push(this.supplies[i].GetClass());
-        // }
-        
-        // this.suppliesList =  MyItems.toString();
-        // if(this.supplies[0] == null)
-        // {
-        //     return;
-        // }
-        // var line = this.supplies[0].GetClass() + ", " + this.supplies[1].GetClass();
-        // this.suppliesList =  line;
-    }
     
-    addSupply(thing : any)
+    addSupply(item : string)
     {
-        this.supplies.push(thing);
+        let inventoryItem : InventoryItem | null = null;
+        switch(item) {
+            case 'shovel' : 
+                inventoryItem = new Shovel();
+                break;
+            case 'pickaxe' : 
+                inventoryItem = new PickAxe();
+                break;
+            case 'wheel' : 
+                inventoryItem = new Wheel();
+                break;
+            case 'engine' : 
+                inventoryItem = new Engine();
+                break;
+            case 'frame' : 
+                inventoryItem = new Frame();
+                break;
+        }
+        if (inventoryItem) {
+            this.suppliesList.push(inventoryItem);
+        }
     }
-    
 
     getCoordinate() {
         return this.coordinate;

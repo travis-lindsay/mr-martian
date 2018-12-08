@@ -339,3 +339,25 @@ p {
 .btn.disabled, .btn:disabled {
     opacity: .3;
 }
+
+.labItemRow {
+    min-width: 290px;
+    color: #b4b4b4;
+}
+
+.labItemIMG {
+    height: 50px;
+}
+
+.labItem {
+    margin: auto;
+}
+
+.inventoryItem {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.inventoryItem:hover {
+    background-color: #313131;
+}

@@ -1,8 +1,9 @@
-export class Engine
+import { InventoryItem } from "../InventoryItem";
+
+export class Engine extends InventoryItem
 {
-    GetClass()
-    {
-        return "Engine";
+    public name : string = "Engine";
+    constructor() {
+        super('./src/IMG/roverparts/roverengine.png');
     }
-    
 }

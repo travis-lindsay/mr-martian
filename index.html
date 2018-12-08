@@ -135,7 +135,44 @@
                                                 <img v-bind:src="currentBuilding.img">
                                             </div>
                                             <div class="col-9">
-                                                <div class="row">
+                                                <div class="row" style="padding-left: 25px;">
+                                                    <div v-show="currentBuilding.type == 'Lab'" style="width: 100%">
+                                                        <div>
+                                                            <span style="color: white; font-weight: bolder;">Rover Parts: </span>
+                                                        </div>
+                                                        <div style="margin-left: 10px; display: inline-block">
+                                                            <div class="labItemRow row">
+                                                                <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/roverparts/roverframe.png"></div>
+                                                                <div class="col-6 labItem">Rover Frame</div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('frame');">Build</button></div>
+                                                            </div>
+                                                            <div class="labItemRow row">
+                                                                <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/roverparts/roverwheel.png"></div>
+                                                                <div class="col-6 labItem">Rover Wheels</div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('wheel');">Build</button></div>
+                                                            </div>
+                                                            <div class="labItemRow row">
+                                                                <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/roverparts/roverengine.png"></div>
+                                                                <div class="col-6 labItem">Rover Engine</div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('engine');">Build</button></div>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <span style="color: white; font-weight: bolder;">Tools: </span>
+                                                        </div>
+                                                        <div style="margin-left: 10px; display: inline-block">
+                                                            <div class="labItemRow row">
+                                                                <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/tools/pickaxe.png"></div>
+                                                                <div class="col-6 labItem">Pick Axe</div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('pickaxe');">Build</button></div>
+                                                            </div>
+                                                            <div class="labItemRow row">
+                                                                <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/tools/shovel.png"></div>
+                                                                <div class="col-6 labItem">Shovel</div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('shovel');">Build</button></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <table style="margin-left: 25px;">
                                                         <tr v-show="currentBuilding.mineable">
                                                             <td style="min-width: 115px;">
@@ -245,6 +282,9 @@
                                             <div class="col-12" style="padding-bottom: 15px;">
                                                 <span id="turnResultDesc" style="color: #cdcccc;">
                                                     <!-- Maybe insert some random paragraph of text depending on what sol it is -->
+                                                    <p id="solSummary">
+                                                        {{ solSummary }}
+                                                    </p>
                                                     <ul>
                                                         <li v-for="solEvent in solEvents">
                                                             <span v-if="solEvent.badEvent">
@@ -261,7 +301,7 @@
                                             </div>
                                             <div class="col-12 menuItemSeparated" style="background-color: #5c545130; padding-left: 0px;">
                                                 <div class="col-12">
-                                                    <h5 style="color: white;">Used resources</h5>
+                                                    <h5 style="color: white;">Used resources this sol</h5>
                                                 </div>
                                                 <div class="col-12" style="padding-bottom: 15px; padding-left: 38px;">
                                                     <span class="itemHeader">Food: </span>
@@ -308,7 +348,7 @@
                                                     <h5 style="color: white;">Scientific Research Progress</h5>
                                                 </div>
                                                 <div class="col-12" style="color: #d3d2d2;">
-                                                    Still not quite sure how we want to do this part... But we have a lab, so I figured we could either give them points for research they do, or make it required, show progress on their rover, etc. TODO
+                                                   You have not built a lab yet...
                                                 </div>
                                             </div>
                                         </div>
@@ -557,8 +597,12 @@
                 </div>
                 <div class="col-sm-12" style="margin-top: 15px; color: #ee4a00;">
                     <hr>
-                    <h4 style="color: white;">Inventory:</h4><span
-                        class="itemStats">{{ currentPlayer.suppliesList }}</span>
+                    <h4 style="color: white;">Inventory:</h4>
+                    <div class="row" style="margin: 5px;">
+                        <div v-for="supply in currentPlayer.suppliesList" class="col-3 inventoryItem">
+                                <img style="width: 100%;" v-bind:src="supply.imgPath"> 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

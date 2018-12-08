@@ -13,6 +13,7 @@ import { Building } from './MiningLocations/Building';
 import { SolEvent } from './SolEvent';
 import { Ship } from './Ship';
 import Utils from './Utils'
+import { SolSummary } from './SolSummary';
 export var gameApp : any;
 
 window.onload = function() {
@@ -79,7 +80,8 @@ window.onload = function() {
 			hoveredBuildingDescription: "",
 			hoveredBuildingBuildTime: 0,
 			hoveredBuildingName: "",
-            solEvents: new Array<SolEvent>(),
+			solEvents: new Array<SolEvent>(),
+			solSummary: "",
 		},
 		components: {
 			'clockpanel': clockpanel,
@@ -278,10 +280,11 @@ window.onload = function() {
 				}
 				this.currentPlayer = this.Players[this.currentPlayerIndex];
 				// Show the 'mission progress' dialog
+				this.solSummary = SolSummary.getSolSummary(this.sol);
 				if (this.sol > 0) {
                     this.calcRationUsageAndEvents();
-					this.openTurnResultsModal();
 				}
+				this.openTurnResultsModal();
 				this.highlightClickableTiles();
 			},
             calcRationUsageAndEvents() { // TODO, break this and other event code into other files
@@ -402,6 +405,9 @@ window.onload = function() {
 				this.currentPlayer = this.Players[0];
 				// Hide the start menu
 				this.playerPick = false;
+				// Open the mission progress menu with start instructions
+				this.solSummary = SolSummary.getSolSummary(this.sol);
+				this.openTurnResultsModal();
 				this.setShip();
 			},
 			setShip: function() {
@@ -424,7 +430,6 @@ window.onload = function() {
                         stuff[2] = 0;
                         self.currentPlayer.addSupply(stuff[0]);
                         self.currentPlayer.addSupply(stuff[1]);
-                        self.currentPlayer.SupplyToString();
                         shipIMG.classList.remove("shipIMG");
                         tiles.removeChild(shipIMG);
                     }				

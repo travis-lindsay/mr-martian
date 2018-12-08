@@ -10,14 +10,15 @@ export class Lab extends Building {
 
         super(player, coordinate);
         this.name = "Lab";
-        this.type = "Place";
+        this.type = "Lab";
         this.img = "./src/IMG/places/lab1.png";
         this.desc = "A designated location for researching this fascinating planet, and building a research base big enough to barter for your escape from this planet.";
         this.maxUpgradeLevel = 3;
         this.upgradeLevel = 1;
+        this.mineable = false;
 
         // Time to construct the Farm
-        this.totalHoursToConstruct = 30;
+        this.totalHoursToConstruct = 3; //30
         this.currentHoursConstructed = 0;
     }
 

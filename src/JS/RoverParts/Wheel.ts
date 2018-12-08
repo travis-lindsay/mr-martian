@@ -1,7 +1,9 @@
-export class Wheel
+import { InventoryItem } from "../InventoryItem";
+
+export class Wheel extends InventoryItem
 {
-    GetClass()
-    {
-        return "Wheel";
+    public name : string = "Wheel";
+    constructor() {
+        super('./src/IMG/roverparts/roverwheel.png');
     }
 }

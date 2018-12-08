@@ -1,9 +1,9 @@
-export class PickAxe
+import { InventoryItem } from "../InventoryItem";
+
+export class PickAxe extends InventoryItem
 {
-    
-    GetClass()
-    {
-        return "PickAxe";
+    public name : string = "Pick Axe";
+    constructor() {
+        super('./src/IMG/tools/pickaxe.png');
     }
-    
 }
