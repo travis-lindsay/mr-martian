@@ -17,13 +17,14 @@ export class Player {
     waterRation : number = 4;
     stone : number = 0;
     usedWaterRation : number = 0;
-    morale : number = 5;
+    morale : number = 100;
     suppliesList : InventoryItem[] = new Array<InventoryItem>();
     isDead : boolean = false;
     imagePath : string;
     name : string;
     number : number;
     inShelter : boolean = false;
+    shelterCoordinate : Coordinate | null = null;
     clock : Clock = new Clock();
     coordinate : Coordinate;
 
@@ -51,12 +52,14 @@ export class Player {
         }
     };
 
-    putPlayerInShelter() {
+    putPlayerInShelter(coordinate : Coordinate) {
         this.inShelter = true;
+        this.shelterCoordinate = coordinate;
     }
 
     removePlayerFromShelter() {
         this.inShelter = false;
+        this.shelterCoordinate = null;
     }
 
     isPlayerInShelter() {
@@ -132,6 +135,18 @@ export class Player {
         }
         if (this.health > 100) {
             this.health = 100;
+        }
+    };
+
+    changeMorale(morale : any)
+    {
+        this.morale += morale;
+        if(this.morale <= 0)
+        {
+            this.morale = 0;
+        }
+        if (this.morale > 100) {
+            this.morale = 100;
         }
     };
     

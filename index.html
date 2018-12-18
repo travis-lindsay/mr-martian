@@ -204,7 +204,7 @@
                                     <button v-show="currentBuilding.mineable" type="button" class="btn btn-info" @click="currentBuilding.mineResource();">
                                         Harvest
                                     </button>
-                                    <span id="buildReqsTooltip" class="d-inline-block buildReqsTooltip" tabindex="0" container="body" data-toggle="tooltip" data-placement="top" data-html="true" title="Upgrade: ${ currentBuilding.nextUpgradeReqs.food }">
+                                    <span id="buildReqsTooltip" class="d-inline-block buildReqsTooltip" tabindex="0" container="body" data-toggle="tooltip" data-placement="top" data-html="true" title="Upgrade:">
                                         <button v-show="currentBuilding.getIsNextUpgrade()" type="button" class="btn btn-primary" v-bind:class="{ disabled: !currentBuilding.getCanUpgrade() }" @click="currentBuilding.upgrade();">
                                             Upgrade
                                         </button>
@@ -287,11 +287,13 @@
                                                         <li v-for="solEvent in solEvents">
                                                             <span v-if="solEvent.badEvent">
                                                                 {{ solEvent.desc }}
-                                                                <span class="badNews">{{ solEvent.points }} {{ solEvent.category }}</span>
+                                                                <span v-if="solEvent.category == 'Health'" class="badNews">{{ solEvent.points }} {{ solEvent.category }}</span>
+                                                                <span v-else class="badNewsMorale">{{ solEvent.points }} {{ solEvent.category }}</span>
                                                             </span>
                                                             <span v-else>
                                                                 {{ solEvent.desc }}
-                                                                <span class="goodNews">{{ solEvent.points }} {{ solEvent.category }}</span>
+                                                                <span v-if="solEvent.category == 'Health'" class="goodNews">{{ solEvent.points }} {{ solEvent.category }}</span>
+                                                                <span v-else class="goodNewsMorale">{{ solEvent.points }} {{ solEvent.category }}</span>
                                                             </span>
                                                         </li>
                                                     </ul>

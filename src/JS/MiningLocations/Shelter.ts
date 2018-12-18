@@ -22,7 +22,7 @@ export class Shelter extends Building {
     }
 
     takeShelter() {
-        this.player!.putPlayerInShelter();
+        this.player!.putPlayerInShelter(this.coordinate!);
         // Move clock to being finished, and finish off the day.
         this.player!.clock.resetClock();
         gameApp.closeAllModals();

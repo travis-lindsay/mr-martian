@@ -45,11 +45,42 @@ window.onload = function() {
 				var c : any = document.getElementById('solTime');
 				var ctx = c.getContext('2d');
 				ctx.clearRect(0, 0, c.width, c.height);
+
+				// White circle
 				ctx.beginPath();
 				ctx.arc(100, 100, 85, 0, Math.PI * 2);
 				ctx.strokeStyle = "#ffffff";
 				ctx.lineWidth = 4;
 				ctx.stroke();
+
+				// Tick marks around the clock face
+				let x = 100;
+				let y = 100;
+				let radius = 75;
+				let n = 24;
+				var hashSpacing = Math.PI * 2 / n;
+				var innerPoints = [];
+				var outerPoints = [];
+				ctx.strokeStyle = "#686666";
+				ctx.lineWidth = 1;
+				for (var i = 0; i < n; i++ ) { // For each tick mark (for all 24 hrs), find it's position based on the given radius
+					var a = hashSpacing * i;
+					innerPoints.push( { x: x + Math.cos( a ) * radius, y: y + Math.sin( a ) * radius } );
+				} 
+				radius = 88; // Setting the outer radius
+				for (var i = 0; i < n; i++ ) {
+					var a = hashSpacing * i;
+					outerPoints.push( { x: x + Math.cos( a ) * radius, y: y + Math.sin( a ) * radius } );
+				} 
+				for (let i = 0; i < n; i++) { // render the ticks
+					ctx.beginPath();
+					ctx.moveTo( outerPoints[i].x, outerPoints[i].y );
+					ctx.lineTo( innerPoints[i].x, innerPoints[i].y );
+					ctx.closePath();
+					ctx.stroke();
+				}
+
+				// Orange circle
 				ctx.beginPath();
 				let curTime : any = this.time; // hack to get typescript to like me
 				let percentage = (curTime / 24) * 2;
@@ -275,7 +306,7 @@ window.onload = function() {
 				}
 			},
 			getPlayerBuildings(player : Player) {
-				return this.buildings.filter(building  => { player.number == building!.player!.number });
+				return this.buildings.filter(building => building.player == player );
 			},
 			changeCurrentPlayer: function() {
 				this.currentPlayerIndex += 1;
@@ -296,7 +327,8 @@ window.onload = function() {
 			    const HEALTHY_FOOD_RATION = 4;
 			    const HEALTHY_WATER_RATION = 4;
 			    const HEALTH_DEDUCTION = 2;
-			    let totalHealthChange = 0;
+				let totalHealthChange = 0;
+				let totalMoraleChange = 0;
                 this.solEvents = []; // reset events
 
                 let p = this.currentPlayer;
@@ -354,9 +386,6 @@ window.onload = function() {
                         healthMultiplier * HEALTH_DEDUCTION
                     ))
 				}
-				
-				let playersBuildings : Building[] = this.getPlayerBuildings(p);
-				let shelters : Building[] = playersBuildings.filter(building => {building instanceof Shelter}); // TODO, decrease moral
 
                 if (!this.currentPlayer.isPlayerInShelter()) {
                     this.solEvents.push(new SolEvent(
@@ -364,11 +393,54 @@ window.onload = function() {
                         "Health",
                         true,
                         -25
+					));
+					this.solEvents.push(new SolEvent(
+                        "Due to your sleepless night, you had extra time to think about how lonely you are. You lost",
+                        "Morale",
+                        true,
+                        -15
                     ));
-                    totalHealthChange -= 25;
-                }
+					totalHealthChange -= 25;
+					totalMoraleChange -= 15;
+                } else {
+					let playersBuildings : Building[] = this.getPlayerBuildings(p);
+					let shelters : Building[] = playersBuildings.filter(building => building.coordinate === p.shelterCoordinate);
+					if (shelters.length > 0) {
+						let shelter : Shelter = <Shelter> shelters[0];
+						switch (shelter.upgradeLevel) {
+							case 1 : 
+								this.solEvents.push(new SolEvent(
+									"Your shelter kept you safe, but it is a bit shabby. You lost",
+									"Morale",
+									true,
+									-5
+								));
+								totalMoraleChange -= 5;
+								break;
+							case 2:
+								this.solEvents.push(new SolEvent(
+									"Your cozy shack is starting to feel a little like home. You gained",
+									"Morale",
+									false,
+									1
+								));
+								totalMoraleChange += 1;
+								break;
+							case 3:
+								this.solEvents.push(new SolEvent(
+									"Your shelter is so nice you just might stick around on Mars. You gained",
+									"Morale",
+									false,
+									10
+								));
+								totalMoraleChange += 10;
+								break;
+						}
+					}
+				}
                 // Now change the health, then calculate the difference
-                p.changeHealth(totalHealthChange);
+				p.changeHealth(totalHealthChange);
+				p.changeMorale(totalMoraleChange);
                 let healthDifference = p.health - previousHealth;
                 if (healthDifference > 0) {
                     this.solEvents.push(new SolEvent(

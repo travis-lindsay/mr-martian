@@ -10,7 +10,7 @@ TODO (Travis, Jared, or Derek):
 	    - Just brainstorming, I was leaning towards being able to steal from them, and making the players add security components to their buildings.
 	- (Good Jared or Derek one) Add ability to input custom player names on menu screen.
 	- Figure out what we want to do when a player dies, (e.g. skip their turn and change player icon? Let them play as an alien? Etc).
-	- Add some sort of benefit to having an upgraded shelter, increase morale, (decrease morale if in basic shelter)
+	- Add some sort of benefit to having morale, I'm thinking decrease the time you have in the day Tycoon Jones style
 	- Add additional functionality to the SolEvent class, and add in other random events that increase decrease health, give you random items, etc.
 
 Ideas:

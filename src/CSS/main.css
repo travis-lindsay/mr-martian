@@ -316,6 +316,16 @@ p {
     color: #2ec62c;
 }
 
+.badNewsMorale {
+    font-weight: bold;
+    color: #7c49bf;
+}
+
+.goodNewsMorale {
+    font-weight: bold;
+    color: #c5c32d;
+}
+
 .tooltip-inner {
     background-color: #252525;
 }
