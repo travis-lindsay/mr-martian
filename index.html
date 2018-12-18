@@ -3,65 +3,25 @@
 
 <head>
     <meta charset="utf-8">
-    <title></title>
-    <!-- OLD BOOTSTRAP -->
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="./CSS/main.css">
+    <title>Mr Martian</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="./src/CSS/main.css">
     <!-- Bootstrap4 JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-    <script src="./JS/Player.js"></script>
-    <script src="./JS/vue.js"></script>
-    <script src="./JS/game.js"></script>
-    <script src="./JS/Ship.js"></script>
-    <script src="./JS/Clock.js"></script>
-    <script src="./JS/MiningLocations/Well.js"></script>
-    <script src="./JS/MiningLocations/Farm.js"></script>
-    <script src="./JS/MiningLocations/Shelter.js"></script>
-    <script src="./JS/MiningLocations/Mine.js"></script>
-    <script src="./JS/MiningLocations/Lab.js"></script>
-    <script src="./JS/Maps/PlayerAnimation.js"></script>
-    <script src="./JS/Maps/Coordinate.js"></script>
-    <script src="./JS/Maps/Map.js"></script>
-    <script src="./JS/Maps/DetermineShortestPath.js"></script>
-    <script src="./JS/Maps/Tile.js"></script>
-    <script src="./JS/Tools/PickAxe.js"></script>
-    <script src="./JS/Tools/Axe.js"></script>
-    <script src="./JS/Tools/Shovel.js"></script>
-    <script src="./JS/Tools/Spear.js"></script>
-    <script src="./JS/RoverParts/Engine.js"></script>
-    <script src="./JS/RoverParts/Frame.js"></script>
-    <script src="./JS/RoverParts/Wheel.js"></script>
-    <script src="./JS/Utils.js"></script>
-    <script src="./JS/SolEvent.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body>
+<body style="font-family: 'Lucida Console';">
 <div id="app">
     <nav class="navbar navbar-inverse navbar-static-top" style="margin-bottom: 0px;">
         <div class="container-fluid">
 
 
             <div class="navbar-header">
-                <!--					<button type="button" class="navbar-toggle collapsed" @click="dropMenuIsOpen=!dropMenuIsOpen" data-toggle="collapse" data-target="#myNavbar">
-                                        <span class="sr-only">Toggle navigation</span>
-                                        <span class="icon-bar"></span>
-                                        <span class="icon-bar"></span>
-                                        <span class="icon-bar"></span>
-                                      </button>-->
                 <a class="navbar-brand" style="color: white;" href="http://www.tlindsay.com">tlindsay.com</a>
             </div>
             <div class="collapse navbar-collapse" :class="{show: dropMenuIsOpen}" id="myNavbar">
@@ -75,12 +35,11 @@
     <!-- Main Row of regular game play-->
     <div class="container-fluid">
 
-
         <!--  Dereks rad start screen -->
         <div v-show="playerPick" class="gameTitleContainer row text-center align-items-center justify-content-center">
             <div class="innerTitleContainer col-md-6">
                 <h1 class="gameTitleHeader">Mr. Martian</h1>
-                <hr style="background-color: #2a2a2a; border-top: 3px solid rgba(0,0,0,.1);">
+                <hr style="background-color: #2a2a2a; border-top: 3px solid rgba(0, 0, 0, 0.28);">
                 <h2 style="color: white;">How many players?</h2>
                 <button @click="pickPlayers(1)" class="button">1</button>
                 <button @click="pickPlayers(2)" class="button">2</button>
@@ -89,14 +48,13 @@
             </div>
         </div>
 
-
         <div class="row" style="border-bottom: 2px solid gray;">
             <!-- Left Time Column -->
             <div class="col-md-2 inventoryColumn text-center" style="padding: 0px;">
-                <h2 style="color: white; padding: 5px;"><span class="itemStats">Sol: <span style="color: #ca400b;">{{ sol }}</span></span>
+                <h2 style="color: white; padding-top: 10px;"><span class="itemStats">Sol: <span style="color: #ca400b;">{{ sol }}</span></span>
                 </h2>
                 <hr>
-                <div class="col-sm-12" style="margin-top: 15px; color: #ee4a00;">
+                <div class="col-sm-12" style="margin-top: 5px; color: #ee4a00;">
                     <span class="itemStats">Time Left in Sol</span>
                 </div>
                 <clockpanel :time="currentPlayer.clock.usedTime">
@@ -120,28 +78,28 @@
                                             <div class="col buildOptionCell"
                                                  v-on:mouseover="updateDescription('shelter')"
                                                  @click="constructBuilding('shelter')">
-                                                <img class="buildOptionImage" src="./IMG/places/shelter1.png">
+                                                <img class="buildOptionImage" src="./src/IMG/places/shelter1.png">
                                             </div>
                                             <div class="col buildOptionCell" v-on:mouseover="updateDescription('well')"
                                                  @click="constructBuilding('well')">
-                                                <img class="buildOptionImage" src="./IMG/places/well1.png">
+                                                <img class="buildOptionImage" src="./src/IMG/places/well1.png">
                                             </div>
                                             <div class="col buildOptionCell" v-on:mouseover="updateDescription('farm')"
                                                  @click="constructBuilding('farm')">
-                                                <img class="buildOptionImage" src="./IMG/places/farm1.png">
+                                                <img class="buildOptionImage" src="./src/IMG/places/farm1.png">
                                             </div>
                                             <div class="col buildOptionCell" v-on:mouseover="updateDescription('mine')"
                                                  @click="constructBuilding('mine')">
-                                                <img class="buildOptionImage" src="./IMG/places/mine1.png">
+                                                <img class="buildOptionImage" src="./src/IMG/places/mine1.png">
                                             </div>
                                             <div class="col buildOptionCell" v-on:mouseover="updateDescription('lab')"
                                                  @click="constructBuilding('lab')">
-                                                <img class="buildOptionImage" src="./IMG/places/lab1.png">
+                                                <img class="buildOptionImage" src="./src/IMG/places/lab1.png">
                                             </div>
                                         </div>
                                         <div class="row" style="min-height: 120px;">
                                             <div class="col-12">
-                                                <h3 class="float-left" style="color: #bcbcbc;"> {{ hoveredBuildingName
+                                                <h3 class="float-left" style="color: #bcbcbc; padding-top: 10px;"> {{ hoveredBuildingName
                                                     }} </h3>
                                                 <span class="float-right" style="color: orange; padding: 7px;">Build Time: {{ hoveredBuildingBuildTime }} </span>
                                             </div>
@@ -170,14 +128,51 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="container-fluid">
-                                        <div class="row align-items-center">
+                                        <div class="row">
                                             <div class="col-3">
                                                 <img v-bind:src="currentBuilding.img">
                                             </div>
                                             <div class="col-9">
-                                                <div class="row">
+                                                <div class="row align-items-center" style="padding-left: 25px; height: 100%;">
+                                                    <div v-show="currentBuilding.type == 'Lab'" style="width: 100%">
+                                                        <div>
+                                                            <span style="color: white; font-weight: bolder; font-size: 20px;">Rover Parts: </span>
+                                                        </div>
+                                                        <div style="margin-left: 10px; display: inline-block">
+                                                            <div class="labItemRow row">
+                                                                <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/roverparts/roverframe.png"></div>
+                                                                <div class="col-6 labItem">Rover Frame</div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('frame');">Build</button></div>
+                                                            </div>
+                                                            <div class="labItemRow row">
+                                                                <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/roverparts/roverwheel.png"></div>
+                                                                <div class="col-6 labItem">Rover Wheels</div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('wheel');">Build</button></div>
+                                                            </div>
+                                                            <div class="labItemRow row">
+                                                                <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/roverparts/roverengine.png"></div>
+                                                                <div class="col-6 labItem">Rover Engine</div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('engine');">Build</button></div>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <span style="color: white; font-weight: bolder; font-size: 20px;">Tools: </span>
+                                                        </div>
+                                                        <div style="margin-left: 10px; display: inline-block">
+                                                            <div class="labItemRow row">
+                                                                <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/tools/pickaxe.png"></div>
+                                                                <div class="col-6 labItem">Pick Axe</div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('pickaxe');">Build</button></div>
+                                                            </div>
+                                                            <div class="labItemRow row">
+                                                                <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/tools/shovel.png"></div>
+                                                                <div class="col-6 labItem">Shovel</div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('shovel');">Build</button></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <table style="margin-left: 25px;">
-                                                        <tr v-show="currentBuilding.totalResourceCount">
+                                                        <tr v-show="currentBuilding.mineable">
                                                             <td style="min-width: 115px;">
                                                                 <span class="itemHeader">Resources: </span>
                                                             </td>
@@ -185,7 +180,7 @@
                                                                 <span class="itemValue">{{ currentBuilding.totalResourceCount - currentBuilding.minedResourceCount }}</span>
                                                             </td>
                                                         </tr>
-                                                        <tr v-show="currentBuilding.resourcePerHour">
+                                                        <tr v-show="currentBuilding.mineable">
                                                             <td>
                                                                 <span class="itemHeader">Harvest Rate: </span>
                                                             </td>
@@ -206,12 +201,14 @@
                                     <button v-show="currentBuilding.type == 'Shelter'" type="button" class="btn btn-info" @click="currentBuilding.takeShelter();">
                                         Take Shelter
                                     </button>
-                                    <button v-show="currentBuilding.mineResource" type="button" class="btn btn-info" @click="currentBuilding.mineResource();">
+                                    <button v-show="currentBuilding.mineable" type="button" class="btn btn-info" @click="currentBuilding.mineResource();">
                                         Harvest
                                     </button>
-                                    <button v-show="currentBuilding.getCanUpgrade()" type="button" class="btn btn-primary" @click="currentBuilding.upgrade();">
-                                        Upgrade
-                                    </button>
+                                    <span id="buildReqsTooltip" class="d-inline-block buildReqsTooltip" tabindex="0" container="body" data-toggle="tooltip" data-placement="top" data-html="true" title="Upgrade: ${ currentBuilding.nextUpgradeReqs.food }">
+                                        <button v-show="currentBuilding.getIsNextUpgrade()" type="button" class="btn btn-primary" v-bind:class="{ disabled: !currentBuilding.getCanUpgrade() }" @click="currentBuilding.upgrade();">
+                                            Upgrade
+                                        </button>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -283,6 +280,9 @@
                                             <div class="col-12" style="padding-bottom: 15px;">
                                                 <span id="turnResultDesc" style="color: #cdcccc;">
                                                     <!-- Maybe insert some random paragraph of text depending on what sol it is -->
+                                                    <p id="solSummary">
+                                                        {{ solSummary }}
+                                                    </p>
                                                     <ul>
                                                         <li v-for="solEvent in solEvents">
                                                             <span v-if="solEvent.badEvent">
@@ -299,7 +299,7 @@
                                             </div>
                                             <div class="col-12 menuItemSeparated" style="background-color: #5c545130; padding-left: 0px;">
                                                 <div class="col-12">
-                                                    <h5 style="color: white;">Used resources</h5>
+                                                    <h5 style="color: white;">Used resources this sol</h5>
                                                 </div>
                                                 <div class="col-12" style="padding-bottom: 15px; padding-left: 38px;">
                                                     <span class="itemHeader">Food: </span>
@@ -346,7 +346,7 @@
                                                     <h5 style="color: white;">Scientific Research Progress</h5>
                                                 </div>
                                                 <div class="col-12" style="color: #d3d2d2;">
-                                                    Still not quite sure how we want to do this part... But we have a lab, so I figured we could either give them points for research they do, or make it required, show progress on their rover, etc. TODO
+                                                   You have not built a lab yet...
                                                 </div>
                                             </div>
                                         </div>
@@ -364,210 +364,210 @@
                         <tbody id="tileMapTable">
                         <tr>
                             <td id="0_0" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="0_0" class="tileIMG" src="./IMG/marssurface/marsTLcorner.png">
+                                <img id="0_0" class="tileIMG" src="./src/IMG/marssurface/marsTLcorner.png">
                             </td>
                             <td id="0_1" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="0_1" class="tileIMG" src="./IMG/marssurface/marshorizontal.png">
+                                <img id="0_1" class="tileIMG" src="./src/IMG/marssurface/marshorizontal.png">
                             </td>
                             <td id="0_2" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="0_2" class="tileIMG" src="./IMG/marssurface/marshorizontal.png">
+                                <img id="0_2" class="tileIMG" src="./src/IMG/marssurface/marshorizontal.png">
                             </td>
                             <td id="0_3" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="0_3" class="tileIMG" src="./IMG/marssurface/marstopintersect.png">
+                                <img id="0_3" class="tileIMG" src="./src/IMG/marssurface/marstopintersect.png">
                             </td>
                             <td id="0_4" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="0_4" class="tileIMG" src="./IMG/marssurface/marshorizontal.png">
+                                <img id="0_4" class="tileIMG" src="./src/IMG/marssurface/marshorizontal.png">
                             </td>
                             <td id="0_5" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="0_5" class="tileIMG" src="./IMG/marssurface/marshorizontal.png">
+                                <img id="0_5" class="tileIMG" src="./src/IMG/marssurface/marshorizontal.png">
                             </td>
                             <td id="0_6" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="0_6" class="tileIMG" src="./IMG/marssurface/marshorizontal.png">
+                                <img id="0_6" class="tileIMG" src="./src/IMG/marssurface/marshorizontal.png">
                             </td>
                             <td id="0_7" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="0_7" class="tileIMG" src="./IMG/marssurface/marsTRcorner.png">
+                                <img id="0_7" class="tileIMG" src="./src/IMG/marssurface/marsTRcorner.png">
                             </td>
                         </tr>
                         <tr>
                             <td id="1_0" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="1_0" class="tileIMG" src="./IMG/marssurface/marsroad.png">
+                                <img id="1_0" class="tileIMG" src="./src/IMG/marssurface/marsroad.png">
                             </td>
                             <td id="1_1" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="1_1" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="1_1" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="1_2" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="1_2" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="1_2" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="1_3" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="1_3" class="tileIMG" src="./IMG/marssurface/marsroad.png">
+                                <img id="1_3" class="tileIMG" src="./src/IMG/marssurface/marsroad.png">
                             </td>
                             <td id="1_4" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="1_4" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="1_4" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="1_5" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="1_5" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="1_5" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="1_6" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="1_6" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="1_6" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="1_7" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="1_7" class="tileIMG" src="./IMG/marssurface/marsroad.png">
+                                <img id="1_7" class="tileIMG" src="./src/IMG/marssurface/marsroad.png">
                             </td>
                         </tr>
                         <tr>
                             <td id="2_0" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="2_0" class="tileIMG" src="./IMG/marssurface/marsroad.png">
+                                <img id="2_0" class="tileIMG" src="./src/IMG/marssurface/marsroad.png">
                             </td>
                             <td id="2_1" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="2_1" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="2_1" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="2_2" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="2_2" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="2_2" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="2_3" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="2_3" class="tileIMG" src="./IMG/marssurface/marsroad.png">
+                                <img id="2_3" class="tileIMG" src="./src/IMG/marssurface/marsroad.png">
                             </td>
                             <td id="2_4" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="2_4" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="2_4" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="2_5" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="2_5" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="2_5" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="2_6" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="2_6" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="2_6" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="2_7" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="2_7" class="tileIMG" src="./IMG/marssurface/marsroad.png">
+                                <img id="2_7" class="tileIMG" src="./src/IMG/marssurface/marsroad.png">
                             </td>
                         </tr>
                         <tr>
                             <td id="3_0" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="3_0" class="tileIMG" src="./IMG/marssurface/marsroad.png">
+                                <img id="3_0" class="tileIMG" src="./src/IMG/marssurface/marsroad.png">
                             </td>
                             <td id="3_1" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="3_1" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="3_1" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="3_2" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="3_2" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="3_2" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="3_3" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="3_3" class="tileIMG" src="./IMG/marssurface/marsleftintersect.png">
+                                <img id="3_3" class="tileIMG" src="./src/IMG/marssurface/marsleftintersect.png">
                             </td>
                             <td id="3_4" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="3_4" class="tileIMG" src="./IMG/marssurface/marstopintersect.png">
+                                <img id="3_4" class="tileIMG" src="./src/IMG/marssurface/marstopintersect.png">
                             </td>
                             <td id="3_5" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="3_5" class="tileIMG" src="./IMG/marssurface/marshorizontal.png">
+                                <img id="3_5" class="tileIMG" src="./src/IMG/marssurface/marshorizontal.png">
                             </td>
                             <td id="3_6" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="3_6" class="tileIMG" src="./IMG/marssurface/marshorizontal.png">
+                                <img id="3_6" class="tileIMG" src="./src/IMG/marssurface/marshorizontal.png">
                             </td>
                             <td id="3_7" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="3_7" class="tileIMG" src="./IMG/marssurface/marsrightintersect.png">
+                                <img id="3_7" class="tileIMG" src="./src/IMG/marssurface/marsrightintersect.png">
                             </td>
                         </tr>
                         <tr>
                             <td id="4_0" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="4_0" class="tileIMG" src="./IMG/marssurface/marsleftintersect.png">
+                                <img id="4_0" class="tileIMG" src="./src/IMG/marssurface/marsleftintersect.png">
                             </td>
                             <td id="4_1" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="4_1" class="tileIMG" src="./IMG/marssurface/marshorizontal.png">
+                                <img id="4_1" class="tileIMG" src="./src/IMG/marssurface/marshorizontal.png">
                             </td>
                             <td id="4_2" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="4_2" class="tileIMG" src="./IMG/marssurface/marshorizontal.png">
+                                <img id="4_2" class="tileIMG" src="./src/IMG/marssurface/marshorizontal.png">
                             </td>
                             <td id="4_3" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="4_3" class="tileIMG" src="./IMG/marssurface/marsbottomintersect.png">
+                                <img id="4_3" class="tileIMG" src="./src/IMG/marssurface/marsbottomintersect.png">
                             </td>
                             <td id="4_4" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="4_4" class="tileIMG" src="./IMG/marssurface/marsrightintersect.png">
+                                <img id="4_4" class="tileIMG" src="./src/IMG/marssurface/marsrightintersect.png">
                             </td>
                             <td id="4_5" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="4_5" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="4_5" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="4_6" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="4_6" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="4_6" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="4_7" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="4_7" class="tileIMG" src="./IMG/marssurface/marsroad.png">
+                                <img id="4_7" class="tileIMG" src="./src/IMG/marssurface/marsroad.png">
                             </td>
                         </tr>
                         <tr>
                             <td id="5_0" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="5_0" class="tileIMG" src="./IMG/marssurface/marsroad.png">
+                                <img id="5_0" class="tileIMG" src="./src/IMG/marssurface/marsroad.png">
                             </td>
                             <td id="5_1" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="5_1" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="5_1" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="5_2" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="5_2" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="5_2" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="5_3" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="5_3" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="5_3" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="5_4" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img class="tileIMG" src="./IMG/marssurface/marsroad.png">
+                                <img class="tileIMG" src="./src/IMG/marssurface/marsroad.png">
                             </td>
                             <td id="5_5" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="5_5" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="5_5" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="5_6" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="5_6" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="5_6" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="5_7" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="5_7" class="tileIMG" src="./IMG/marssurface/marsroad.png">
+                                <img id="5_7" class="tileIMG" src="./src/IMG/marssurface/marsroad.png">
                             </td>
                         </tr>
                         <tr>
                             <td id="6_0" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="6_0" class="tileIMG" src="./IMG/marssurface/marsroad.png">
+                                <img id="6_0" class="tileIMG" src="./src/IMG/marssurface/marsroad.png">
                             </td>
                             <td id="6_1" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="6_1" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="6_1" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="6_2" class="gameTile surface" @click="handleTileClickEvent">
-                                <img class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="6_3" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="6_3" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="6_3" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="6_4" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="6_4" class="tileIMG" src="./IMG/marssurface/marsroad.png">
+                                <img id="6_4" class="tileIMG" src="./src/IMG/marssurface/marsroad.png">
                             </td>
                             <td id="6_5" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="6_5" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="6_5" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="6_6" class="gameTile surface" @click="handleTileClickEvent">
-                                <img id="6_6" class="tileIMG" src="./IMG/marssurface/marssurface.png">
+                                <img id="6_6" class="tileIMG" src="./src/IMG/marssurface/marssurface.png">
                             </td>
                             <td id="6_7" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="6_7" class="tileIMG" src="./IMG/marssurface/marsroad.png">
+                                <img id="6_7" class="tileIMG" src="./src/IMG/marssurface/marsroad.png">
                             </td>
                         </tr>
                         <tr>
                             <td id="7_0" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="7_0" class="tileIMG" src="./IMG/marssurface/marsBLcorner.png">
+                                <img id="7_0" class="tileIMG" src="./src/IMG/marssurface/marsBLcorner.png">
                             </td>
                             <td id="7_1" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="7_1" class="tileIMG" src="./IMG/marssurface/marshorizontal.png">
+                                <img id="7_1" class="tileIMG" src="./src/IMG/marssurface/marshorizontal.png">
                             </td>
                             <td id="7_2" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="7_2" class="tileIMG" src="./IMG/marssurface/marshorizontal.png">
+                                <img id="7_2" class="tileIMG" src="./src/IMG/marssurface/marshorizontal.png">
                             </td>
                             <td id="7_3" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="7_3" class="tileIMG" src="./IMG/marssurface/marshorizontal.png">
+                                <img id="7_3" class="tileIMG" src="./src/IMG/marssurface/marshorizontal.png">
                             </td>
                             <td id="7_4" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="7_4" class="tileIMG" src="./IMG/marssurface/marsbottomintersect.png">
+                                <img id="7_4" class="tileIMG" src="./src/IMG/marssurface/marsbottomintersect.png">
                             </td>
                             <td id="7_5" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="7_5" class="tileIMG" src="./IMG/marssurface/marshorizontal.png">
+                                <img id="7_5" class="tileIMG" src="./src/IMG/marssurface/marshorizontal.png">
                             </td>
                             <td id="7_6" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="7_6" class="tileIMG" src="./IMG/marssurface/marshorizontal.png">
+                                <img id="7_6" class="tileIMG" src="./src/IMG/marssurface/marshorizontal.png">
                             </td>
                             <td id="7_7" class="gameTile clickable" @click="handleTileClickEvent">
-                                <img id="7_7" class="tileIMG" src="./IMG/marssurface/marsBRcorner.png">
+                                <img id="7_7" class="tileIMG" src="./src/IMG/marssurface/marsBRcorner.png">
                             </td>
                         </tr>
                         </tbody>
@@ -577,7 +577,7 @@
             <!-- Right Details Column -->
             <div class="col-md-2 inventoryColumn text-center" style="padding: 0px;">
                 <h2 style="color: white; padding: 5px;"><span class="itemStats">{{ currentPlayer.name }}</span></h2>
-                <div id="mainPlayerIMG" class="mainPlayerIMG" v-bind:style="{ 'background-image': 'url(./IMG/spaceman/' + currentPlayer.imagePath + ')' }"></div>
+                <div id="mainPlayerIMG" class="mainPlayerIMG" v-bind:style="{ 'background-image': 'url(./src/IMG/spaceman/' + currentPlayer.imagePath + ')' }"></div>
                 <div class="col-sm-12" style="margin-top: 15px; color: #ee4a00;">
                     <b class="itemHeader">Health: </b><span class="itemStats">{{ currentPlayer.health }}</span>
                 </div>
@@ -595,8 +595,12 @@
                 </div>
                 <div class="col-sm-12" style="margin-top: 15px; color: #ee4a00;">
                     <hr>
-                    <h4 style="color: white;">Inventory:</h4><span
-                        class="itemStats">{{ currentPlayer.suppliesList }}</span>
+                    <h4 style="color: white;">Inventory:</h4>
+                    <div class="row" style="margin: 5px;">
+                        <div v-for="supply in currentPlayer.suppliesList" class="col-3 inventoryItem">
+                                <img style="width: 100%;" v-bind:src="supply.imgPath"> 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
