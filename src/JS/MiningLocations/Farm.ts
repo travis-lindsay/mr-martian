@@ -20,7 +20,7 @@ export class Farm extends Building {
         this.currentHoursConstructed = 0;
     
         // TODO, assign a random value to the total resources
-        this.totalResourceCount = 85;
+        this.totalResourceCount = 135;
         this.resourcePerHour = 1;
         this.minedResourceCount = 0;
         this.nextUpgradeReqs = { food : 20, water : 20, stone : 5 }

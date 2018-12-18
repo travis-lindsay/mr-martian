@@ -341,8 +341,10 @@ p {
 }
 
 .labItemRow {
-    min-width: 290px;
+    min-width: 330px;
     color: #b4b4b4;
+    background-color: #ffddbf08;
+    border-left: 1px solid gray;
 }
 
 .labItemIMG {
@@ -360,4 +362,9 @@ p {
 
 .inventoryItem:hover {
     background-color: #313131;
+}
+
+hr {
+    background-color: #2a2a2a; 
+    border-top: 2px solid rgba(155, 49, 8, 0.22);
 }

@@ -82,6 +82,7 @@ window.onload = function() {
 			hoveredBuildingName: "",
 			solEvents: new Array<SolEvent>(),
 			solSummary: "",
+			buildings: new Array<Building>(),
 		},
 		components: {
 			'clockpanel': clockpanel,
@@ -268,9 +269,13 @@ window.onload = function() {
 					Utils.addImageToCoordinate("./src/IMG/spaceman/corner" + this.currentPlayer.number + ".png", this.lastClickedTileCoord, 'CORNER');
 					Utils.addImageToCoordinate(this.currentBuilding.img, this.lastClickedTileCoord, 'IMG');
 					Utils.addImageToCoordinate("./src/IMG/Construction.png", this.lastClickedTileCoord, 'CONSTRUCTION');
+					this.buildings.push(this.currentBuilding);
 					$("#buildOptionsModal").modal("hide");
 					$("#constructionModal").modal("show");
 				}
+			},
+			getPlayerBuildings(player : Player) {
+				return this.buildings.filter(building  => { player.number == building!.player!.number });
 			},
 			changeCurrentPlayer: function() {
 				this.currentPlayerIndex += 1;
@@ -316,7 +321,6 @@ window.onload = function() {
                 // If the ration is below the healthy amount, then subtract health
                 let healthMultiplier = p.usedFoodRation - HEALTHY_FOOD_RATION;
                 totalHealthChange += healthMultiplier * HEALTH_DEDUCTION;
-                // TODO, take into account if the player's health is already at 100%
                 if (healthMultiplier > 0) {
                     this.solEvents.push(new SolEvent(
                         "Due to excellent food consumption you gained",
@@ -349,7 +353,10 @@ window.onload = function() {
                         true,
                         healthMultiplier * HEALTH_DEDUCTION
                     ))
-                }
+				}
+				
+				let playersBuildings : Building[] = this.getPlayerBuildings(p);
+				let shelters : Building[] = playersBuildings.filter(building => {building instanceof Shelter}); // TODO, decrease moral
 
                 if (!this.currentPlayer.isPlayerInShelter()) {
                     this.solEvents.push(new SolEvent(

@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body>
+<body style="font-family: 'Lucida Console';">
 <div id="app">
     <nav class="navbar navbar-inverse navbar-static-top" style="margin-bottom: 0px;">
         <div class="container-fluid">
@@ -35,12 +35,11 @@
     <!-- Main Row of regular game play-->
     <div class="container-fluid">
 
-
         <!--  Dereks rad start screen -->
         <div v-show="playerPick" class="gameTitleContainer row text-center align-items-center justify-content-center">
             <div class="innerTitleContainer col-md-6">
                 <h1 class="gameTitleHeader">Mr. Martian</h1>
-                <hr style="background-color: #2a2a2a; border-top: 3px solid rgba(0,0,0,.1);">
+                <hr style="background-color: #2a2a2a; border-top: 3px solid rgba(0, 0, 0, 0.28);">
                 <h2 style="color: white;">How many players?</h2>
                 <button @click="pickPlayers(1)" class="button">1</button>
                 <button @click="pickPlayers(2)" class="button">2</button>
@@ -49,14 +48,13 @@
             </div>
         </div>
 
-
         <div class="row" style="border-bottom: 2px solid gray;">
             <!-- Left Time Column -->
             <div class="col-md-2 inventoryColumn text-center" style="padding: 0px;">
-                <h2 style="color: white; padding: 5px;"><span class="itemStats">Sol: <span style="color: #ca400b;">{{ sol }}</span></span>
+                <h2 style="color: white; padding-top: 10px;"><span class="itemStats">Sol: <span style="color: #ca400b;">{{ sol }}</span></span>
                 </h2>
                 <hr>
-                <div class="col-sm-12" style="margin-top: 15px; color: #ee4a00;">
+                <div class="col-sm-12" style="margin-top: 5px; color: #ee4a00;">
                     <span class="itemStats">Time Left in Sol</span>
                 </div>
                 <clockpanel :time="currentPlayer.clock.usedTime">
@@ -101,7 +99,7 @@
                                         </div>
                                         <div class="row" style="min-height: 120px;">
                                             <div class="col-12">
-                                                <h3 class="float-left" style="color: #bcbcbc;"> {{ hoveredBuildingName
+                                                <h3 class="float-left" style="color: #bcbcbc; padding-top: 10px;"> {{ hoveredBuildingName
                                                     }} </h3>
                                                 <span class="float-right" style="color: orange; padding: 7px;">Build Time: {{ hoveredBuildingBuildTime }} </span>
                                             </div>
@@ -130,15 +128,15 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="container-fluid">
-                                        <div class="row align-items-center">
+                                        <div class="row">
                                             <div class="col-3">
                                                 <img v-bind:src="currentBuilding.img">
                                             </div>
                                             <div class="col-9">
-                                                <div class="row" style="padding-left: 25px;">
+                                                <div class="row align-items-center" style="padding-left: 25px; height: 100%;">
                                                     <div v-show="currentBuilding.type == 'Lab'" style="width: 100%">
                                                         <div>
-                                                            <span style="color: white; font-weight: bolder;">Rover Parts: </span>
+                                                            <span style="color: white; font-weight: bolder; font-size: 20px;">Rover Parts: </span>
                                                         </div>
                                                         <div style="margin-left: 10px; display: inline-block">
                                                             <div class="labItemRow row">
@@ -158,7 +156,7 @@
                                                             </div>
                                                         </div>
                                                         <div>
-                                                            <span style="color: white; font-weight: bolder;">Tools: </span>
+                                                            <span style="color: white; font-weight: bolder; font-size: 20px;">Tools: </span>
                                                         </div>
                                                         <div style="margin-left: 10px; display: inline-block">
                                                             <div class="labItemRow row">

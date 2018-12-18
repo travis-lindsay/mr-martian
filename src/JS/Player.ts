@@ -19,7 +19,6 @@ export class Player {
     usedWaterRation : number = 0;
     morale : number = 5;
     suppliesList : InventoryItem[] = new Array<InventoryItem>();
-    supplies : any = [null];
     isDead : boolean = false;
     imagePath : string;
     name : string;
