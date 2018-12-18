@@ -1,4 +1,4 @@
 export class Stone
 {
-    name : string = "Stone"
+    name : string = "Stone" 
 }
