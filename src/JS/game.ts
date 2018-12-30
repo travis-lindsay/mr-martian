@@ -14,6 +14,7 @@ import { SolEvent } from './SolEvent';
 import { Ship } from './Ship';
 import Utils from './Utils'
 import { SolSummary } from './SolSummary';
+import { FinalGame } from './FinalGame/FinalGame';
 export var gameApp : any;
 
 window.onload = function() {
@@ -104,6 +105,7 @@ window.onload = function() {
 			dropMenuIsOpen: false,
 			tileMap: new Map(),
 			playerPick: true,
+			finalGameShow: false,
 			mapSize: 8,
 			sol: 0,
 			buildOptionVisible: false,
@@ -465,6 +467,10 @@ window.onload = function() {
             },
 			incrementSol: function() {
 				this.sol += 1;
+			},
+			startFinalGame: function() {
+				var game = new FinalGame();
+				this.finalGameShow = true;
 			},
 			pickPlayers: function(numPlayers : number) {
 				for (var i = 0; i < numPlayers; i++) {
