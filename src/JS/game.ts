@@ -202,7 +202,10 @@ window.onload = function() {
 			},
             closeTurnResultsModal: function() {
                 $("#turnResultsModal").modal("hide");
-            },
+			},
+			getCurrentPlayer() {
+				return this.currentPlayer;
+			},
 			movePlayerTo: function(x : number, y : number) {
 			    this.currentPlayer.removePlayerFromShelter();
 				var currentCoord = this.currentPlayer.getCoordinate();
