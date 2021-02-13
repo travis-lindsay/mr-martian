@@ -34,6 +34,9 @@ export class Player {
         this.name = "Player " + (num + 1);
         this.number = num;
         
+        // Each players starts with a shovel by default
+        this.addSupply('shovel');
+
         switch(num) {
             case 0:
                 this.coordinate = new Coordinate(0,0);

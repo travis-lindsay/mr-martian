@@ -217,7 +217,6 @@ window.onload = function() {
 				if (coordinatePath.length > timeInDay) {
 					coordinatePath = coordinatePath.slice(0, timeInDay + 1);
 				}
-				console.log(coordinatePath);
 				var animation = new PlayerAnimation(this.currentPlayer, coordinatePath);
 				animation.animatePlayerMovement(this.highlightClickableTiles);
 			},
