@@ -15,6 +15,10 @@ export class Tile {
     setBuilding(building : any) {
         this.building = building;
     }
+
+    destroyBuilding() {
+        this.building = null; 
+    }
     
     getBuilding()  {
         return this.building;

@@ -62,11 +62,60 @@
                 </clockpanel>
                 <button class="btn btn-dark" style="margin-top: 15px;" @click="openTurnResultsModal">Mission Progress</button>
                 <button class="btn btn-dark" style="margin-top: 15px;" @click="startFinalGame()">Final Game</button>
+                <div class="col-12" style="padding-left: 15px; padding-bottom: 15px;">
+                    <div class="row" style="padding-top: 20px; padding-left: 25px;">
+                        <span style="color: white;">Food Ration: </span>
+                        <span class="itemValue" style="padding-left: 5px;">{{ currentPlayer.foodRation }}</span>
+                    </div> 
+                    <div class="row" style="padding: 25px;">
+                        <input type="range" v-model="currentPlayer.foodRation" min="0" v-bind:max="currentPlayer.food"
+                                class="slider" v-bind:class="{
+                                'bad': currentPlayer.foodRation < 3,
+                                'low': currentPlayer.foodRation == 3,
+                                'meh': currentPlayer.foodRation == 4,
+                                'good': currentPlayer.foodRation == 5,
+                                'great': currentPlayer.foodRation > 5}" id="foodRationSlider">
+                    </div>
+                    <div class="row" style="padding-left: 25px;">
+                        <span style="color: white;">Water Ration: </span>
+                        <span class="itemValue" style="padding-left: 5px;">{{ currentPlayer.waterRation }}</span>
+                    </div> 
+                    <div class="row" style="padding: 25px;">
+                        <input type="range" v-model="currentPlayer.waterRation" min="0" v-bind:max="currentPlayer.water" class="slider" v-bind:class="{
+                                'bad': currentPlayer.waterRation < 3,
+                                'low': currentPlayer.waterRation == 3,
+                                'meh': currentPlayer.waterRation == 4,
+                                'good': currentPlayer.waterRation == 5,
+                                'great': currentPlayer.waterRation > 5}" id="waterRationSlider">
+                    </div>
+                </div>
             </div>
             <!-- Middle Column Containing Main Screens-->
             <div class="col-md-8 mainColumn">
                 <div class="row eventRow">
 
+                     <!-- Confirmation Modal -->
+                     <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index: 1060;">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content"
+                             style="max-width: 700px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 10px 20px 0 rgba(5, 5, 5, 0.19); background-color: rgba(50, 50, 50, 0.86); border: solid 1px gray;">
+                            <div class="modal-body" style="padding: 0px;">
+                                <div class="container-fluid">
+                                    <div class="row" style="min-height: 120px;">
+                                        <div class="col-12 d-flex flex-column min-vh-100 justify-content-center align-items-center">
+                                            <span style="color: orange; padding: 7px;">{{ confirmationDialogMsg }} </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="border-top: solid #1d1c1c 2px;">
+                                <button id="btnYes" type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
+                                <button id="btnNo" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                     <!-- Build Selection Modal -->
                     <div class="modal fade" id="buildOptionsModal" tabindex="-1" role="dialog"
@@ -199,6 +248,10 @@
                                 <div class="modal-footer" style="border-top: solid #1d1c1c 2px;">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                         Close
+                                    </button>
+                                    <button type="button" class="btn btn-dark" @click="closeAllModals(); openConfirmationModal('Are you sure you want to destroy this building?',
+                                        () => {currentBuilding.destroy(tileMap)}, () => {openPlaceActionsModal();});">
+                                        Destroy
                                     </button>
                                     <button v-show="currentBuilding.type == 'Shelter'" type="button" class="btn btn-info" @click="currentBuilding.takeShelter();">
                                         Take Shelter

@@ -116,6 +116,7 @@ window.onload = function() {
 			solEvents: new Array<SolEvent>(),
 			solSummary: "",
 			buildings: new Array<Building>(),
+			confirmationDialogMsg: "",
 		},
 		components: {
 			'clockpanel': clockpanel,
@@ -202,6 +203,23 @@ window.onload = function() {
 			},
             closeTurnResultsModal: function() {
                 $("#turnResultsModal").modal("hide");
+			},
+			openConfirmationModal: function(msg : string, yesCallback : any, noCallback : any) {
+				this.confirmationDialogMsg = msg;
+				let dialog = $("#confirmationModal");
+			
+				$('#btnYes').click(function() {
+					$("#confirmationModal").modal("hide");
+					yesCallback();
+				});
+				$('#btnNo').click(function() {
+					$("#confirmationModal").modal("hide");
+					noCallback();
+				});
+				$("#confirmationModal").modal("show");
+			},
+            closeConfirmationModal: function() {
+                $("#confirmationModal").modal("hide");
 			},
 			getCurrentPlayer() {
 				return this.currentPlayer;

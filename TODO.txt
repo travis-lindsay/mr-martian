@@ -1,5 +1,6 @@
 TODO (Travis, Jared, or Derek):
-    - Build out the "Player inventory"
+	- Ability to add "anti-alien propaganda" to other players buildings, which increases the # of enemies they have to fight off in the end game
+	- Build out the "Player inventory"
 		- Not quite sure how we want to do this... Maybe some small thumbnails of the items you have in the "inventory" section, or maybe another screen pops up with more details when you click some "view inventory" button
 	- Add some sort of "End Game" state, E.g. after X amount of sols passes by, the game ends (the ship arrives) and determine who wins the game
 	- Make the random ship crashes randomly occur at different moments in the game, (after some x amount of turns it happens)

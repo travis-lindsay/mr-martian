@@ -1,5 +1,7 @@
 import { Player } from "../Player";
 import { Coordinate } from "../Maps/Coordinate";
+import { Map } from "../Maps/Map";
+import { Tile } from "../Maps/Tile";
 import { gameApp } from "../game";
 import Utils from "../Utils";
 
@@ -106,5 +108,17 @@ export class Building {
             this.currentHoursConstructed += 1;
             this.player!.clock.incrementTimeUsed();
         }
+    }
+
+    destroy(tileMap: Map) {
+        Utils.removeImageFromCoordinate('CONSTRUCTION', this.coordinate);
+        Utils.removeImageFromCoordinate('IMG', this.coordinate);
+        Utils.removeImageFromCoordinate('CORNER', this.coordinate);
+        if (this.coordinate !== undefined) {
+            let tile : Tile = tileMap.getTile(this.coordinate.y, this.coordinate.x);
+            tile.destroyBuilding();
+        }
+        gameApp.buildings.filter((b : Coordinate) => this.coordinate !== undefined && b.x == this.coordinate.x && b.y == this.coordinate.y);
+        gameApp.closeAllModals();
     }
 }

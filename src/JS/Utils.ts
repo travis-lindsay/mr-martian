@@ -26,6 +26,8 @@ export default class Utils {
     */
     static removeImageFromCoordinate(id : any, coord : any) {
         var element : any = document.getElementById(coord.getYCoordinate() + '_' + coord.getXCoordinate() + '_' + id);
-        element.parentNode.removeChild(element);
+        if (element) {
+            element.parentNode.removeChild(element);
+        }
     }
 }
