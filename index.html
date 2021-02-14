@@ -310,6 +310,49 @@
                         </div>
                     </div>
 
+                    <!-- Not yet complete, just an empty shell, pretty identical to the build modal -Derek -->
+                    <!-- Random event, pop-up box modal thing -->\
+                    <div class="modal fade" id="randEventPopUp" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content"
+                                 style="max-width: 700px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 10px 20px 0 rgba(5, 5, 5, 0.19); background-color: rgba(50, 50, 50, 0.86); border: solid 1px gray;">
+                                <div class="modal-header" style="border-bottom: solid #a0421e 4px;">
+                                    <h3 class="modal-title" style="color: white;" id="exampleModalLongTitle">{{
+                                        currentBuilding.name }}</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+                                        <div class="row align-items-center">
+                                            <div class="col-3">
+                                                <img v-bind:src="currentBuilding.img">
+                                            </div>
+                                            <div class="col-9">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-md-auto">
+                                                        <span v-for="filled in currentBuilding.currentHoursConstructed"
+                                                              class="constructionCellFilled"></span>
+                                                        <span v-for="empty in currentBuilding.totalHoursToConstruct - currentBuilding.currentHoursConstructed"
+                                                              class="constructionCellEmpty"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer" style="border-top: solid #1d1c1c 2px;">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" @click="currentBuilding.construct();">
+                                        Build
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Turn results / Mission Progress modal -->
                     <div class="modal fade" id="turnResultsModal" tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered modal-lg">
