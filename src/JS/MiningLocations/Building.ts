@@ -4,6 +4,7 @@ import { Map } from "../Maps/Map";
 import { Tile } from "../Maps/Tile";
 import { gameApp } from "../game";
 import Utils from "../Utils";
+import { ActionType } from "../Enums/ActionType";
 
 type UpgradeReqs = {
     water : number,
@@ -84,7 +85,7 @@ export class Building {
     }
 
     incrementPlayerClock() {
-        this.player!.clock.incrementTimeUsed();
+        this.player!.clock.incrementTimeUsed(ActionType.Mine);
     }
   
     getIsConstructed() {
@@ -99,14 +100,16 @@ export class Building {
         }
         if (this.getIsConstructed()) {
             // Then don't let them construct anymore, and close the window
-            if (this.getIsConstructed()) {
-                Utils.removeImageFromCoordinate('CONSTRUCTION', this.coordinate);
-            }
+            Utils.removeImageFromCoordinate('CONSTRUCTION', this.coordinate);
             gameApp.closeConstructionModal();
         }
         else {
             this.currentHoursConstructed += 1;
-            this.player!.clock.incrementTimeUsed();
+            this.player!.clock.incrementTimeUsed(ActionType.Build);
+            if (this.getIsConstructed()) {
+                Utils.removeImageFromCoordinate('CONSTRUCTION', this.coordinate);
+                gameApp.closeConstructionModal();
+            }
         }
     }
 

@@ -10,11 +10,12 @@ import { PlayerAnimation } from './Maps/PlayerAnimation';
 import { ShortestPathCalculator } from './Maps/DetermineShortestPath';
 import { Map } from './Maps/Map';
 import { Building } from './MiningLocations/Building';
-import { SolEvent } from './SolEvent';
+import { SolEvent } from './RandomEvents/SolEvent';
 import { Ship } from './Ship';
 import Utils from './Utils'
 import { SolSummary } from './SolSummary';
 import { FinalGame } from './FinalGame/FinalGame';
+import { RandomEvent } from './RandomEvents/RandomEvent';
 export var gameApp : any;
 
 window.onload = function() {
@@ -100,6 +101,7 @@ window.onload = function() {
 			Ships: new Array<Ship>(),
 			currentPlayer: new Player(0),
 			currentBuilding: new Building(),
+			currentRandomEvent: new RandomEvent("",0,0,0,0,0,null),
 			currentPlayerIndex: 0,
 			dayCount: 0,
 			dropMenuIsOpen: false,

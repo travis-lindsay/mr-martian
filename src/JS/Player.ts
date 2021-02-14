@@ -68,6 +68,12 @@ export class Player {
     isPlayerInShelter() {
         return this.inShelter;
     }
+
+    addInventoryItems(inventoryItems : Array<InventoryItem> | null) {
+        if (inventoryItems !== null && inventoryItems.length > 0) {
+            this.suppliesList.push(...inventoryItems);
+        }
+    }
     
     addSupply(item : string)
     {
@@ -166,6 +172,9 @@ export class Player {
     addFood(plusFood : number)
     {
         this.food += plusFood;
+        if (this.food < 0) {
+            this.food = 0;
+        }
     }
     
     substractFood(minusFood : number)
@@ -189,6 +198,9 @@ export class Player {
     addWater(plusWater : number)
     {
         this.water += plusWater;
+        if (this.water < 0) {
+            this.water = 0;
+        }
     }
     
     substractWater(minusWater : number)
@@ -202,6 +214,9 @@ export class Player {
     addStone(stone : number)
     {
         this.stone += stone;
+        if (this.stone < 0) {
+            this.stone = 0;
+        }
     }
 
     subtractStone(stone : number) 
@@ -224,7 +239,10 @@ export class Player {
 
     addMorale(plusMorale : number)
     {
-        return this.morale += plusMorale;
+        this.morale += plusMorale;
+        if (this.morale < 0) {
+            this.morale = 0;
+        }
     }
     
     substractMorale(minusMorale : number)

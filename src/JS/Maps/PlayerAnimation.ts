@@ -1,4 +1,5 @@
 import { Coordinate } from "./Coordinate";
+import { ActionType } from "../Enums/ActionType";
 
 export class PlayerAnimation {
 
@@ -50,7 +51,16 @@ export class PlayerAnimation {
                     let oldCoordinate = self.coordinateArray[self.counter - 1]; // TODO, check for bounds
                     self.determinePlayerDirection(oldCoordinate, newCoordinate);
                     self.addPlayerIMG(newCoordinate);
-                    self.player.clock.incrementTimeUsed();
+                    let eventOccurred = self.player.clock.incrementTimeUsed(ActionType.Move);
+                    if (eventOccurred) {
+                        // Then stop moving, and let them look at the event
+                        // For now, they'll just have to click back to where they were moving to continue
+                        // We could potentially add some callback function when they acknowledge the event or something
+                        clearInterval(interval);
+                        self.resetPlayerSprite(self.coordinateArray[self.counter]);
+                        self.player.setCoordinate(self.coordinateArray[self.counter]);
+                        highlightTilesFunc();
+                    }
                 }
             }
             else {

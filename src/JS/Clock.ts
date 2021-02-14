@@ -1,24 +1,27 @@
 import { gameApp } from "./game";
-import { RandomMarsEvents } from "./RandomMarsEvents";
+import { ActionType } from "./Enums/ActionType";
+import { RandomEventController } from "./RandomEvents/RandomEventController";
 
 export class Clock {
 
     usedTime : number = 0;
     totalTime : number = 24;
     isDone : boolean = false;
-    randEvent : RandomMarsEvents;
+    randomEventController : RandomEventController;
 
     constructor() {
-        this.randEvent = new RandomMarsEvents("Test", "Default-Test", false, 0);
+        this.randomEventController = new RandomEventController();
     }
 
-    incrementTimeUsed() {
+    incrementTimeUsed(actionType : ActionType) {
         if (!this.getIsDone()) {
             this.usedTime += 1;
         } else {
             this.resetClock();
         }
-        // potentially add logic, to see if a random event will occur
+
+        // See if random event occurs based on action being taken
+        return this.randomEventController.tryGenerateRandomEvent(actionType);
     }
 
     resetClock() {
