@@ -12,6 +12,28 @@ body {
     padding-right: 0 !important; /* This is to fix a weird issue with the bootstrap modal that adds padding-right everytime you open it */
 }
 
+.gameTitleContainer {
+	background: linear-gradient(-45deg, #fffaed, #ec7505, #eb572a, #d63605);
+	background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    position: absolute; 
+    height: 100%; 
+    width: 100%; 
+    z-index:51;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 td {
     padding: 0px;
 }
@@ -121,9 +143,58 @@ p {
 }
 
 .gameTitleHeader {
-    font-family:impact; 
+    font-weight:900;
     font-size:80px; 
-    color:#F66715;
+    color: #262626;
+}
+
+.gameTitleImage {
+    background-image:url('../IMG/spaceman/spaceman0.png');
+    background-repeat:no-repeat;
+    background-position:25% 75%;
+}
+
+.gameTitleBtn {
+    position: relative;
+    background: none;
+    color: aqua;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 0.2em solid aqua;
+    padding: 11px 25px;
+    font-size: 40px;
+}
+.gameTitleBtn::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 10%;
+    background: #222;
+    height: 0.3em;
+    right: 20%;
+    top: -0.21em;
+    transform: skewX(-45deg);
+    -webkit-transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+    transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+}
+.gameTitleBtn::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 10%;
+    background: #222;
+    height: 0.3em;
+    left: 20%;
+    bottom: -0.25em;
+    transform: skewX(45deg);
+    -webkit-transition: all 0.45 cubic-bezier(0.86, 0, 0.07, 1);
+    transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+}
+.gameTitleBtn:hover::before {
+    right: 80%;
+}
+.gameTitleBtn:hover::after {
+    left: 80%;
 }
 
 .button {
@@ -138,14 +209,6 @@ p {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 8px
-}
-
-.gameTitleContainer {
-    position: absolute; 
-    background-color: #2d2c2c; 
-    height: 100%; 
-    width: 100%; 
-    z-index:51;
 }
 
 .buildOptionsContainer {

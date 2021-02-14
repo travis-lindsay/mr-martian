@@ -40,12 +40,11 @@
         <div v-show="playerPick" class="gameTitleContainer row text-center align-items-center justify-content-center">
             <div class="innerTitleContainer col-md-6">
                 <h1 class="gameTitleHeader">Mr. Martian</h1>
-                <hr style="background-color: #2a2a2a; border-top: 3px solid rgba(0, 0, 0, 0.28);">
-                <h2 style="color: white;">How many players?</h2>
-                <button @click="pickPlayers(1)" class="button">1</button>
-                <button @click="pickPlayers(2)" class="button">2</button>
-                <button @click="pickPlayers(3)" class="button">3</button>
-                <button @click="pickPlayers(4)" class="button">4</button>
+                <h2 style="color: white; margin-bottom: 25px;">How many players?</h2>
+                <button @click="pickPlayers(1)" class="gameTitleBtn">1</button>
+                <button @click="pickPlayers(2)" class="gameTitleBtn">2</button>
+                <button @click="pickPlayers(3)" class="gameTitleBtn">3</button>
+                <button @click="pickPlayers(4)" class="gameTitleBtn">4</button>
             </div>
         </div>
 
