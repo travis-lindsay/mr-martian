@@ -2,8 +2,7 @@ import { InventoryItem } from "../InventoryItem";
 
 export class PickAxe extends InventoryItem
 {
-    public name : string = "Pick Axe";
     constructor() {
-        super('./src/IMG/tools/pickaxe.png');
+        super('Pick Axe', 'Improves mining efficiency', './src/IMG/tools/pickaxe.png');
     }
 }

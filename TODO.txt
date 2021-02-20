@@ -38,6 +38,7 @@ Note: Please make all images with a transparent background, and center the non t
 Note: When making sprite sheets, please stick with 100 px height X whatever multiple of 100 px for the width
 
 INVENTORY:
+	- Dead player
     - Water icon (like a water droplet, with some sort of circular backdrop I think would look rad)
     - Stone icon (for what is mined)
     - Etc...

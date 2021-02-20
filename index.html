@@ -326,6 +326,41 @@
                                         <div class="row align-items-center">
                                             {{ currentRandomEvent.description }}
                                         </div>
+                                        <div v-if="currentRandomEvent.healthAmount != 0" class="row align-items-center">
+                                            <span v-if="currentRandomEvent.healthAmount > 0">- Gained <span class="goodNews">{{ currentRandomEvent.healthAmount }}</span> health</span>
+                                            <span v-else>- Lost <span class="badNews">{{ currentRandomEvent.healthAmount }}</span> health</span>
+                                        </div>
+                                        <div v-if="currentRandomEvent.moraleAmount != 0" class="row align-items-center">
+                                            <span v-if="currentRandomEvent.moraleAmount > 0">- Gained <span class="goodNewsMorale">{{ currentRandomEvent.moraleAmount }}</span> morale</span>
+                                            <span v-else>- Lost <span class="badNewsMorale">{{ currentRandomEvent.moraleAmount }}</span> morale</span>
+                                        </div>
+                                        <div v-if="currentRandomEvent.foodAmount != 0" class="row align-items-center">
+                                            <span v-if="currentRandomEvent.foodAmount > 0">- Gained <span class="goodNews">{{ currentRandomEvent.foodAmount }}</span> food</span>
+                                            <span v-else>- Lost <span class="badNews">{{ currentRandomEvent.foodAmount }}</span> food</span>
+                                        </div>
+                                        <div v-if="currentRandomEvent.waterAmount != 0" class="row align-items-center">
+                                            <span v-if="currentRandomEvent.waterAmount > 0">- Gained <span class="goodNews">{{ currentRandomEvent.waterAmount }}</span> water</span>
+                                            <span v-else>- Lost <span class="badNews">{{ currentRandomEvent.waterAmount }}</span> water</span>
+                                        </div>
+                                        <div v-if="currentRandomEvent.stoneAmount != 0" class="row align-items-center">
+                                            <span v-if="currentRandomEvent.stoneAmount > 0">- Gained <span class="goodNews">{{ currentRandomEvent.stoneAmount }}</span> stone</span>
+                                            <span v-else>- Lost <span class="badNews">{{ currentRandomEvent.stoneAmount }}</span> stone</span>
+                                        </div>
+                                        <div  v-if="currentRandomEvent.inventoryItems">
+                                            <div class="row align-items-center">
+                                                <span>- Gained inventory:</span>
+                                            </div>
+                                            <div class="row align-items-center">
+                                                <ul>
+                                                    <li v-for="item in currentRandomEvent.inventoryItems">
+                                                        <span>
+                                                            {{ item.name }} 
+                                                        </span>
+                                                        <img v-bind:src="item.imgPath" style="width: 40px;">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer" style="border-top: solid #1d1c1c 2px;">
@@ -677,9 +712,12 @@
                     <hr>
                     <h4 style="color: white;">Inventory:</h4>
                     <div class="row" style="margin: 5px;">
-                        <div v-for="supply in currentPlayer.suppliesList" class="col-3 inventoryItem">
-                                <img style="width: 100%;" v-bind:src="supply.imgPath"> 
-                        </div>
+                            <div v-for="supply in currentPlayer.suppliesList" class="col-3 inventoryItem">
+                                <span v-b-tooltip.hover.top="'Tooltip!'">
+                                <!-- <span class="d-inline-block buildReqsTooltip" tabindex="0" container="body" data-toggle="tooltip" data-placement="top" data-html="true" v-bind:data-original-title="supply.name"> -->
+                                    <img style="width: 100%;" v-bind:src="supply.imgPath"> 
+                                </span>
+                            </div>
                     </div>
                 </div>
             </div>

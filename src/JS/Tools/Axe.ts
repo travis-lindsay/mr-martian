@@ -1,7 +1,8 @@
-export class Axe
+import { InventoryItem } from "../InventoryItem";
+
+export class Axe extends InventoryItem
 {
-    GetClass()
-    {
-        return "Axe";
+    constructor() {
+        super('Axe', 'Great for construction, self defense', './src/IMG/tools/axe.png');
     }
 }
