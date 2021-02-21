@@ -1,7 +1,8 @@
 TODO (Travis, Jared, or Derek):
 	- Ability to add "anti-alien propaganda" to other players buildings, which increases the # of enemies they have to fight off in the end game
 	- Build out the "Player inventory"
-		- Not quite sure how we want to do this... Maybe some small thumbnails of the items you have in the "inventory" section, or maybe another screen pops up with more details when you click some "view inventory" button
+		- Make it so the inventory items you have actually have some effect on the gameplay
+		- E.g. pick axe makes it so you can mine faster, etc.
 	- Add some sort of "End Game" state, E.g. after X amount of sols passes by, the game ends (the ship arrives) and determine who wins the game
 	- Make the random ship crashes randomly occur at different moments in the game, (after some x amount of turns it happens)
 		- Make the ship carry some random inventory item
@@ -25,10 +26,21 @@ Ideas:
 	Possibly other tools / weapons depending on what the end 'mini-game' thing ends up being.
 	- Eventually, we can write some backend API that stores high scores and such, so they can see how they rank.
 
+Story:
+	- You are there researching, setting up camp and getting a base established.
+	- For multiplayer (which should be the ideal way to play anyways), each player represents a different space/tech/research company
+		- hence why your all competing, etc.
+	- Sol 5 or something, the political situation changes and the martians send a mob after you to take you out.
+		- Ship needs time to recharge before you can leave again
+	- Sol 10 your boss tells you they came up with a way to better your odds, by adding propaganda to other companies buildings
+		- 1 alien in end game per propaganda
+	- Sol 15, they say you won't have time and will need to prepare to defend your ship
+	- Sol 20, the reckoning
+	- End game scoring, who did the most research, most health, ship health, morale, buildings, etc.
+
 BUG Fixes:
     - Figure out how to handle two players being on the same tile, (e.g. have one peek out a little so they don't overlap).
-    - If player clicks on tile they are currently on, change it so they don't move a tile away then back again.
-    - Fix weird styling issues in Edge, Mozilla, (e.g. border on tiles not showing like in chrome)
+    - Fix weird styling issues in Mozilla, (e.g. border on tiles not showing like in chrome)
 
 TODO (LINDSAY, or anyone else if they are feeling creative):
 
@@ -38,7 +50,19 @@ Note: Please make all images with a transparent background, and center the non t
 Note: When making sprite sheets, please stick with 100 px height X whatever multiple of 100 px for the width
 
 INVENTORY:
-	- Dead player
+	- Anti-alien propaganda
     - Water icon (like a water droplet, with some sort of circular backdrop I think would look rad)
     - Stone icon (for what is mined)
     - Etc...
+STORY:
+	- Intro slides:
+		- After months of travel your space station has finally arrived. Mars.
+		Your years of training has prepared you for this moment to finally be able to set foot on the red planet, 
+		and gain some much anticipated (and protected) information regarding life on the planet.
+			- (Picture of space station orbiting around Mars)
+		- Once thought to be uninhabited, several races of intelligent life have since been discovered to be thriving on the planet.
+		However, years of poorly executed inter-planetary politics have raised tensions higher than ever between Earth and Mars.
+		Amidst this aggressive political climate, you've been given a rare opportunity by your corporation to carry out research on the planet.
+			- (picture of Space ship flying to mars with spaceman inside)
+		- You've arrived, you've been designated by your employer to setup a research camp. But first you must setup everything you'll need to survive.
+			- (picture of Space ship landed, spaceman outside surveying... Or maybe leaning on a shovel or something by some materials)

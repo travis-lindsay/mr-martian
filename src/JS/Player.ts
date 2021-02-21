@@ -6,6 +6,8 @@ import { PickAxe } from "./Tools/PickAxe";
 import { Wheel } from "./RoverParts/Wheel";
 import { Engine } from "./RoverParts/Engine";
 import { Frame } from "./RoverParts/Frame";
+import { Spear } from "./Tools/Spear";
+import { Propaganda } from "./Tools/Propaganda";
 
 export class Player {
   
@@ -85,6 +87,9 @@ export class Player {
             case 'pickaxe' : 
                 inventoryItem = new PickAxe();
                 break;
+            case 'spear' : 
+                inventoryItem = new Spear();
+                break;
             case 'wheel' : 
                 inventoryItem = new Wheel();
                 break;
@@ -93,6 +98,9 @@ export class Player {
                 break;
             case 'frame' : 
                 inventoryItem = new Frame();
+                break;
+            case 'propaganda' : 
+                inventoryItem = new Propaganda();
                 break;
         }
         if (inventoryItem) {

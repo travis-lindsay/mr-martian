@@ -4,6 +4,7 @@ const path = require('path');
 module.exports = {
     entry: './src/JS/game.ts',
     mode: 'development', // Change to production for prod build
+    //mode: 'production',
     output: {
         filename: 'app.js',
         path: path.resolve(__dirname, 'dist')

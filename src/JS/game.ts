@@ -145,10 +145,11 @@ window.onload = function() {
 
 				// if road tile, movePlayer();
 				if (isRoad) {
-					this.movePlayerTo(x, y);
+					if (this.currentPlayer.coordinate.x != x || this.currentPlayer.coordinate.y != y) {
+						this.movePlayerTo(x, y);
+					}
 				}
                 else {
-                    
                     if (this.checkIfInActionRange(parseInt(x), parseInt(y))) {
                         this.handlePlace(new Coordinate(x, y));
                     }					
@@ -481,6 +482,22 @@ window.onload = function() {
                         healthDifference
                     ));
                 }
+
+				// Change the amount of time the player has in the day based on their morale
+				// For every 4 pts of morale take away one hour of their time
+				// Don't start taking away time for morale until lower than 90
+				if (p.morale < 90) {
+					let hoursLost = Math.floor((90 - p.morale) / 4);
+					p.clock.setUsedtime(hoursLost);
+					if (hoursLost > 0) {
+						this.solEvents.push(new SolEvent(
+							"Due to poor morale, you wasted " + hoursLost + " hours wallowing in self pity",
+							"Hours",
+							true,
+							-hoursLost
+						));
+					}
+				}
 
                 // Check if player has bit the bucket
                 if (p.isPlayerDead()) {
