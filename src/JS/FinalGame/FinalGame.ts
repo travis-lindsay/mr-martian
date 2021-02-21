@@ -14,7 +14,7 @@ export enum Direction {
 
 // Delay helper function 
 export async function delay(ms: number) {
-    await new Promise(resolve => setTimeout(()=>resolve(), 1000)).then(); 
+    await new Promise(resolve => setTimeout(()=>resolve(null), 1000)).then(); 
 }
 
 /*
@@ -24,13 +24,13 @@ export class FinalGame {
 
     game: Phaser.Game;
     player: Player;
-    spaceman: Spaceman;
+    spaceman: Spaceman | any;
     ground: any;
-    ship: Ship;
+    ship: Ship | any;
     mountains: any;
-    enemyCount: number;
-    count: number;
-    spacemanText : Phaser.Text;
+    enemyCount: number | any;
+    count: number | any;
+    spacemanText : Phaser.Text | any;
     // Key, Value pair of Phaser.Sprite objects with 
     enemyObjs: { [s: string]: Phaser.Sprite; } = {};
     // Key, Value pair data structure that stores all enemies
