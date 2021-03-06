@@ -185,6 +185,7 @@ window.onload = function() {
 			closeAllModals: function() {
 				this.closePlaceActionsModal();
 				this.closeConstructionModal();
+				this.closePropagandaModal();
 			},
 			closeConstructionModal: function() {
                 $("#constructionModal").modal("hide");
@@ -194,6 +195,9 @@ window.onload = function() {
             },
             closePlaceActionsModal: function() {
                 $("#placeActionsModal").modal("hide");
+            },
+			closePropagandaModal: function() {
+                $("#propagandaModal").modal("hide");
             },
             openPlaceActionsModal: function() {
 				let reqs: any = this.currentBuilding.nextUpgradeReqs;
@@ -261,8 +265,8 @@ window.onload = function() {
 							this.openPlaceActionsModal();
 						}
 					} else {
-						// TODO, determine what the other players can do to your buildings
-						alert("this doesn't belong to you");
+						// Open propaganda modal
+						$("#propagandaModal").modal("show");
 					}
 				}
 			},

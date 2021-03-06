@@ -28,6 +28,8 @@ export class Building {
     totalResourceCount : number = 45;
     resourcePerHour : number = 2;
     minedResourceCount : number = 0;
+    bonusResourcePerHour : number = 0;
+    bonusResourcePerHourDesc : string = "";
     nextUpgradeReqs : UpgradeReqs = { water : 0, food : 0, stone : 0 };
 
     constructor (player? : Player, coordinate? : Coordinate) {
@@ -37,7 +39,9 @@ export class Building {
         this.coordinate = coordinate;
     }
 
-    mineResource() : number {
+    mineResource(bonusResourcePerHour : number) : number {
+        // If there is a tool that give it a bonus harvest rate > 0, it will display in UI
+        this.bonusResourcePerHour = bonusResourcePerHour;
         if (this.player!.clock.getIsDone()) {
             this.player!.clock.resetClock(); // TODO, find a better approach, some sort of time controller / model pattern
             gameApp.closeAllModals();
@@ -45,11 +49,11 @@ export class Building {
         }
         if (!this.getIsEmpty()) {
             this.incrementPlayerClock();
-            this.minedResourceCount += this.resourcePerHour;
+            this.minedResourceCount += this.resourcePerHour + bonusResourcePerHour;
             if (this.minedResourceCount > this.totalResourceCount) {
                 this.minedResourceCount = this.totalResourceCount;
             }
-            return this.resourcePerHour;
+            return this.resourcePerHour + bonusResourcePerHour;
         }
         else {
             return 0;

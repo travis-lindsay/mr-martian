@@ -3,6 +3,7 @@ import { Player } from "../Player";
 import { Coordinate } from "../Maps/Coordinate";
 import { gameApp } from "../game";
 import Utils from "../Utils";
+import { PickAxe } from "../Tools/PickAxe";
 
 export class Mine extends Building {
 
@@ -27,7 +28,7 @@ export class Mine extends Building {
     }
 
     mineResource() : number {
-        let minedAmount : number = super.mineResource();
+        let minedAmount : number = super.mineResource(this.bonusResourcePerHour);
         this.player!.addStone(minedAmount);
         return minedAmount;
     }

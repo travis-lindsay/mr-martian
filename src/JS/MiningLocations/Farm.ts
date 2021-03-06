@@ -27,7 +27,7 @@ export class Farm extends Building {
     }
 
     mineResource() : number {
-        let minedAmount : number = super.mineResource();
+        let minedAmount : number = super.mineResource(0);
         this.player!.addFood(minedAmount);
         return minedAmount;
     }

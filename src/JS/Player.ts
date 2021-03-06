@@ -8,6 +8,8 @@ import { Engine } from "./RoverParts/Engine";
 import { Frame } from "./RoverParts/Frame";
 import { Spear } from "./Tools/Spear";
 import { Propaganda } from "./Tools/Propaganda";
+import { gameApp } from "./game";
+import { Building } from "./MiningLocations/Building";
 
 export class Player {
   
@@ -73,7 +75,9 @@ export class Player {
 
     addInventoryItems(inventoryItems : Array<InventoryItem> | null) {
         if (inventoryItems !== null && inventoryItems.length > 0) {
-            this.suppliesList.push(...inventoryItems);
+            inventoryItems.forEach(item => {
+                this.addSupply(item.name);
+            });
         }
     }
     
@@ -86,6 +90,12 @@ export class Player {
                 break;
             case 'pickaxe' : 
                 inventoryItem = new PickAxe();
+                let buildings : [Building] = gameApp.getPlayerBuildings(this);
+                let mines = buildings.filter(building => building.name === "Mine");
+                mines.forEach(mine => {
+                    mine.bonusResourcePerHour = PickAxe.bonusResource;
+                    mine.bonusResourcePerHourDesc = "Pick Axe";
+                });
                 break;
             case 'spear' : 
                 inventoryItem = new Spear();

@@ -26,7 +26,7 @@ export class Well extends Building
     }
 
     mineResource() : number {
-        let minedAmount : number = super.mineResource();
+        let minedAmount : number = super.mineResource(0);
         this.player!.addWater(minedAmount);
         return minedAmount;
     }

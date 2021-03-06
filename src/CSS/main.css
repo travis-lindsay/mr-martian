@@ -104,6 +104,13 @@ p {
     margin: auto;
 }
 
+.otherPlayerIMG {
+    background-position: 0px 0px;
+    height: 100px;
+    width: 100px;
+    transform: scale(0.5);
+}
+
 .playerIMG {
     -webkit-transform: scale(0.6); /* Scaling to 60% of original image for grid */
     -moz-transform: scale(0.6);

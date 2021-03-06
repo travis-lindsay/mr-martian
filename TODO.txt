@@ -1,8 +1,8 @@
 TODO (Travis, Jared, or Derek):
 	- Ability to add "anti-alien propaganda" to other players buildings, which increases the # of enemies they have to fight off in the end game
 	- Build out the "Player inventory"
-		- Make it so the inventory items you have actually have some effect on the gameplay
-		- E.g. pick axe makes it so you can mine faster, etc.
+		- Additional items, e.g. hammer to make you build stuff faster
+		- Tooltips, descriptions in lab so you know what the item actually does
 	- Add some sort of "End Game" state, E.g. after X amount of sols passes by, the game ends (the ship arrives) and determine who wins the game
 	- Make the random ship crashes randomly occur at different moments in the game, (after some x amount of turns it happens)
 		- Make the ship carry some random inventory item
@@ -12,8 +12,7 @@ TODO (Travis, Jared, or Derek):
 	    - Just brainstorming, I was leaning towards being able to steal from them, and making the players add security components to their buildings.
 	- (Good Jared or Derek one) Add ability to input custom player names on menu screen.
 	- Figure out what we want to do when a player dies, (e.g. skip their turn and change player icon? Let them play as an alien? Etc).
-	- Add some sort of benefit to having morale, I'm thinking decrease the time you have in the day Tycoon Jones style
-	- Add additional functionality to the SolEvent class, and add in other random events that increase decrease health, give you random items, etc.
+	- Add weapons you can build in lab for endgame
 
 Ideas:
 	- For the end of game, (after like 20-30 sols or something), your 'ship' is coming to pick you up finally (if you survived), but you have
@@ -21,9 +20,6 @@ Ideas:
 	that are coming to get you before your ship gets to you. This way the game ends (unlike Tycoon Jones), and you have something to look forward to / build for
 	and it ends in an intense 'oregon-trail-style' fashion, and we can give them their overall score / placement compared to their other players.
 	This way the solo mode also makes sense, because then they can try and achieve a higher score.
-	- I'm thinking that the 'Lab' should allow you to build certain tools, components and things that will benefit you both in the main game
-	play as well as the end of game. Such as the rover, (cuz we already have images for it), and that lets you move faster or something.
-	Possibly other tools / weapons depending on what the end 'mini-game' thing ends up being.
 	- Eventually, we can write some backend API that stores high scores and such, so they can see how they rank.
 
 Story:
@@ -41,6 +37,7 @@ Story:
 BUG Fixes:
     - Figure out how to handle two players being on the same tile, (e.g. have one peek out a little so they don't overlap).
     - Fix weird styling issues in Mozilla, (e.g. border on tiles not showing like in chrome)
+	- Fix event dialog for building events (swap out building dialog for event dialog instead of layering them)
 
 TODO (LINDSAY, or anyone else if they are feeling creative):
 
