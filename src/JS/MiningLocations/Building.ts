@@ -5,6 +5,8 @@ import { Tile } from "../Maps/Tile";
 import { gameApp } from "../game";
 import Utils from "../Utils";
 import { ActionType } from "../Enums/ActionType";
+import { Propaganda } from "../Tools/Propaganda";
+import { InventoryItem } from "../InventoryItem";
 
 type UpgradeReqs = {
     water : number,
@@ -30,6 +32,7 @@ export class Building {
     minedResourceCount : number = 0;
     bonusResourcePerHour : number = 0;
     bonusResourcePerHourDesc : string = "";
+    propaganda : number = 0;
     nextUpgradeReqs : UpgradeReqs = { water : 0, food : 0, stone : 0 };
 
     constructor (player? : Player, coordinate? : Coordinate) {
@@ -127,5 +130,24 @@ export class Building {
         }
         gameApp.buildings.filter((b : Coordinate) => this.coordinate !== undefined && b.x == this.coordinate.x && b.y == this.coordinate.y);
         gameApp.closeAllModals();
+    }
+
+    incrementPropaganda(player: Player) {
+        if (player!.clock.getIsDone()) {
+            player!.clock.resetClock();
+            gameApp.closeAllModals();
+            return;
+        }
+        let itemIndex : number = player.suppliesList.findIndex(item => item.name === 'Anti-alien propaganda');
+        if (itemIndex != -1) {
+            let item : InventoryItem = player.suppliesList[itemIndex];
+            if (item.amount > 0) {
+                this.propaganda += 1;
+                item.updateAmount(-1);
+                if (item.amount <= 0) {
+                    player.suppliesList.splice(itemIndex, 1);
+                }
+            }
+        }
     }
 }

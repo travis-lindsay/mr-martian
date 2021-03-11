@@ -10,6 +10,7 @@ import { Spear } from "./Tools/Spear";
 import { Propaganda } from "./Tools/Propaganda";
 import { gameApp } from "./game";
 import { Building } from "./MiningLocations/Building";
+import { Axe } from "./Tools/Axe";
 
 export class Player {
   
@@ -39,7 +40,7 @@ export class Player {
         this.number = num;
         
         // Each players starts with a shovel by default
-        this.addSupply('shovel');
+        this.addSupply(Shovel.name);
 
         switch(num) {
             case 0:
@@ -75,47 +76,69 @@ export class Player {
 
     addInventoryItems(inventoryItems : Array<InventoryItem> | null) {
         if (inventoryItems !== null && inventoryItems.length > 0) {
-            inventoryItems.forEach(item => {
-                this.addSupply(item.name);
-            });
+            for (let i = 0; i < inventoryItems.length; i++) {
+                this.addSupply(inventoryItems[i].name);
+            }
         }
     }
     
     addSupply(item : string)
     {
         let inventoryItem : InventoryItem | null = null;
+        let itemIndex = -1;
         switch(item) {
-            case 'shovel' : 
+            case 'Shovel' : 
                 inventoryItem = new Shovel();
                 break;
-            case 'pickaxe' : 
+            case 'Pick Axe' : 
                 inventoryItem = new PickAxe();
-                let buildings : [Building] = gameApp.getPlayerBuildings(this);
-                let mines = buildings.filter(building => building.name === "Mine");
-                mines.forEach(mine => {
-                    mine.bonusResourcePerHour = PickAxe.bonusResource;
-                    mine.bonusResourcePerHourDesc = "Pick Axe";
-                });
+                itemIndex = this.alreadyHasItem(inventoryItem);
+                if (itemIndex === -1) {
+                    let buildings : [Building] = gameApp.getPlayerBuildings(this);
+                    let mines = buildings.filter(building => building.name === "Mine");
+                    mines.forEach(mine => {
+                        mine.bonusResourcePerHour = PickAxe.bonusResource;
+                        mine.bonusResourcePerHourDesc = "Pick Axe";
+                    });
+                }
                 break;
-            case 'spear' : 
+            case 'Spear' : 
                 inventoryItem = new Spear();
                 break;
-            case 'wheel' : 
+            case 'Wheel' : 
                 inventoryItem = new Wheel();
                 break;
-            case 'engine' : 
+            case 'Engine' : 
                 inventoryItem = new Engine();
                 break;
-            case 'frame' : 
+            case 'Frame' : 
                 inventoryItem = new Frame();
                 break;
-            case 'propaganda' : 
+            case 'Anti-alien propaganda' : 
                 inventoryItem = new Propaganda();
+                break;
+            case 'Axe' :
+                inventoryItem = new Axe();
                 break;
         }
         if (inventoryItem) {
-            this.suppliesList.push(inventoryItem);
+            itemIndex = this.alreadyHasItem(inventoryItem);
+            if (itemIndex == -1) {
+                this.suppliesList.push(inventoryItem);
+            }
+            else {
+                let item = this.suppliesList[itemIndex];
+                item.amount += 1;
+            }
         }
+    }
+
+    hasPropaganda() {
+        return this.suppliesList.findIndex(supply => supply.name === 'Anti-alien propaganda') !== -1;
+    }
+
+    alreadyHasItem(item : InventoryItem) {
+        return this.suppliesList.findIndex(supply => supply.name === item.name);
     }
 
     getCoordinate() {

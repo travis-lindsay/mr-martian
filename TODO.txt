@@ -1,5 +1,4 @@
 TODO (Travis, Jared, or Derek):
-	- Ability to add "anti-alien propaganda" to other players buildings, which increases the # of enemies they have to fight off in the end game
 	- Build out the "Player inventory"
 		- Additional items, e.g. hammer to make you build stuff faster
 		- Tooltips, descriptions in lab so you know what the item actually does
@@ -8,8 +7,6 @@ TODO (Travis, Jared, or Derek):
 		- Make the ship carry some random inventory item
 	- Build out the Farm to possibly require some sort of "plowing/seeding/watering/harvesting" functionality
 	- Build out the Lab to require different materials for research, etc.
-	- Figure out what players can do to interact with other players buildings, (e.g. destroy them, steal from them, do nothing to them, etc)
-	    - Just brainstorming, I was leaning towards being able to steal from them, and making the players add security components to their buildings.
 	- (Good Jared or Derek one) Add ability to input custom player names on menu screen.
 	- Figure out what we want to do when a player dies, (e.g. skip their turn and change player icon? Let them play as an alien? Etc).
 	- Add weapons you can build in lab for endgame

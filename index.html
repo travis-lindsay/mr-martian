@@ -192,17 +192,17 @@
                                                             <div class="labItemRow row">
                                                                 <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/roverparts/roverframe.png"></div>
                                                                 <div class="col-6 labItem">Rover Frame</div>
-                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('frame');">Build</button></div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('Frame');">Build</button></div>
                                                             </div>
                                                             <div class="labItemRow row">
                                                                 <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/roverparts/roverwheel.png"></div>
                                                                 <div class="col-6 labItem">Rover Wheels</div>
-                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('wheel');">Build</button></div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('Wheel');">Build</button></div>
                                                             </div>
                                                             <div class="labItemRow row">
                                                                 <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/roverparts/roverengine.png"></div>
                                                                 <div class="col-6 labItem">Rover Engine</div>
-                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('engine');">Build</button></div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('Engine');">Build</button></div>
                                                             </div>
                                                         </div>
                                                         <div>
@@ -212,22 +212,22 @@
                                                             <div class="labItemRow row">
                                                                 <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/tools/pickaxe.png"></div>
                                                                 <div class="col-6 labItem">Pick Axe</div>
-                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('pickaxe');">Build</button></div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('Pick Axe');">Build</button></div>
                                                             </div>
                                                             <div class="labItemRow row">
                                                                 <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/tools/shovel.png"></div>
                                                                 <div class="col-6 labItem">Shovel</div>
-                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('shovel');">Build</button></div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('Shovel');">Build</button></div>
                                                             </div>
                                                             <div class="labItemRow row">
                                                                 <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/tools/spear.png"></div>
                                                                 <div class="col-6 labItem">Spear</div>
-                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('spear');">Build</button></div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('Spear');">Build</button></div>
                                                             </div>
                                                             <div class="labItemRow row">
-                                                                <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/tools/spear.png"></div>
+                                                                <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/tools/propaganda.png"></div>
                                                                 <div class="col-6 labItem">Propaganda</div>
-                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('propaganda');">Build</button></div>
+                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('Anti-alien propaganda');">Build</button></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -402,19 +402,22 @@
                                         <div class="col-3">
                                             <img v-bind:src="currentBuilding.img">
                                         </div>
-                                        <div class="col-9">
+                                        <div class="col-6">
                                             <div class="row justify-content-center">
                                                 <div class="col-md-auto">
-                                                    Picture of propaganda. + amount of propaganda player has applied to them
+                                                    <img style="width: 150px;" src="src/IMG/tools/propaganda.png">
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-3" style="font-size: xx-large; color: orange;">+ {{currentBuilding.propaganda}}</div>
+                                        <div class="col-12" style="color: white; font-size: small;">You can make propaganda in the lab to place on other players buildings. 
+                                            Which will increase the amount of aliens to come after them in the final game.</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer" style="border-top: solid #1d1c1c 2px;">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" @click="">
+                                <button type="button" class="btn btn-primary" v-bind:class="{ disabled: !currentPlayer.hasPropaganda() }" @click="currentBuilding.incrementPropaganda(currentPlayer);">
                                     Place Propaganda
                                 </button>
                             </div>
@@ -767,6 +770,7 @@
                             <div v-for="supply in currentPlayer.suppliesList" class="col-3 inventoryItem">
                                 <!-- <span v-b-tooltip.hover.top="'Tooltip!'"> -->
                                 <!-- <span class="d-inline-block buildReqsTooltip" tabindex="0" container="body" data-toggle="tooltip" data-placement="top" data-html="true" v-bind:data-original-title="supply.name"> -->
+                                    <span style="position: absolute; color: orange; left: -2px; top: -7px;">{{supply.amount}}</span>
                                     <img style="width: 100%;" v-bind:src="supply.imgPath"> 
                                 </span>
                             </div>
