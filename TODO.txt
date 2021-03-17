@@ -7,9 +7,13 @@ TODO (Travis, Jared, or Derek):
 		- Make the ship carry some random inventory item
 	- Build out the Farm to possibly require some sort of "plowing/seeding/watering/harvesting" functionality
 	- Build out the Lab to require different materials for research, etc.
-	- (Good Jared or Derek one) Add ability to input custom player names on menu screen.
+	- Add ability to input custom player names on menu screen.
 	- Figure out what we want to do when a player dies, (e.g. skip their turn and change player icon? Let them play as an alien? Etc).
 	- Add weapons you can build in lab for endgame
+	- Add in "end game related research" to lab... Potentially just gives you points in the end... If you hit a certain amounts, point multipliers, etc?
+	- Add some story elements to the game. E.g. Little intro story to give some context / explanation to the game
+		- Every 5 sols story line pops up to move the game along
+		- Add some animation for the story text to slowly type into the screen
 
 Ideas:
 	- For the end of game, (after like 20-30 sols or something), your 'ship' is coming to pick you up finally (if you survived), but you have
@@ -44,11 +48,12 @@ Note: Please make all images with a transparent background, and center the non t
 Note: When making sprite sheets, please stick with 100 px height X whatever multiple of 100 px for the width
 
 INVENTORY:
-	- Anti-alien propaganda
     - Water icon (like a water droplet, with some sort of circular backdrop I think would look rad)
     - Stone icon (for what is mined)
+	- Images for story slides
     - Etc...
-STORY:
+
+STORY DIALOG:
 	- Intro slides:
 		- After months of travel your space station has finally arrived. Mars.
 		Your years of training has prepared you for this moment to finally be able to set foot on the red planet, 

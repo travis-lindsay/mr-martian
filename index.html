@@ -25,12 +25,6 @@
             <div class="navbar-header">
                 <a class="navbar-brand" style="color: white;" href="http://www.tlindsay.com">tlindsay.com</a>
             </div>
-            <div class="collapse navbar-collapse" :class="{show: dropMenuIsOpen}" id="myNavbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li id="login" class=""><a id="loginAnchor" href="login.html"><span
-                            class="glyphicon glyphicon-user"></span><span id="loginText"> Login</span></a></li>
-                </ul>
-            </div>
         </div>
     </nav>
     <!-- Main Row of regular game play-->
@@ -93,24 +87,62 @@
             <div class="col-md-8 mainColumn">
                 <div class="row eventRow">
 
-                     <!-- Confirmation Modal -->
-                     <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
+                    <!-- Confirmation Modal -->
+                    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index: 1060;">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content"
+                                    style="max-width: 700px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 10px 20px 0 rgba(5, 5, 5, 0.19); background-color: rgba(50, 50, 50, 0.86); border: solid 1px gray;">
+                                <div class="modal-body" style="padding: 0px;">
+                                    <div class="container-fluid">
+                                        <div class="row" style="min-height: 120px;">
+                                            <div class="col-12 d-flex flex-column min-vh-100 justify-content-center align-items-center">
+                                                <span style="color: orange; padding: 7px;">{{ confirmationDialogMsg }} </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer" style="border-top: solid #1d1c1c 2px;">
+                                    <button id="btnYes" type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
+                                    <button id="btnNo" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                     <!-- Story Modal -->
+                     <div class="modal fade" id="storyModal" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index: 1060;">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 50%;">
                         <div class="modal-content"
                              style="max-width: 700px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 10px 20px 0 rgba(5, 5, 5, 0.19); background-color: rgba(50, 50, 50, 0.86); border: solid 1px gray;">
                             <div class="modal-body" style="padding: 0px;">
-                                <div class="container-fluid">
+                                <div class="container-fluid" v-if="currentStories.length > 0">
                                     <div class="row" style="min-height: 120px;">
                                         <div class="col-12 d-flex flex-column min-vh-100 justify-content-center align-items-center">
-                                            <span style="color: orange; padding: 7px;">{{ confirmationDialogMsg }} </span>
+                                            <img style="border-radius: 10px; margin-top: 10px; width:100%;" v-bind:src="currentStories[currentStoryIndex].imgPath">
+                                        </div>
+                                    </div>
+                                    <div class="row" style="min-height: 120px;">
+                                        <div class="col-1 d-flex flex-column min-vh-100 justify-content-center align-items-center"
+                                             @click="currentStoryIndex -= 1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="arrowIcon" viewBox="0 0 16 16">
+                                            <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+                                          </svg>
+                                        </div>
+                                        <div class="col-10 d-flex flex-column min-vh-100 justify-content-center align-items-center">
+                                            <span style="color: orange; padding: 7px;"> {{ currentStories[currentStoryIndex].text }} </span>
+                                        </div>
+                                        <div class="col-1 d-flex flex-column min-vh-100 justify-content-center align-items-center"
+                                            @click="currentStoryIndex += 1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="arrowIcon" viewBox="0 0 16 16">
+                                            <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+                                          </svg>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer" style="border-top: solid #1d1c1c 2px;">
-                                <button id="btnYes" type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
-                                <button id="btnNo" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                <button type="button" class="btn btn-secondary" id="btnCloseStory">Close</button>
                             </div>
                         </div>
                     </div>

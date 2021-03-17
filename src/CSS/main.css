@@ -448,3 +448,19 @@ hr {
     background-color: #2a2a2a; 
     border-top: 2px solid rgba(155, 49, 8, 0.22);
 }
+
+.arrowIcon {
+    fill: orange;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.arrowIcon:hover {
+    fill: #ffb429;
+}
+
+.arrowIconDisabled {
+    fill: #0e0e0e !important;
+    cursor: none !important;
+}

@@ -16,6 +16,8 @@ import Utils from './Utils'
 import { SolSummary } from './SolSummary';
 import { FinalGame } from './FinalGame/FinalGame';
 import { RandomEvent } from './RandomEvents/RandomEvent';
+import { StoryTile } from './Story/StoryTile';
+import { StoryController } from './Story/StoryController';
 export var gameApp : any;
 
 window.onload = function() {
@@ -102,6 +104,9 @@ window.onload = function() {
 			currentPlayer: new Player(0),
 			currentBuilding: new Building(),
 			currentRandomEvent: new RandomEvent("",0,0,0,0,0,null),
+			storyController: new StoryController(),
+			currentStories: new Array<StoryTile>(),
+			currentStoryIndex: 0,
 			currentPlayerIndex: 0,
 			dayCount: 0,
 			dropMenuIsOpen: false,
@@ -213,7 +218,6 @@ window.onload = function() {
 			},
 			openConfirmationModal: function(msg : string, yesCallback : any, noCallback : any) {
 				this.confirmationDialogMsg = msg;
-				let dialog = $("#confirmationModal");
 			
 				$('#btnYes').click(function() {
 					$("#confirmationModal").modal("hide");
@@ -227,6 +231,17 @@ window.onload = function() {
 			},
             closeConfirmationModal: function() {
                 $("#confirmationModal").modal("hide");
+			},
+			openStoryModal: function(closeCallback : any) {
+				$('#btnCloseStory').click(function() {
+					$("#storyModal").modal("hide");
+					closeCallback();
+				});
+				$('#storyModal').modal({backdrop: 'static', keyboard: false}) 
+				$("#storyModal").modal("show");
+			},
+			closeStoryModal: function() {
+                $("#storyModal").modal("hide");
 			},
 			getCurrentPlayer() {
 				return this.currentPlayer;
@@ -349,8 +364,19 @@ window.onload = function() {
 				if (this.sol > 0) {
                     this.calcRationUsageAndEvents();
 				}
-				this.openTurnResultsModal();
 				this.highlightClickableTiles();
+
+				// TODO, check if it's player 0's turn again, and the sol matches the correct number, then display the story modal
+				// get some sort of on close event to trigger opening the turn results modal
+				if (this.currentPlayerIndex === 0 && this.storyController.storyShouldHappen(this.sol)) {
+					this.currentStories = this.storyController.getStoryList(this.sol);
+					this.currentStoryIndex = 0;
+					this.openStoryModal(() => {
+						this.openTurnResultsModal();
+					});
+				} else {
+					this.openTurnResultsModal();
+				}
 			},
             calcRationUsageAndEvents() { // TODO, break this and other event code into other files
 			    const HEALTHY_FOOD_RATION = 4;
@@ -533,10 +559,16 @@ window.onload = function() {
 				this.currentPlayer = this.Players[0];
 				// Hide the start menu
 				this.playerPick = false;
-				// Open the mission progress menu with start instructions
-				this.solSummary = SolSummary.getSolSummary(this.sol);
-				this.openTurnResultsModal();
 				this.setShip();
+
+				// Set the intro story slides and open the modal
+				// When that is acknowledged / closed then open the turn results modal
+				this.currentStories = this.storyController.getStoryList(0);
+				this.openStoryModal(() => {
+					// Open the mission progress menu with start instructions
+					this.solSummary = SolSummary.getSolSummary(this.sol);
+					this.openTurnResultsModal();
+				});
 			},
 			setShip: function() {
 				this.Ships.push(new Ship());
