@@ -61,7 +61,7 @@ STORY DIALOG:
 			- (Picture of space station orbiting around Mars)
 		- Once thought to be uninhabited, several races of intelligent life have since been discovered to be thriving on the planet.
 		However, years of poorly executed inter-planetary politics have raised tensions higher than ever between Earth and Mars.
-		Amidst this aggressive political climate, you've been given a rare opportunity by your corporation to carry out research on the planet.
 			- (picture of Space ship flying to mars with spaceman inside)
-		- You've arrived, you've been designated by your employer to setup a research camp. But first you must setup everything you'll need to survive.
+		- Amidst this aggressive political climate, you've been given a rare opportunity by your corporation to carry out research on the planet. 
+			But first you must setup everything you'll need to survive...
 			- (picture of Space ship landed, spaceman outside surveying... Or maybe leaning on a shovel or something by some materials)

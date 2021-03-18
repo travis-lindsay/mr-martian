@@ -352,6 +352,20 @@ window.onload = function() {
 			getPlayerBuildings(player : Player) {
 				return this.buildings.filter(building => building.player == player );
 			},
+			nextStoryModalClicked() {
+				if (this.currentStoryIndex + 1 < this.currentStories.length) {
+					this.currentStories[this.currentStoryIndex].StopAnimation();
+					this.currentStoryIndex += 1;
+					this.currentStories[this.currentStoryIndex].RunAnimation(0);
+				}
+			},
+			previousStoryModalClicked() {
+				if (this.currentStoryIndex -1 >= 0) {
+					this.currentStories[this.currentStoryIndex].StopAnimation();
+					this.currentStoryIndex -= 1;
+					this.currentStories[this.currentStoryIndex].RunAnimation(0);
+				}
+			},
 			changeCurrentPlayer: function() {
 				this.currentPlayerIndex += 1;
 				if (this.currentPlayerIndex >= this.Players.length) {
@@ -366,13 +380,14 @@ window.onload = function() {
 				}
 				this.highlightClickableTiles();
 
-				// TODO, check if it's player 0's turn again, and the sol matches the correct number, then display the story modal
+				// Check if it's player 0's turn again, and the sol matches the correct number, then display the story modal
 				// get some sort of on close event to trigger opening the turn results modal
 				if (this.currentPlayerIndex === 0 && this.storyController.storyShouldHappen(this.sol)) {
 					this.currentStories = this.storyController.getStoryList(this.sol);
 					this.currentStoryIndex = 0;
 					this.openStoryModal(() => {
 						this.openTurnResultsModal();
+						this.currentStories[this.currentStoryIndex].RunAnimation(0);
 					});
 				} else {
 					this.openTurnResultsModal();
@@ -569,6 +584,7 @@ window.onload = function() {
 					this.solSummary = SolSummary.getSolSummary(this.sol);
 					this.openTurnResultsModal();
 				});
+				this.currentStories[this.currentStoryIndex].RunAnimation(0);
 			},
 			setShip: function() {
 				this.Ships.push(new Ship());

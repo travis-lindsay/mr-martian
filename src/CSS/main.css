@@ -462,5 +462,5 @@ hr {
 
 .arrowIconDisabled {
     fill: #0e0e0e !important;
-    cursor: none !important;
+    cursor: not-allowed !important;
 }

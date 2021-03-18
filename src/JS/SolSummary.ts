@@ -4,7 +4,7 @@
 export class SolSummary {
     private static START_SOL : number = 0;
     private static FINAL_SOL : number = 20; // TODO, pull these from a global context once we implement end-game stuff
-    private static startInstructions : string = `Welcome to Mars... Your rescue ship is coming to get you on sol ${SolSummary.FINAL_SOL.toString()},
+    private static startInstructions : string = `Welcome to Mars... You have ${SolSummary.FINAL_SOL.toString()} sols to finish up all your research,
         as long as you can survive to that point. Tips: Set healthy rations of food and water, and build a shelter as quickly as possible to spend the night in.`;
     private static finalInstructions : string = `Say goodbye to Mars... But prepare yourself for the final test to escape the clenches of this planet.`;
     private static summaries : Array<string> = [
@@ -17,6 +17,9 @@ export class SolSummary {
         "Mission Control messaged you: 'Lolz, just found out there is a meteor shower headed your way the same sol the rescue ship is supposed to arrive :)'",
         "You've become quite good at Sudoku puzzles in your free time.",
         "Fun fact, only 19 out of 39 mars missions have actually been successful. Hopefully the number is about to increase.",
+        "Tip: Eat and Drink more than the required rations to gain back health that's been lost.",
+        "Obvious Tip: Placing your frequently used building closer together will reduce the time wasted traveling around the map. I mean if you haven't figured that out by now it's a wonder you're still alive.",
+        "Tip: Due to our failures in inter-planetary relations... You should proabably avoid interacting with any alien species."
         // TODO, just add in more random summaries to bring variety to the game
     ];
 
