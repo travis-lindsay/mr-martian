@@ -37,7 +37,7 @@ export class PlayerAnimation {
         this.coordinateArray.unshift(this.player.getCoordinate());
         let self = this;
         let interval = window.setInterval(function() {
-            if (self.counter + 1 < self.coordinateArray.length) {
+            if (self.counter + 1 < self.coordinateArray.length && !self.player.isDead) {
                 // Then we are still iterating through the path
                 // First remove the img
                 let fail = self.removePlayerIMG(self.coordinateArray[self.counter]);

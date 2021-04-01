@@ -50,8 +50,15 @@ export class RandomEventController {
             gameApp.currentRandomEvent = event;
             // apply event
             this.applyEvent(event);
-            // open modal with info
-            this.openRandEventPopUp();
+            // did player die from event?
+            if ((gameApp.currentPlayer as Player).isPlayerDead()) {
+                this.openRandEventPopUp(() => {
+                    gameApp.handlePlayerDied();
+                });
+            } else {
+                // open modal with info
+                this.openRandEventPopUp(() => {});
+            }
         }
         return event !== null;
     }
@@ -67,7 +74,11 @@ export class RandomEventController {
         player.addInventoryItems(event.inventoryItems);
     }
 
-    openRandEventPopUp() {
+    openRandEventPopUp(closeCallBack : any) {
+        $('#btnCloseEvent').click(function() {
+            $('randomEventPopUp').modal("hide");
+            closeCallBack();
+        });
         $("#randEventPopUp").modal("show");
     }
 

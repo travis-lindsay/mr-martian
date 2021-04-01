@@ -124,6 +124,7 @@ window.onload = function() {
 			solSummary: "",
 			buildings: new Array<Building>(),
 			confirmationDialogMsg: "",
+			deathDialogMsg: "",
 		},
 		components: {
 			'clockpanel': clockpanel,
@@ -242,6 +243,18 @@ window.onload = function() {
 			},
 			closeStoryModal: function() {
                 $("#storyModal").modal("hide");
+			},
+			openDeathModal: function(closeCallback : any) {
+				// this.changeCurrentPlayer()
+				$('#btnDeathClose').click(function() {
+					$("#deathModal").modal("hide");
+					closeCallback();
+				});
+				$('#deathModal').modal({backdrop: 'static', keyboard: false}) 
+				$("#deathModal").modal("show");
+			},
+			closeDeathModal: function() {
+				$("#deathModal").modal("hide");
 			},
 			getCurrentPlayer() {
 				return this.currentPlayer;
@@ -372,11 +385,35 @@ window.onload = function() {
 					this.currentPlayerIndex = 0;
 					this.incrementSol();
 				}
+
+				// Check if player is dead
+				// Check if all players are dead... End game?
+				let deadCount = 0;
+				while (this.Players[this.currentPlayerIndex].isDead) {
+					deadCount++;
+					if (deadCount >= this.Players.length) {
+						alert("Game Over");
+						// TODO, maybe trigger some specific story slides, or endgame text and show end game stuff, scores, etc.
+						location.reload();
+						return;
+					}
+					this.currentPlayerIndex += 1;
+					if (this.currentPlayerIndex >= this.Players.length) {
+						this.currentPlayerIndex = 0;
+						this.incrementSol();
+					}
+				}
+
 				this.currentPlayer = this.Players[this.currentPlayerIndex];
 				// Show the 'mission progress' dialog
 				this.solSummary = SolSummary.getSolSummary(this.sol);
 				if (this.sol > 0) {
                     this.calcRationUsageAndEvents();
+				}
+				// Check if player died from exposure, if so recurse to switch players turns
+				if (this.currentPlayer.isDead) {
+					return;
+					// this.changeCurrentPlayer();
 				}
 				this.highlightClickableTiles();
 
@@ -546,9 +583,18 @@ window.onload = function() {
 
                 // Check if player has bit the bucket
                 if (p.isPlayerDead()) {
-                    alert(p.name + ' died a terrible death'); // TODO, figure out to do when player dies
+					this.handlePlayerDied();
                 }
             },
+			handlePlayerDied: function() {
+				// Replace the image of the player with the grave image
+				var animation = new PlayerAnimation(this.currentPlayer, null);
+				animation.removePlayerIMG(this.currentPlayer.coordinate);
+				Utils.addImageToCoordinate("./src/IMG/Places/Grave.png", this.currentPlayer.coordinate, "P_Grave_" + this.currentPlayer.number);
+				// Display some sort of dialog showing that the player died
+				this.deathDialogMsg = this.currentPlayer.name + " has perished.";
+				this.openDeathModal(() => { this.changeCurrentPlayer() });
+			},
 			incrementSol: function() {
 				this.sol += 1;
 			},

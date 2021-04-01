@@ -2,13 +2,13 @@ TODO (Travis, Jared, or Derek):
 	- Build out the "Player inventory"
 		- Additional items, e.g. hammer to make you build stuff faster
 		- Tooltips, descriptions in lab so you know what the item actually does
-	- Add some sort of "End Game" state, E.g. after X amount of sols passes by, the game ends (the ship arrives) and determine who wins the game
+	- Add "End Game" logic, on sol 20 trigger the last story slides, then the final game, once that is over cacluate high scores, etc.
 	- Make the random ship crashes randomly occur at different moments in the game, (after some x amount of turns it happens)
 		- Make the ship carry some random inventory item
-	- Build out the Farm to possibly require some sort of "plowing/seeding/watering/harvesting" functionality
+	- Build out the Farm to possibly require some sort of "plowing/seeding/watering/harvesting" functionality, or at least a way to replenish it.
 	- Build out the Lab to require different materials for research, etc.
+	- Add way to "replenish" supplies, (e.g. 'dig deeper' for well, maybe just use a similar construction type dialog, or cost resources)
 	- Add ability to input custom player names on menu screen.
-	- Figure out what we want to do when a player dies, (e.g. skip their turn and change player icon? Let them play as an alien? Etc).
 	- Add weapons you can build in lab for endgame
 	- Add in "end game related research" to lab... Potentially just gives you points in the end... If you hit a certain amounts, point multipliers, etc?
 	- Add some story elements to the game. E.g. Little intro story to give some context / explanation to the game
@@ -65,3 +65,14 @@ STORY DIALOG:
 		- Amidst this aggressive political climate, you've been given a rare opportunity by your corporation to carry out research on the planet. 
 			But first you must setup everything you'll need to survive...
 			- (picture of Space ship landed, spaceman outside surveying... Or maybe leaning on a shovel or something by some materials)
+	
+	- Sol 5 Slide Dialog:
+		- (some picture of another spaceman looking guy sitting at a desk or something)
+			- Incoming Transmission... "Hey, I've got some bad news... Looks like the last round of 'civil discussion' our ambassador
+				had regarding our research here didn't go very well. In fact they've revoked out research visa and demanded we leave."
+		- (same guy, different position, perhaps looking distressed or pointing to diagram of ship charging)
+			- "We just received word they also are assembling an angry mob to come and forcibly remove you. Which wouldn't be a problem
+				but your ship is going to take some time to charge."
+		- (same guy, different position)
+			- "Based on our calculations though, your ship should be ready before they get there, but it's gonna be a close call.
+				While you're waiting, might as well get as much research done as possible. Good luck."

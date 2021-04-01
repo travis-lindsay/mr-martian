@@ -108,6 +108,27 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Death Modal -->
+                    <div class="modal fade" id="deathModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="z-index: 1060;">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content"
+                                    style="max-width: 700px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 10px 20px 0 rgba(5, 5, 5, 0.19); background-color: rgba(50, 50, 50, 0.86); border: solid 1px gray;">
+                                <div class="modal-body" style="padding: 0px;">
+                                    <div class="container-fluid">
+                                        <div class="row" style="min-height: 120px;">
+                                            <div class="col-12 d-flex flex-column min-vh-100 justify-content-center align-items-center">
+                                                <span style="color: rgb(190, 48, 38); padding: 7px;">{{ deathDialogMsg }} </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer" style="border-top: solid #1d1c1c 2px;">
+                                    <button id="btnDeathClose" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
                      <!-- Story Modal -->
                      <div class="modal fade" id="storyModal" tabindex="-1" role="dialog"
@@ -409,7 +430,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer" style="border-top: solid #1d1c1c 2px;">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button id="btnCloseEvent" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
