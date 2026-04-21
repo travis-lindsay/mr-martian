@@ -822,12 +822,10 @@
                     <hr>
                     <h4 style="color: white;">Inventory:</h4>
                     <div class="row" style="margin: 5px;">
-                            <div v-for="supply in currentPlayer.suppliesList" class="col-3 inventoryItem">
-                                <!-- <span v-b-tooltip.hover.top="'Tooltip!'"> -->
-                                <!-- <span class="d-inline-block buildReqsTooltip" tabindex="0" container="body" data-toggle="tooltip" data-placement="top" data-html="true" v-bind:data-original-title="supply.name"> -->
+                            <div v-for="supply in currentPlayer.suppliesList" class="col-3 inventoryItem"
+                                 data-toggle="tooltip" data-placement="top" v-bind:title="supply.description" @mouseover="initTooltip">
                                     <span style="position: absolute; color: orange; left: -2px; top: -7px;">{{supply.amount}}</span>
                                     <img style="width: 100%;" v-bind:src="supply.imgPath"> 
-                                </span>
                             </div>
                     </div>
                 </div>

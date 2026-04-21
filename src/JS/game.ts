@@ -188,6 +188,9 @@ window.onload = function() {
                 		: surface.classList.remove('clickable');
 				}
 			},
+			initTooltip: function(event : any) {
+				$(event.target).tooltip('show');
+			},
 			closeAllModals: function() {
 				this.closePlaceActionsModal();
 				this.closeConstructionModal();
