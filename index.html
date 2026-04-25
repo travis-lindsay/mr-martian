@@ -35,6 +35,66 @@
         </svg>
     </div>
 
+    <!-- Help Icon -->
+    <div class="helpIcon" @click="openHowToPlayModal" title="How to Play">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+        </svg>
+    </div>
+
+    <!-- How To Play Modal -->
+    <div class="modal fade" id="howToPlayModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content adminModalContent">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color: orange;">Mission Briefing: Survival & Escape</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="font-family: 'Lucida Console';">
+                    <div class="adminControlGroup">
+                        <h5>Objective</h5>
+                        <p>You are stranded on Mars. Your goal is to survive the harsh environment, manage your resources, and build a rover to escape before it's too late.</p>
+                    </div>
+                    <div class="adminControlGroup">
+                        <h5>Survival (The Sol Cycle)</h5>
+                        <ul>
+                            <li><strong>Time:</strong> Each Sol (day) has 24 hours. Actions like moving, mining, and building consume time.</li>
+                            <li><strong>Resources:</strong> You must manage your <strong>Food</strong> and <strong>Water</strong> rations. Consuming too little will damage your health.</li>
+                            <li><strong>Shelter:</strong> You must be in a shelter at the end of your turn to avoid massive health and morale loss from the Mars elements.</li>
+                            <li><strong>Morale:</strong> Low morale wastes time as you wallow in self-pity. Keep it high to remain efficient.</li>
+                        </ul>
+                    </div>
+                    <div class="adminControlGroup">
+                        <h5>Buildings & Research</h5>
+                        <ul>
+                            <li><strong>Wells, Farms, Mines:</strong> Essential for gathering Water, Food, and Stone.</li>
+                            <li><strong>Labs:</strong> The key to escape. Build a Lab to research and construct <strong>Rover Parts</strong> (Frame, Engine, Wheels) and advanced tools.</li>
+                            <li><strong>Upgrades:</strong> Buildings can be upgraded to increase their efficiency and provide better protection.</li>
+                        </ul>
+                    </div>
+                    <div class="adminControlGroup">
+                        <h5>Winning the Game</h5>
+                        <ol>
+                            <li><strong>Construct all Rover Parts:</strong> Use the Lab to build the Frame, Engine, and Wheels.</li>
+                            <li><strong>Launch:</strong> Once your rover is ready, initiate the final escape.</li>
+                            <li><strong>The Final Stand:</strong> Survive the combat phase by defending your ship from Martian threats. If your ship survives, you win!</li>
+                        </ol>
+                    </div>
+                    <div class="adminControlGroup">
+                        <h5>Pro-Tip</h5>
+                        <p>Use <strong>Propaganda</strong> to sabotage other players. Placing it on their buildings increases the number of enemies they face in the final stand!</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Good Luck, Martian</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Admin Modal -->
     <div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -161,7 +221,14 @@
                 <clockpanel :time="currentPlayer.clock.usedTime">
                 </clockpanel>
                 <button class="btn btn-dark" style="margin-top: 15px;" @click="openTurnResultsModal">Mission Progress</button>
-                <button class="btn btn-dark" style="margin-top: 15px;" @click="startFinalGame()">Final Game</button>
+                
+                <div v-if="currentPlayer.hasAllRoverParts()">
+                    <button class="btn btn-success" style="margin-top: 15px; font-weight: bold; animation: pulse 2s infinite;" @click="startFinalGame()">🚀 LAUNCH ESCAPE ROVER</button>
+                </div>
+                <div v-else>
+                    <button class="btn btn-dark disabled" style="margin-top: 15px; opacity: 0.5;" title="Collect Frame, Engine, and Wheels to launch" data-toggle="tooltip">Final Game (Locked)</button>
+                </div>
+
                 <div class="col-12" style="padding-left: 15px; padding-bottom: 15px;">
                     <div class="row" style="padding-top: 20px; padding-left: 25px;">
                         <span style="color: white;">Food Ration: </span>

@@ -295,4 +295,11 @@ export class Player {
     {
         return this.isDead;
     }
-}
+
+    hasAllRoverParts() {
+        const parts = ['Frame', 'Engine', 'Wheel'];
+        return parts.every(partName => 
+            this.suppliesList.some(item => item.name === partName && item.amount > 0)
+        );
+    }
+    }

@@ -224,6 +224,9 @@ window.onload = function() {
                     alert("Incorrect password.");
                 }
             },
+            openHowToPlayModal: function() {
+                $("#howToPlayModal").modal("show");
+            },
             adminAddItem: function() {
                 let item = ($("#adminItemSelect").val() as string);
                 if (item) {
