@@ -188,6 +188,9 @@ window.onload = function() {
                 		: surface.classList.remove('clickable');
 				}
 			},
+			initTooltip: function(event : any) {
+				$(event.target).tooltip('show');
+			},
 			closeAllModals: function() {
 				this.closePlaceActionsModal();
 				this.closeConstructionModal();
@@ -210,6 +213,20 @@ window.onload = function() {
 				let newTooltip : string = `<span style="color:orange">Required Resources:</span><br>Food: ${reqs.food}<br>Water: ${reqs.water}<br>Stone: ${reqs.stone}`;
 				$('#buildReqsTooltip').attr('data-original-title', newTooltip).tooltip('update');
                 $("#placeActionsModal").modal("show");
+            },
+            openAdminModal: function() {
+                let password = prompt("Enter Admin Password:");
+                if (password === "red") {
+                    $("#adminModal").modal("show");
+                } else {
+                    alert("Incorrect password.");
+                }
+            },
+            adminAddItem: function() {
+                let item = ($("#adminItemSelect").val() as string);
+                if (item) {
+                    this.currentPlayer.addSupply(item);
+                }
             },
 			openTurnResultsModal: function() {
 				$("#turnResultsModal").modal("show");
