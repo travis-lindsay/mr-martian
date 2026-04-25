@@ -930,11 +930,54 @@
                     <h4 style="color: white;">Inventory:</h4>
                     <div class="row" style="margin: 5px;">
                             <div v-for="supply in currentPlayer.suppliesList" class="col-3 inventoryItem"
-                                 data-toggle="tooltip" data-placement="top" v-bind:title="supply.description" @mouseover="initTooltip">
+                                 data-toggle="tooltip" data-placement="top" v-bind:title="supply.description" 
+                                 @mouseover="initTooltip" @click="openItemDetailsModal(supply)">
                                     <span style="position: absolute; color: orange; left: -2px; top: -7px;">{{supply.amount}}</span>
                                     <img style="width: 100%;" v-bind:src="supply.imgPath"> 
                             </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Item Details Modal -->
+    <div class="modal fade" id="itemDetailsModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content"
+                 style="max-width: 700px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 10px 20px 0 rgba(5, 5, 5, 0.19); background-color: rgba(50, 50, 50, 0.86); border: solid 1px gray;">
+                <div class="modal-header" style="border-bottom: solid #a0421e 4px;">
+                    <h3 class="modal-title" style="color: white;">{{ currentItem.name }}</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="color: white;">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-4">
+                                <img v-bind:src="currentItem.imgPath" style="width: 100%;">
+                            </div>
+                            <div class="col-8">
+                                <p style="font-size: 1.2em; color: orange;">{{ currentItem.description }}</p>
+                                <div v-if="currentItem.name === 'Pick Axe'" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 5px;">
+                                    <span style="color: #2ec62c; font-weight: bold;">Stat Effect:</span> +5 Stone per harvest in Mines.
+                                </div>
+                                <div v-if="currentItem.name === 'Shovel'" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 5px;">
+                                    <span style="color: #2ec62c; font-weight: bold;">Stat Effect:</span> Basic weapon for defense in the Final Game.
+                                </div>
+                                <div v-if="currentItem.name === 'Anti-alien propaganda'" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 5px;">
+                                    <span style="color: #2ec62c; font-weight: bold;">Usage:</span> Place on other players' buildings to increase their enemy count.
+                                </div>
+                                <div v-if="['Wheel', 'Engine', 'Frame'].includes(currentItem.name)" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 5px;">
+                                    <span style="color: #2ec62c; font-weight: bold;">Purpose:</span> Critical rover part needed for escape.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="border-top: solid #1d1c1c 2px;">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

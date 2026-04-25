@@ -434,9 +434,11 @@ p {
 .labItem {
     margin: auto;
 }
-
 .inventoryItem {
-    padding: 5px;
+    padding: 3px;
+    cursor: pointer;
+}
+
     cursor: pointer;
 }
 

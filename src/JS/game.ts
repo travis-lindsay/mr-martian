@@ -18,6 +18,7 @@ import { FinalGame } from './FinalGame/FinalGame';
 import { RandomEvent } from './RandomEvents/RandomEvent';
 import { StoryTile } from './Story/StoryTile';
 import { StoryController } from './Story/StoryController';
+import { InventoryItem } from './InventoryItem';
 export var gameApp : any;
 
 window.onload = function() {
@@ -125,6 +126,7 @@ window.onload = function() {
 			buildings: new Array<Building>(),
 			confirmationDialogMsg: "",
 			deathDialogMsg: "",
+			currentItem: new InventoryItem("", "", "", 0),
 		},
 		components: {
 			'clockpanel': clockpanel,
@@ -227,6 +229,10 @@ window.onload = function() {
                 if (item) {
                     this.currentPlayer.addSupply(item);
                 }
+            },
+            openItemDetailsModal: function(item: any) {
+                this.currentItem = item;
+                $("#itemDetailsModal").modal("show");
             },
 			openTurnResultsModal: function() {
 				$("#turnResultsModal").modal("show");
