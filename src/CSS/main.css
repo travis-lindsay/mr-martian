@@ -464,3 +464,38 @@ hr {
     fill: #0e0e0e !important;
     cursor: not-allowed !important;
 }
+
+.adminIcon {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1070;
+    cursor: pointer;
+    fill: #555;
+    width: 30px;
+    height: 30px;
+    transition: fill 0.3s;
+}
+
+.adminIcon:hover {
+    fill: #aaa;
+}
+
+.adminModalContent {
+    background-color: #2c2c2c;
+    color: #ddd;
+    border: 1px solid #444;
+}
+
+.adminControlGroup {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #3d3d3d;
+    border-radius: 4px;
+}
+
+.adminControlGroup h5 {
+    color: orange;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+}
