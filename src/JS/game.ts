@@ -377,9 +377,15 @@ window.onload = function() {
 					}
 					this.tileMap.getTile(this.lastClickedTileCoord.getYCoordinate(), this.lastClickedTileCoord.getXCoordinate())
 						.setBuilding(this.currentBuilding);
-					Utils.addImageToCoordinate("./src/IMG/spaceman/corner" + this.currentPlayer.number + ".png", this.lastClickedTileCoord, 'CORNER');
 					Utils.addImageToCoordinate(this.currentBuilding.img, this.lastClickedTileCoord, 'IMG');
+					Utils.addImageToCoordinate("./src/IMG/spaceman/corner" + this.currentPlayer.number + ".png", this.lastClickedTileCoord, 'CORNER', 'playerIndicator');
 					Utils.addImageToCoordinate("./src/IMG/Construction.png", this.lastClickedTileCoord, 'CONSTRUCTION');
+					
+					let tileElement = document.getElementById(this.lastClickedTileCoord.getYCoordinate() + '_' + this.lastClickedTileCoord.getXCoordinate());
+					if (tileElement) {
+						tileElement.classList.add('player' + this.currentPlayer.number + '-owned');
+					}
+
 					this.buildings.push(this.currentBuilding);
 					$("#buildOptionsModal").modal("hide");
 					$("#constructionModal").modal("show");

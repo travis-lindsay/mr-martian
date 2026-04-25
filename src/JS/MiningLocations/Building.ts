@@ -127,6 +127,11 @@ export class Building {
         if (this.coordinate !== undefined) {
             let tile : Tile = tileMap.getTile(this.coordinate.y, this.coordinate.x);
             tile.destroyBuilding();
+
+            let tileElement = document.getElementById(this.coordinate.y + '_' + this.coordinate.x);
+            if (tileElement) {
+                tileElement.classList.remove('player0-owned', 'player1-owned', 'player2-owned', 'player3-owned');
+            }
         }
         gameApp.buildings.filter((b : Coordinate) => this.coordinate !== undefined && b.x == this.coordinate.x && b.y == this.coordinate.y);
         gameApp.closeAllModals();

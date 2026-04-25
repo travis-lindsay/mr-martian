@@ -5,7 +5,7 @@ export default class Utils {
         Coordinate coord: Coordinate object of the tile you want to place the image on
         String id: string identifier to help access the image for future instances (e.g. document.getElementById("uniqueID"))
     */
-    static addImageToCoordinate(imgPath : any, coord : any, id : any) {
+    static addImageToCoordinate(imgPath : any, coord : any, id : any, className : string = "genericIMG") {
         let existingImage : any = document.getElementById(coord.getYCoordinate() + '_' + coord.getXCoordinate() + '_' + id);
         if (existingImage) {
             existingImage.src = imgPath;
@@ -13,7 +13,7 @@ export default class Utils {
             var tiles : any = document.getElementById(coord.getYCoordinate() + '_' + coord.getXCoordinate());
             var img : any = document.createElement("IMG");
             img.src = imgPath;
-            img.classList.add("genericIMG");
+            img.classList.add(className);
             img.id = coord.getYCoordinate() + '_' + coord.getXCoordinate() + '_' + id;
             tiles.appendChild(img);
         }
