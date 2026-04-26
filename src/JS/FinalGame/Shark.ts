@@ -110,4 +110,10 @@ export class Shark extends Attackable implements Enemy {
             this.sprite.destroy(true);
         }
     }
+
+    public push(xAmount : number, yAmount : number) {
+        this.sprite.x += xAmount;
+        // Sharks are on the ground, so we don't necessarily need to push them "down", 
+        // but we could give them a little bounce or just leave y alone.
+    }
 }

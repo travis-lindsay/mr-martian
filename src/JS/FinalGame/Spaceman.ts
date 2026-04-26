@@ -13,11 +13,15 @@ export class Spaceman extends Attackable {
     healthText : Phaser.Text;
     public static PLAYER_SPEED : number = 300;
     public static MOVE_ANIM_SPEED : number = 7;
+    lastThrowTime : number = 0;
+    throwCooldown : number = 500; // ms
+    throwCallback : () => void;
 
-    constructor(game : Phaser.Game, name : string, healthText : Phaser.Text) {
+    constructor(game : Phaser.Game, name : string, healthText : Phaser.Text, throwCallback : () => void) {
         super(100, 500, 15);
         this.game = game;
         this.healthText = healthText;
+        this.throwCallback = throwCallback;
         this.sprite = this.game.add.sprite(300, 300, 'spaceman');
         this.sprite.name = name;
         // Physics must be enabled on a sprite before the sprite.body property can be accessed
@@ -71,7 +75,7 @@ export class Spaceman extends Attackable {
             // this.spaceman.y += 4;
             // nothingIsPressed = false;
         }
-        if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+        if (this.game.input.keyboard.isDown(Phaser.Keyboard.J)) {
             // Hit with shovel
             if (this.lastDirection == Direction.RIGHT) {
                 this.sprite.animations.play("hitShovelRight", Spaceman.MOVE_ANIM_SPEED, false);
@@ -85,6 +89,22 @@ export class Spaceman extends Attackable {
             if (!this.attacking) {
                 this.attack(this.overlappingEnemies[0]);
             }
+        } else if (this.game.input.keyboard.isDown(Phaser.Keyboard.K)) {
+            // Throw shovel
+            let currentTime = this.game.time.now;
+            if (currentTime - this.lastThrowTime > this.throwCooldown) {
+                this.lastThrowTime = currentTime;
+                if (this.lastDirection == Direction.RIGHT) {
+                    this.sprite.animations.play("hitShovelRight", Spaceman.MOVE_ANIM_SPEED, false);
+                } else {
+                    this.sprite.animations.play("hitShovelLeft", Spaceman.MOVE_ANIM_SPEED, false);
+                }
+                nothingIsPressed = false;
+                if (this.remainingAnimationFrames <= 0) {
+                    this.remainingAnimationFrames += 30;
+                }
+                this.throwCallback();
+            }
         } else {
             this.attacking = false;
         }
@@ -93,7 +113,8 @@ export class Spaceman extends Attackable {
             this.sprite.body.velocity.x = 0;
         }
         if (this.remainingAnimationFrames <= 0 &&
-            !this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) &&
+            !this.game.input.keyboard.isDown(Phaser.Keyboard.J) &&
+            !this.game.input.keyboard.isDown(Phaser.Keyboard.K) &&
             !this.game.input.keyboard.isDown(Phaser.Keyboard.A) &&
             !this.game.input.keyboard.isDown(Phaser.Keyboard.S) &&
             !this.game.input.keyboard.isDown(Phaser.Keyboard.W) &&

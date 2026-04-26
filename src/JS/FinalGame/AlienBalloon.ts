@@ -110,4 +110,13 @@ export class AlienBalloon extends Attackable implements Enemy {
             this.sprite.destroy(true);
         }
     }
+
+    public push(xAmount : number, yAmount : number) {
+        if (this.sprite.y + yAmount <= 300) {
+            this.sprite.y += yAmount;
+        } else {
+            this.sprite.y = 300;
+        }
+        this.sprite.x += xAmount;
+    }
 }

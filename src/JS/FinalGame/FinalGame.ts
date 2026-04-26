@@ -37,6 +37,8 @@ export class FinalGame {
     enemyDict: { [s: string]: Enemy; } = {};
     //remainingAnimationFrames: number = 0; // For animations that should be played all the way through, (e.g. non-moving actions).
     lastDirection: Direction = Direction.RIGHT;
+    projectiles: Phaser.Group | any;
+    enemies: Phaser.Group | any;
 
     constructor() {
 
@@ -67,6 +69,7 @@ export class FinalGame {
         this.game.load.spritesheet('sharkborg', './src/IMG/finalgame/shark.png', 150, 200);
         this.game.load.spritesheet('alienballoon', './src/IMG/finalgame/alienballoon.png', 100, 150);
         this.game.load.image('ground', './src/IMG/finalgame/ground.png');
+        this.game.load.image('shovel', './src/IMG/tools/shovel.png');
     }
 
     create() {
@@ -116,7 +119,9 @@ export class FinalGame {
         };
         this.spacemanText = this.game.add.text(0, 0, "Health: " + this.player.health, style);
         this.spacemanText.setTextBounds(16, 16, 768, 568);
-        this.spaceman = new Spaceman(this.game, this.player.name, this.spacemanText);
+
+        let self = this;
+        this.spaceman = new Spaceman(this.game, this.player.name, this.spacemanText, () => { self.throwShovel(); });
         
         // Enable physics on the player sprite
         //this.game.physics.enable(this.spaceman, Phaser.Physics.ARCADE);
@@ -128,16 +133,49 @@ export class FinalGame {
 
         // Set the physics engines overall gravity, 120 pixels per second
         this.game.physics.arcade.gravity.y = 120;
+
+        // Projectiles group
+        this.projectiles = this.game.add.group();
+        this.projectiles.enableBody = true;
+        this.projectiles.physicsBodyType = Phaser.Physics.ARCADE;
+
+        // Enemies group
+        this.enemies = this.game.add.group();
+        this.enemies.enableBody = true;
+        this.enemies.physicsBodyType = Phaser.Physics.ARCADE;
+        for (let key in this.enemyDict) {
+            this.enemies.add(this.enemyDict[key].sprite);
+        }
     }
 
     private hitGround() : void {
         // This does nothing right now...
     }
 
+    private throwShovel() {
+        let shovel = this.projectiles.create(this.spaceman.sprite.x, this.spaceman.sprite.y, 'shovel');
+        shovel.anchor.setTo(0.5, 0.5);
+        shovel.scale.setTo(0.5, 0.5);
+        if (this.spaceman.lastDirection == Direction.LEFT) {
+            shovel.body.velocity.x = -250;
+        } else {
+            shovel.body.velocity.x = 250;
+        }
+        shovel.body.velocity.y = -350;
+        shovel.body.angularVelocity = 500;
+        shovel.checkWorldBounds = true;
+        shovel.outOfBoundsKill = true;
+    }
+
     update() {
         this.spaceman.resetOverlappingEnemies();
         // Check for collisions     
         this.game.physics.arcade.collide(this.spaceman.sprite, this.ground, this.hitGround, undefined, this);
+        this.game.physics.arcade.collide(this.spaceman.sprite, this.ship.sprite);
+        this.game.physics.arcade.collide(this.projectiles, this.ground, function(shovel : any, ground : any) {
+            shovel.kill();
+        }, undefined, this);
+
         // No need to store in group, since I want to use objects individual context variables and callback functions
         let self = this;
         for (let key in this.enemyDict) {
@@ -152,6 +190,25 @@ export class FinalGame {
             }, undefined, enemyObj);
         }
 
+        // Projectile hits any enemy
+        this.game.physics.arcade.overlap(this.projectiles, this.enemies, function(shovel : any, enemySprite : any) {
+            let directionalX = (shovel.body.velocity.x > 0) ? 20 : -20;
+            shovel.kill();
+            
+            // Find the enemy object that owns this sprite
+            for (let key in self.enemyDict) {
+                let enemy = self.enemyDict[key];
+                if (enemy.sprite === enemySprite) {
+                    if (typeof (enemy as any).push === 'function') {
+                        // Balloons always go right, others follow shovel direction
+                        let xPush = (enemySprite.key === 'alienballoon') ? 100 : directionalX;
+                        (enemy as any).push(xPush, 30);
+                    }
+                    break;
+                }
+            }
+        }, undefined, this);
+
         this.spaceman.animate();
         
         // Do AI animations
@@ -161,13 +218,15 @@ export class FinalGame {
                 enemyObj.animate();
             } else {
                 delete this.enemyDict[key];
+                let newEnemy : Enemy;
                 if (this.count % 2 == 0) {
-                    let sharkBoi : Shark = new Shark(this.game, this.enemyCount.toString());
-                    this.enemyDict[sharkBoi.sprite.name] = sharkBoi;
+                    newEnemy = new Shark(this.game, this.enemyCount.toString());
                 } else {
-                    let alienBoi : AlienBalloon = new AlienBalloon(this.game, this.enemyCount.toString());
-                    this.enemyDict[alienBoi.sprite.name] = alienBoi;
+                    newEnemy = new AlienBalloon(this.game, this.enemyCount.toString());
                 }
+                this.enemyDict[newEnemy.sprite.name] = newEnemy;
+                this.enemies.add(newEnemy.sprite);
+
                 this.count += 1;
                 this.enemyCount += 1;
             }
