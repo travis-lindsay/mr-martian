@@ -10,14 +10,18 @@ export class Spaceman extends Attackable {
     remainingAnimationFrames : number = 0; // For animations that should be played all the way through, (e.g. non-moving actions like attacking).
     lastDirection : Direction = Direction.RIGHT;
     overlappingEnemies: Attackable[] = new Array();
-    healthText : Phaser.Text;
+    healthText : Phaser.Text | undefined;
+    healthbar : Phaser.Graphics;
+    healthLabel : Phaser.Text;
+    totalhp : number = 100;
+    lasthp : number = -1;
     public static PLAYER_SPEED : number = 300;
     public static MOVE_ANIM_SPEED : number = 7;
     lastThrowTime : number = 0;
     throwCooldown : number = 500; // ms
     throwCallback : () => void;
 
-    constructor(game : Phaser.Game, name : string, healthText : Phaser.Text, throwCallback : () => void) {
+    constructor(game : Phaser.Game, name : string, healthText : Phaser.Text | undefined, throwCallback : () => void) {
         super(100, 500, 15);
         this.game = game;
         this.healthText = healthText;
@@ -37,11 +41,53 @@ export class Spaceman extends Attackable {
         this.sprite.body.collideWorldBounds = true;
         // Set the sprite collision box size, so the transparent space on the image doesn't make it look weird
         this.sprite.body.setSize(50, 100, 25, 0);
+
+        // HEALTH BAR
+        this.healthbar = game.add.graphics(0,0);
+        const style = { font: "bold 16px Arial", fill: "#ffffff" };
+        this.healthLabel = this.game.add.text(this.game.width - 270, 20, "Player Health", style);
+        this.updateHealthBar();
+    }
+
+    public updateHealthBar() {
+        const width = 250;
+        const height = 20;
+        const x = this.game.width - 270;
+        const y = 45;
+
+        if (this.lasthp !== this.health) {    
+            this.healthbar.clear();    
+            
+            // Background
+            this.healthbar.beginFill(0x333333);
+            this.healthbar.drawRect(x, y, width, height);
+            this.healthbar.endFill();
+
+            let percentHealth = (this.health / this.totalhp) * 100;    
+            let color : number;
+            if (percentHealth < 33) {
+                color = 0xe82929;
+            } else if (percentHealth < 66) {
+                color = 0xffcf1f;
+            } else {
+                color = 0x66d520;
+            }       
+            this.healthbar.beginFill(color);    
+            this.healthbar.drawRect(x, y, width * (percentHealth / 100), height);    
+            this.healthbar.endFill();
+
+            // Border
+            this.healthbar.lineStyle(2, 0xffffff, 1);
+            this.healthbar.drawRect(x, y, width, height);
+        }
+        this.lasthp = this.health;
     }
 
     public animate() {
         // Spaceman should always be the frontmost
         this.sprite.bringToTop();
+        this.game.world.bringToTop(this.healthbar);
+        this.game.world.bringToTop(this.healthLabel);
         let nothingIsPressed : Boolean = true;
         if (this.game.input.keyboard.isDown(Phaser.Keyboard.A)) // LEFT
         {
@@ -145,7 +191,10 @@ export class Spaceman extends Attackable {
             this.health = 0;
             this.alive = false;
         }
-        this.healthText.setText("Health: " + this.health);
+        if (this.healthText) {
+            this.healthText.setText("Health: " + this.health);
+        }
+        this.updateHealthBar();
     }
 
     public addSetOverlappingEnemy(enemy : Attackable) {

@@ -106,22 +106,8 @@ export class FinalGame {
             }
         }
 
-        // Text
-        var style = { 
-            font: "15px Arial",
-            fontWeight: "bolder",
-            fill: "#2c2c2c", 
-            align: "left", // the alignment of the text is independent of the bounds, try changing to 'center' or 'right'
-            boundsAlignH: "left", 
-            boundsAlignV: "top", 
-            wordWrap: true, 
-            wordWrapWidth: 300,
-        };
-        this.spacemanText = this.game.add.text(0, 0, "Health: " + this.player.health, style);
-        this.spacemanText.setTextBounds(16, 16, 768, 568);
-
         let self = this;
-        this.spaceman = new Spaceman(this.game, this.player.name, this.spacemanText, () => { self.throwShovel(); });
+        this.spaceman = new Spaceman(this.game, this.player.name, undefined, () => { self.throwShovel(); });
         
         // Enable physics on the player sprite
         //this.game.physics.enable(this.spaceman, Phaser.Physics.ARCADE);

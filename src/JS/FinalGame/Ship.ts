@@ -3,9 +3,10 @@ export class Ship extends Attackable {
     game : Phaser.Game;
     sprite : Phaser.Sprite;
     // Health bar 
-    lasthp : number = 0;
+    lasthp : number = -1;
     totalhp : number = 500;
     healthbar : Phaser.Graphics;
+    healthLabel : Phaser.Text;
 
     constructor(game : Phaser.Game, name : string) {
         super(500, 0, 0);
@@ -20,10 +21,13 @@ export class Ship extends Attackable {
 
         // HEALTH BAR
         this.healthbar = game.add.graphics(0,0);
-        this.healthbar.moveTo(100, 100);
+        
+        const style = { font: "bold 16px Arial", fill: "#ffffff" };
+        this.healthLabel = this.game.add.text(20, 20, "Rocket Ship Health", style);
+        
         this.updateHealthBar();
         this.game.world.bringToTop(this.healthbar);
-        // this.sprite.addChild(this.healthbar);
+        this.game.world.bringToTop(this.healthLabel);
     }
 
     public getAttacked(damage : number) {
@@ -34,27 +38,41 @@ export class Ship extends Attackable {
             this.health = 0;
             this.alive = false;
             this.sprite.destroy(true);
+            this.healthbar.clear();
+            this.healthLabel.destroy();
         }
     }
 
     public updateHealthBar() {
-        const width = 200;
+        const width = 250;
+        const height = 20;
+        const x = 20;
+        const y = 45;
+
         if (this.lasthp !== this.health) {    
             this.healthbar.clear();    
+            
+            // Background
+            this.healthbar.beginFill(0x333333);
+            this.healthbar.drawRect(x, y, width, height);
+            this.healthbar.endFill();
+
             let percentHealth = (this.health / this.totalhp) * 100;    
-            let color : any;
+            let color : number;
             if (percentHealth < 33) {
-                color = "0xe82929";
+                color = 0xe82929;
             } else if (percentHealth < 66) {
-                color = "0xffcf1f";
+                color = 0xffcf1f;
             } else {
-                color = "0x66d520";
+                color = 0x66d520;
             }       
             this.healthbar.beginFill(color);    
-            this.healthbar.lineStyle(5, color, 1);    
-            this.healthbar.moveTo(0,-5);    
-            this.healthbar.lineTo(width * (percentHealth / 100), -5);    
+            this.healthbar.drawRect(x, y, width * (percentHealth / 100), height);    
             this.healthbar.endFill();
+
+            // Border
+            this.healthbar.lineStyle(2, 0xffffff, 1);
+            this.healthbar.drawRect(x, y, width, height);
         }
         this.lasthp = this.health;
     }
