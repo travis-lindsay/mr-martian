@@ -84,6 +84,28 @@
                         </ol>
                     </div>
                     <div class="adminControlGroup">
+                        <h5>Controls</h5>
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>WASD</strong> - Move & Jump<br>
+                                <strong>SPACE</strong> - Attack
+                            </div>
+                            <div class="col-6">
+                                <strong>Mouse</strong> - Interact with Map<br>
+                                <strong>Sliders</strong> - Set Rations
+                            </div>
+                        </div>
+                    </div>
+                    <div class="adminControlGroup">
+                        <h5>How You Can Lose</h5>
+                        <ul>
+                            <li><strong>Death:</strong> If your <strong>Health</strong> reaches 0, you die and the mission fails.</li>
+                            <li><strong>Starvation/Dehydration:</strong> Setting your rations too low will slowly drain your health each Sol.</li>
+                            <li><strong>Exposure:</strong> Ending a turn outside of a shelter will cause massive damage to health and morale.</li>
+                            <li><strong>Final Game Failure:</strong> If your escape rover is destroyed by Martian threats during the launch phase, you lose.</li>
+                        </ul>
+                    </div>
+                    <div class="adminControlGroup">
                         <h5>Pro-Tip</h5>
                         <p>Use <strong>Propaganda</strong> to sabotage other players. Placing it on their buildings increases the number of enemies they face in the final stand!</p>
                     </div>
@@ -1096,12 +1118,18 @@
             </div>
         </div>
     </div>
-</div>
-</div>
 
- <!-- Final Game container -->
-<div v-show="finalGameShow" class="row text-center align-items-center justify-content-center" style="margin-right:0px;">
-    <div id="content"></div>
+    <!-- Final Game container -->
+    <div v-show="finalGameShow" class="row text-center align-items-center justify-content-center" style="margin-right:0px; position: relative;">
+        <div id="content"></div>
+        <div style="position: absolute; bottom: 70px; left: 20px; background: rgba(0,0,0,0.5); color: white; padding: 10px; border-radius: 5px; text-align: left; font-size: 14px; border: 1px solid #555; pointer-events: none;">
+            <h6 style="color: orange; margin-bottom: 5px;">Controls</h6>
+            <strong>A / D</strong> - Move<br>
+            <strong>W</strong> - Jump<br>
+            <strong>SPACE</strong> - Attack
+        </div>
+    </div>
+</div>
 </div>
 </body>
 
