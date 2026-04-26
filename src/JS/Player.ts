@@ -302,4 +302,13 @@ export class Player {
             this.suppliesList.some(item => item.name === partName && item.amount > 0)
         );
     }
+
+    hasRoverPart(partName: string) {
+        return this.suppliesList.some(item => item.name === partName && item.amount > 0);
+    }
+
+    getRoverPartsCount() {
+        const parts = ['Frame', 'Engine', 'Wheel'];
+        return parts.filter(partName => this.hasRoverPart(partName)).length;
+    }
     }

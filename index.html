@@ -220,7 +220,10 @@
                 </div>
                 <clockpanel :time="currentPlayer.clock.usedTime">
                 </clockpanel>
-                <button class="btn btn-dark" style="margin-top: 15px;" @click="openTurnResultsModal">Mission Progress</button>
+                <button class="btn btn-dark" style="margin-top: 15px;" @click="openTurnResultsModal">
+                    Mission Progress 
+                    <span class="badge badge-warning" v-if="currentPlayer.getRoverPartsCount() > 0">{{ currentPlayer.getRoverPartsCount() }}/3</span>
+                </button>
                 
                 <div v-if="currentPlayer.hasAllRoverParts()">
                     <button class="btn btn-success" style="margin-top: 15px; font-weight: bold; animation: pulse 2s infinite;" @click="startFinalGame()">🚀 LAUNCH ESCAPE ROVER</button>
@@ -421,17 +424,29 @@
                                                             <div class="labItemRow row">
                                                                 <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/roverparts/roverframe.png"></div>
                                                                 <div class="col-6 labItem">Rover Frame</div>
-                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('Frame');">Build</button></div>
+                                                                <div class="col-3 labItem">
+                                                                    <button class="btn btn-sm btn-dark" v-bind:class="{ disabled: currentPlayer.hasRoverPart('Frame') }" @click="currentPlayer.addSupply('Frame');">
+                                                                        {{ currentPlayer.hasRoverPart('Frame') ? 'Collected' : 'Build' }}
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                             <div class="labItemRow row">
                                                                 <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/roverparts/roverwheel.png"></div>
                                                                 <div class="col-6 labItem">Rover Wheels</div>
-                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('Wheel');">Build</button></div>
+                                                                <div class="col-3 labItem">
+                                                                    <button class="btn btn-sm btn-dark" v-bind:class="{ disabled: currentPlayer.hasRoverPart('Wheel') }" @click="currentPlayer.addSupply('Wheel');">
+                                                                        {{ currentPlayer.hasRoverPart('Wheel') ? 'Collected' : 'Build' }}
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                             <div class="labItemRow row">
                                                                 <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/roverparts/roverengine.png"></div>
                                                                 <div class="col-6 labItem">Rover Engine</div>
-                                                                <div class="col-3 labItem"><button class="btn btn-sm btn-dark" @click="currentPlayer.addSupply('Engine');">Build</button></div>
+                                                                <div class="col-3 labItem">
+                                                                    <button class="btn btn-sm btn-dark" v-bind:class="{ disabled: currentPlayer.hasRoverPart('Engine') }" @click="currentPlayer.addSupply('Engine');">
+                                                                        {{ currentPlayer.hasRoverPart('Engine') ? 'Collected' : 'Build' }}
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div>
@@ -696,9 +711,49 @@
                                                     </ul>
                                                 </span>
                                             </div>
+                                            <div class="col-12 menuItemSeparated">
+                                                <div class="row">
+                                                    <div class="col-6" style="border-right: 1px solid #595959ba;">
+                                                        <h5 style="color: white; font-size: 1rem;">Rover Construction</h5>
+                                                        <div class="roverPartsProgress">
+                                                            <div class="roverPartContainer">
+                                                                <img src="./src/IMG/roverparts/roverframe.png" 
+                                                                     class="roverPartIcon" 
+                                                                     v-bind:class="{ 'collected': currentPlayer.hasRoverPart('Frame'), 'missing': !currentPlayer.hasRoverPart('Frame') }"
+                                                                     title="Rover Frame">
+                                                                <div v-if="currentPlayer.hasRoverPart('Frame')" class="collectedCheckmark">✓</div>
+                                                                <span class="roverPartLabel">Frame</span>
+                                                            </div>
+                                                            <div class="roverPartContainer">
+                                                                <img src="./src/IMG/roverparts/roverengine.png" 
+                                                                     class="roverPartIcon" 
+                                                                     v-bind:class="{ 'collected': currentPlayer.hasRoverPart('Engine'), 'missing': !currentPlayer.hasRoverPart('Engine') }"
+                                                                     title="Rover Engine">
+                                                                <div v-if="currentPlayer.hasRoverPart('Engine')" class="collectedCheckmark">✓</div>
+                                                                <span class="roverPartLabel">Engine</span>
+                                                            </div>
+                                                            <div class="roverPartContainer">
+                                                                <img src="./src/IMG/roverparts/roverwheel.png" 
+                                                                     class="roverPartIcon" 
+                                                                     v-bind:class="{ 'collected': currentPlayer.hasRoverPart('Wheel'), 'missing': !currentPlayer.hasRoverPart('Wheel') }"
+                                                                     title="Rover Wheels">
+                                                                <div v-if="currentPlayer.hasRoverPart('Wheel')" class="collectedCheckmark">✓</div>
+                                                                <span class="roverPartLabel">Wheels</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <h5 style="color: white; font-size: 1rem;">Scientific Research</h5>
+                                                        <div style="color: #d3d2d2; font-size: 0.8rem; padding: 10px; background-color: rgba(0, 0, 0, 0.2); border-radius: 8px; height: 75px; display: flex; align-items: center; justify-content: center;">
+                                                           You have not built a lab yet...
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <div class="col-12 menuItemSeparated" style="background-color: #5c545130; padding-left: 0px;">
                                                 <div class="col-12">
-                                                    <h5 style="color: white;">Used resources this sol</h5>
+                                                    <h5 style="color: white; font-size: 1rem;">Used resources this sol</h5>
                                                 </div>
                                                 <div class="col-12" style="padding-bottom: 15px; padding-left: 38px;">
                                                     <span class="itemHeader">Food: </span>
@@ -709,7 +764,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 menuItemSeparated">
-                                                <h5 style="color: white;">Rations</h5>
+                                                <h5 style="color: white; font-size: 1rem;">Rations</h5>
                                             </div>
                                             <div class="col-12" style="padding-left: 38px; padding-bottom: 15px;">
                                                 <table>
@@ -739,14 +794,6 @@
                                                         </td>
                                                     </tr>
                                                 </table>
-                                            </div>
-                                            <div class="col-12 menuItemSeparated" style="background-color: #68210530; padding-bottom: 15px; padding-left: 0px;">
-                                                <div class="col-12">
-                                                    <h5 style="color: white;">Scientific Research Progress</h5>
-                                                </div>
-                                                <div class="col-12" style="color: #d3d2d2;">
-                                                   You have not built a lab yet...
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
