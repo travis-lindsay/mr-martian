@@ -14,7 +14,7 @@ export enum Direction {
 
 // Delay helper function 
 export async function delay(ms: number) {
-    await new Promise(resolve => setTimeout(()=>resolve(null), 1000)).then(); 
+    await new Promise(resolve => setTimeout(()=>resolve(null), ms)); 
 }
 
 /*

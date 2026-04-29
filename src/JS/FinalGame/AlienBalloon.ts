@@ -13,6 +13,10 @@ export class AlienBalloon extends Attackable implements Enemy {
     totalhp : number = 100;
     healthbar : Phaser.Graphics;
 
+    stunned: boolean = false;
+    stunTimer: number = 0;
+    stunText: Phaser.Text;
+
     constructor(game : Phaser.Game, name : string, startXPosition = game.width) {
         super(100, 750, 3);
         this.game = game;
@@ -33,6 +37,12 @@ export class AlienBalloon extends Attackable implements Enemy {
         // HEALTH BAR
         this.healthbar = game.add.graphics(0,0);
         this.sprite.addChild(this.healthbar);
+
+        // STUN EMOJI
+        this.stunText = game.add.text(50, -30, "💫", { font: "32px Arial", fill: "#ff0044", align: "center" });
+        this.stunText.anchor.setTo(0.5, 0.5);
+        this.stunText.visible = false;
+        this.sprite.addChild(this.stunText);
     }
 
     public updateHealthBar() {
@@ -59,19 +69,30 @@ export class AlienBalloon extends Attackable implements Enemy {
 
     public hitShip(ship : Attackable) {
         this.atShip = true;
-        if (!this.attacking) {
+        if (!this.attacking && !this.stunned) {
             this.attack(ship);
         }
     }
 
     public hitPlayer(spaceman : Attackable) {
         this.atPlayer = true;
-        if (!this.attacking) {
+        if (!this.attacking && !this.stunned) {
             this.attack(spaceman);
         }
     }
 
     public animate() {
+        if (this.stunned) {
+            if (this.game.time.now > this.stunTimer) {
+                this.stunned = false;
+                this.stunText.visible = false;
+            } else {
+                this.sprite.body.velocity.x = 0;
+                this.sprite.animations.stop();
+                return;
+            }
+        }
+
         if (this.atShip == true || this.atPlayer == true) {
             this.sprite.body.velocity.x = 0;
             this.sprite.animations.play("attack", 4, false);
@@ -89,14 +110,15 @@ export class AlienBalloon extends Attackable implements Enemy {
     }
 
     public attack(victim : Attackable) {
-        if (!victim || this.attacking) { return; }
+        if (!victim || this.attacking || this.stunned) { return; }
         this.attacking = true;
         let count : number = 0;
         (async () => { 
-            while (this.attacking && victim.alive) {
+            while (this.attacking && victim.alive && !this.stunned) {
                 victim.getAttacked(this.attackDamage);
                 await delay(this.attackSpeed);
             }
+            this.attacking = false;
         })();
     }
 
@@ -117,6 +139,9 @@ export class AlienBalloon extends Attackable implements Enemy {
         } else {
             this.sprite.y = 300;
         }
-        this.sprite.x += xAmount;
+        
+        this.stunned = true;
+        this.stunTimer = this.game.time.now + 2000;
+        this.stunText.visible = true;
     }
 }
