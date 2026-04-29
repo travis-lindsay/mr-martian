@@ -40,6 +40,10 @@ export class FinalGame {
     projectiles: Phaser.Group | any;
     enemies: Phaser.Group | any;
 
+    launchTimer: number = 60; // 60 seconds till launch
+    launchText: Phaser.Text | any;
+    isWon: boolean = false;
+
     constructor() {
 
         this.player = gameApp.getCurrentPlayer();
@@ -132,6 +136,66 @@ export class FinalGame {
         for (let key in this.enemyDict) {
             this.enemies.add(this.enemyDict[key].sprite);
         }
+
+        // Launch Timer Text
+        const style = { font: "bold 32px Arial", fill: "#ffffff", boundsAlignH: "center", boundsAlignV: "middle" };
+        this.launchText = this.game.add.text(this.game.width / 2, 50, "Time till Launch: 60", style);
+        this.launchText.anchor.setTo(0.5, 0.5);
+    }
+
+    private handleWin() {
+        if (this.isWon) return;
+        this.isWon = true;
+
+        // Stop all enemies and spaceman
+        for (let key in this.enemyDict) {
+            this.enemyDict[key].sprite.body.velocity.x = 0;
+            this.enemyDict[key].sprite.body.velocity.y = 0;
+            this.enemyDict[key].sprite.animations.stop();
+            this.enemyDict[key].alive = false;
+        }
+        this.spaceman.sprite.body.velocity.x = 0;
+        this.spaceman.sprite.body.velocity.y = 0;
+        this.spaceman.sprite.animations.stop();
+
+        // Display Win Text
+        const style = { font: "bold 64px Arial", fill: "#00ff00", align: "center" };
+        const winText = this.game.add.text(this.game.width / 2, this.game.height / 2 - 50, this.player.name + " WINS!", style);
+        winText.anchor.setTo(0.5, 0.5);
+
+        // Home Screen Button
+        const btnStyle = { font: "bold 32px Arial", fill: "#ffffff", backgroundColor: "#ce400a" };
+        const homeBtn = this.game.add.text(this.game.width / 2, this.game.height / 2 + 50, "  HOME SCREEN  ", btnStyle);
+        homeBtn.anchor.setTo(0.5, 0.5);
+        homeBtn.inputEnabled = true;
+        homeBtn.events.onInputDown.add(() => {
+            location.reload();
+        }, this);
+        homeBtn.events.onInputOver.add((target: Phaser.Text) => {
+            target.fill = "#ffcf1f";
+        }, this);
+        homeBtn.events.onInputOut.add((target: Phaser.Text) => {
+            target.fill = "#ffffff";
+        }, this);
+
+        // Confetti Effect
+        const emitter = this.game.add.emitter(this.game.width / 2, -50, 200);
+        emitter.makeParticles('ground'); // Using ground as a placeholder particle, we'll tint it
+        emitter.width = this.game.width;
+        emitter.minParticleScale = 0.1;
+        emitter.maxParticleScale = 0.5;
+        emitter.minParticleSpeed.setTo(-200, 200);
+        emitter.maxParticleSpeed.setTo(200, 500);
+        emitter.gravity = 200;
+
+        emitter.start(false, 5000, 20);
+
+        // Periodically change particle colors for confetti effect
+        this.game.time.events.loop(100, () => {
+            emitter.forEachAlive((p : any) => {
+                p.tint = Math.random() * 0xffffff;
+            }, this);
+        }, this);
     }
 
     private hitGround() : void {
@@ -197,8 +261,18 @@ export class FinalGame {
 
         this.spaceman.animate();
 
+        // Launch Timer Update
+        if (!this.isWon) {
+            this.launchTimer -= this.game.time.elapsedMS / 1000;
+            if (this.launchTimer <= 0) {
+                this.launchTimer = 0;
+                this.handleWin();
+            }
+            this.launchText.setText("Time till Launch: " + Math.ceil(this.launchTimer));
+        }
+
         // Check for lose conditions
-        if (!this.spaceman.alive || !this.ship.alive) {
+        if (!this.isWon && (!this.spaceman.alive || !this.ship.alive)) {
             // Player loses
             if (!this.spaceman.alive) {
                 this.player.isDead = true;
@@ -215,23 +289,25 @@ export class FinalGame {
         }
         
         // Do AI animations
-        for (let key in this.enemyDict) {
-            let enemyObj : Enemy = this.enemyDict[key];
-            if (enemyObj.alive) {
-                enemyObj.animate();
-            } else {
-                delete this.enemyDict[key];
-                let newEnemy : Enemy;
-                if (this.count % 2 == 0) {
-                    newEnemy = new Shark(this.game, this.enemyCount.toString());
+        if (!this.isWon) {
+            for (let key in this.enemyDict) {
+                let enemyObj : Enemy = this.enemyDict[key];
+                if (enemyObj.alive) {
+                    enemyObj.animate();
                 } else {
-                    newEnemy = new AlienBalloon(this.game, this.enemyCount.toString());
-                }
-                this.enemyDict[newEnemy.sprite.name] = newEnemy;
-                this.enemies.add(newEnemy.sprite);
+                    delete this.enemyDict[key];
+                    let newEnemy : Enemy;
+                    if (this.count % 2 == 0) {
+                        newEnemy = new Shark(this.game, this.enemyCount.toString());
+                    } else {
+                        newEnemy = new AlienBalloon(this.game, this.enemyCount.toString());
+                    }
+                    this.enemyDict[newEnemy.sprite.name] = newEnemy;
+                    this.enemies.add(newEnemy.sprite);
 
-                this.count += 1;
-                this.enemyCount += 1;
+                    this.count += 1;
+                    this.enemyCount += 1;
+                }
             }
         }
     }
