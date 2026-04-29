@@ -177,10 +177,11 @@ export class Spaceman extends Attackable {
         this.attacking = true;
         let count : number = 0;
         (async () => { 
-            while (this.attacking && victim.alive) {
+            while (this.attacking && victim.alive && this.alive) {
                 victim.getAttacked(this.attackDamage);
                 await delay(this.attackSpeed);
             }
+            this.attacking = false;
         })();
     }
 
@@ -190,6 +191,7 @@ export class Spaceman extends Attackable {
         } else {
             this.health = 0;
             this.alive = false;
+            this.attacking = false;
         }
         if (this.healthText) {
             this.healthText.setText("Health: " + this.health);

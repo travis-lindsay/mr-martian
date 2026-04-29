@@ -37,6 +37,7 @@ export class Ship extends Attackable {
         } else {
             this.health = 0;
             this.alive = false;
+            this.attacking = false;
             this.sprite.destroy(true);
             this.healthbar.clear();
             this.healthLabel.destroy();

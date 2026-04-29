@@ -114,7 +114,7 @@ export class AlienBalloon extends Attackable implements Enemy {
         this.attacking = true;
         let count : number = 0;
         (async () => { 
-            while (this.attacking && victim.alive && !this.stunned) {
+            while (this.attacking && victim.alive && !this.stunned && this.alive) {
                 victim.getAttacked(this.attackDamage);
                 await delay(this.attackSpeed);
             }
@@ -129,6 +129,7 @@ export class AlienBalloon extends Attackable implements Enemy {
         } else {
             this.health = 0;
             this.alive = false;
+            this.attacking = false;
             this.sprite.destroy(true);
         }
     }

@@ -93,10 +93,11 @@ export class Shark extends Attackable implements Enemy {
         this.attacking = true;
         let count : number = 0;
         (async () => { 
-            while (this.attacking && victim.alive) {
+            while (this.attacking && victim.alive && this.alive) {
                 victim.getAttacked(this.attackDamage);
                 await delay(this.attackSpeed);
             }
+            this.attacking = false;
         })();
     }
 
@@ -107,6 +108,7 @@ export class Shark extends Attackable implements Enemy {
         } else {
             this.health = 0;
             this.alive = false;
+            this.attacking = false;
             this.sprite.destroy(true);
         }
     }

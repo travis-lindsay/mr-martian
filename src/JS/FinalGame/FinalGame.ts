@@ -196,6 +196,23 @@ export class FinalGame {
         }, undefined, this);
 
         this.spaceman.animate();
+
+        // Check for lose conditions
+        if (!this.spaceman.alive || !this.ship.alive) {
+            // Player loses
+            if (!this.spaceman.alive) {
+                this.player.isDead = true;
+            } else {
+                // If ship is destroyed, player also effectively dies in the context of this game
+                this.player.isDead = true;
+                // Optional: add a specific message for ship destruction if needed
+            }
+            
+            // Cleanup Phaser game and call main app's death handler
+            this.game.destroy();
+            gameApp.handlePlayerDied();
+            return;
+        }
         
         // Do AI animations
         for (let key in this.enemyDict) {

@@ -619,6 +619,8 @@ window.onload = function() {
                 }
             },
 			handlePlayerDied: function() {
+				// Hide final game screen if it was open
+				this.finalGameShow = false;
 				// Replace the image of the player with the grave image
 				var animation = new PlayerAnimation(this.currentPlayer, null);
 				animation.removePlayerIMG(this.currentPlayer.coordinate);
