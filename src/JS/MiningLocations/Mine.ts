@@ -64,8 +64,8 @@ function UpgradeMine2(mine : Mine) {
     mine.desc = "This mine features a railway which makes for more efficient transportation of mined materials.";
     mine.totalHoursToConstruct = 24;
     mine.currentHoursConstructed = 0;
-    mine.totalResourceCount += 295;
-    mine.resourcePerHour = 10;
+    mine.totalResourceCount += 400;
+    mine.resourcePerHour = 20;
     mine.img = './src/IMG/places/mine2.png';
 }
 
@@ -75,7 +75,7 @@ function UpgradeMine3(mine : Mine) {
     mine.desc = "Digs deeper and faster than its predecessors";
     mine.totalHoursToConstruct = 28;
     mine.currentHoursConstructed = 0;
-    mine.totalResourceCount += 455;
-    mine.resourcePerHour = 15;
+    mine.totalResourceCount += 1000;
+    mine.resourcePerHour = 100;
     mine.img = './src/IMG/places/mine3.png';
 }

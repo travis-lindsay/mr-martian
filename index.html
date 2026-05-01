@@ -457,27 +457,27 @@
                                                         <div style="margin-left: 10px; display: inline-block">
                                                             <div class="labItemRow row">
                                                                 <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/roverparts/roverframe.png"></div>
-                                                                <div class="col-5 labItem">Rover Frame (100)</div>
+                                                                <div class="col-5 labItem">Rover Frame (500)</div>
                                                                 <div class="col-4 labItem">
-                                                                    <button class="btn btn-sm btn-dark" v-bind:class="{ disabled: currentPlayer.hasRoverPart('Frame') || currentBuilding.upgradeLevel < 2 || currentPlayer.stone < 100 }" @click="currentPlayer.addSupplyWithCost('Frame', 100);">
+                                                                    <button class="btn btn-sm btn-dark" v-bind:class="{ disabled: currentPlayer.hasRoverPart('Frame') || currentBuilding.upgradeLevel < 2 || currentPlayer.stone < 500 }" @click="currentPlayer.addSupplyWithCost('Frame', 500);">
                                                                         {{ currentPlayer.hasRoverPart('Frame') ? 'Collected' : 'Build' }}
                                                                     </button>
                                                                 </div>
                                                             </div>
                                                             <div class="labItemRow row">
                                                                 <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/roverparts/roverwheel.png"></div>
-                                                                <div class="col-5 labItem">Rover Wheels (100)</div>
+                                                                <div class="col-5 labItem">Rover Wheels (500)</div>
                                                                 <div class="col-4 labItem">
-                                                                    <button class="btn btn-sm btn-dark" v-bind:class="{ disabled: currentPlayer.hasRoverPart('Wheel') || currentBuilding.upgradeLevel < 2 || currentPlayer.stone < 100 }" @click="currentPlayer.addSupplyWithCost('Wheel', 100);">
+                                                                    <button class="btn btn-sm btn-dark" v-bind:class="{ disabled: currentPlayer.hasRoverPart('Wheel') || currentBuilding.upgradeLevel < 2 || currentPlayer.stone < 500 }" @click="currentPlayer.addSupplyWithCost('Wheel', 500);">
                                                                         {{ currentPlayer.hasRoverPart('Wheel') ? 'Collected' : 'Build' }}
                                                                     </button>
                                                                 </div>
                                                             </div>
                                                             <div class="labItemRow row">
                                                                 <div class="col-3 labItem"><img class="labItemIMG" src="./src/IMG/roverparts/roverengine.png"></div>
-                                                                <div class="col-5 labItem">Rover Engine (100)</div>
+                                                                <div class="col-5 labItem">Rover Engine (500)</div>
                                                                 <div class="col-4 labItem">
-                                                                    <button class="btn btn-sm btn-dark" v-bind:class="{ disabled: currentPlayer.hasRoverPart('Engine') || currentBuilding.upgradeLevel < 2 || currentPlayer.stone < 100 }" @click="currentPlayer.addSupplyWithCost('Engine', 100);">
+                                                                    <button class="btn btn-sm btn-dark" v-bind:class="{ disabled: currentPlayer.hasRoverPart('Engine') || currentBuilding.upgradeLevel < 2 || currentPlayer.stone < 500 }" @click="currentPlayer.addSupplyWithCost('Engine', 500);">
                                                                         {{ currentPlayer.hasRoverPart('Engine') ? 'Collected' : 'Build' }}
                                                                     </button>
                                                                 </div>
@@ -595,13 +595,18 @@
                                                         <span style="color: orange; font-weight: bold;">Cost: {{ currentBuilding.stoneCostPerTic }} Stone / Hour</span>
                                                     </div>
                                                 </div>
+                                                <div class="row justify-content-center" style="margin-top: 5px;">
+                                                    <div class="col-md-auto">
+                                                        <span style="color: #2ec62c; font-weight: bold;">Building Power: {{ currentPlayer.getBuildingPower() }}</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer" style="border-top: solid #1d1c1c 2px;">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" v-bind:class="{ disabled: currentPlayer.stone < currentBuilding.stoneCostPerTic }" @click="currentBuilding.construct();">
+                                    <button type="button" class="btn btn-primary" v-bind:class="{ disabled: currentPlayer.getBuildingPower() <= 0 || (currentBuilding.stoneCostPerTic > 0 && currentPlayer.stone < currentBuilding.stoneCostPerTic) }" @click="currentBuilding.construct();">
                                         Build
                                     </button>
                                 </div>
@@ -1084,6 +1089,9 @@
                     <b class="itemHeader">Stone: </b><span class="itemStats">{{ currentPlayer.stone }}</span>
                 </div>
                 <div class="col-sm-12" style="margin-top: 15px; color: #ee4a00;">
+                    <b class="itemHeader" title="Tics per click" data-toggle="tooltip">Building Power: </b><span class="itemStats" style="color: #2ec62c;">{{ currentPlayer.getBuildingPower() }}</span>
+                </div>
+                <div class="col-sm-12" style="margin-top: 15px; color: #ee4a00;">
                     <hr>
                     <h4 style="color: white;">Inventory:</h4>
                     <div class="row" style="margin: 5px;">
@@ -1123,11 +1131,11 @@
                                     <br><span style="color: orange; font-weight: bold;">Combat Damage:</span> 10
                                 </div>
                                 <div v-if="currentItem.name === 'Shovel'" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 5px;">
-                                    <span style="color: #2ec62c; font-weight: bold;">Stat Effect:</span> Basic weapon for defense.
+                                    <span style="color: #2ec62c; font-weight: bold;">Stat Effect:</span> +1 Building Power (max 3 from shovels).
                                     <br><span style="color: orange; font-weight: bold;">Combat Damage:</span> 5
                                 </div>
                                 <div v-if="currentItem.name === 'Axe'" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 5px;">
-                                    <span style="color: #2ec62c; font-weight: bold;">Stat Effect:</span> Advanced weapon for defense.
+                                    <span style="color: #2ec62c; font-weight: bold;">Stat Effect:</span> +5 Building Power.
                                     <br><span style="color: orange; font-weight: bold;">Combat Damage:</span> 15
                                 </div>
                                 <div v-if="currentItem.name === 'Spear'" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 5px;">

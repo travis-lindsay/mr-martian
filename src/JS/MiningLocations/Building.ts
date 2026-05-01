@@ -112,16 +112,27 @@ export class Building {
             gameApp.closeConstructionModal();
         }
         else {
-            if (this.player!.stone < this.stoneCostPerTic) {
-                // Not enough stone
+            const buildingPower = this.player!.getBuildingPower();
+            if (buildingPower <= 0) {
                 return;
             }
-            this.currentHoursConstructed += 1;
-            this.player!.subtractStone(this.stoneCostPerTic);
-            this.player!.clock.incrementTimeUsed(ActionType.Build);
-            if (this.getIsConstructed()) {
-                Utils.removeImageFromCoordinate('CONSTRUCTION', this.coordinate);
-                gameApp.closeConstructionModal();
+
+            const remainingHours = this.totalHoursToConstruct - this.currentHoursConstructed;
+            let ticsToApply = Math.min(buildingPower, remainingHours);
+
+            if (this.stoneCostPerTic > 0) {
+                const affordableTics = Math.floor(this.player!.stone / this.stoneCostPerTic);
+                ticsToApply = Math.min(ticsToApply, affordableTics);
+            }
+
+            if (ticsToApply > 0) {
+                this.currentHoursConstructed += ticsToApply;
+                this.player!.subtractStone(ticsToApply * this.stoneCostPerTic);
+                this.player!.clock.incrementTimeUsed(ActionType.Build);
+                if (this.getIsConstructed()) {
+                    Utils.removeImageFromCoordinate('CONSTRUCTION', this.coordinate);
+                    gameApp.closeConstructionModal();
+                }
             }
         }
     }

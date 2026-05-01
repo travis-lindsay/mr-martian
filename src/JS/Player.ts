@@ -135,11 +135,24 @@ export class Player {
             if (itemIndex == -1) {
                 this.suppliesList.push(inventoryItem);
             }
-            else {
+            else if (item === 'Shovel') {
                 let item = this.suppliesList[itemIndex];
                 item.amount += 1;
             }
         }
+    }
+
+    getBuildingPower() {
+        let power = 0;
+        const shovelIndex = this.suppliesList.findIndex(s => s.name === 'Shovel');
+        if (shovelIndex !== -1) {
+            power += Math.min(this.suppliesList[shovelIndex].amount, 3);
+        }
+        const axeIndex = this.suppliesList.findIndex(s => s.name === 'Axe');
+        if (axeIndex !== -1 && this.suppliesList[axeIndex].amount > 0) {
+            power += 5;
+        }
+        return power;
     }
 
     hasPropaganda() {
