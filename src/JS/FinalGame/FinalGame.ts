@@ -186,7 +186,7 @@ export class FinalGame {
         emitter.maxParticleScale = 0.5;
         emitter.minParticleSpeed.setTo(-200, 200);
         emitter.maxParticleSpeed.setTo(200, 500);
-        emitter.gravity = 200;
+        (emitter as any).gravity = 200;
 
         emitter.start(false, 5000, 20);
 
