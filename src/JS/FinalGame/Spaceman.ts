@@ -3,6 +3,8 @@ import { Attackable } from "./Attackable";
 import { Direction } from "./FinalGame";
 import { delay } from "./FinalGame";
 
+import { gameApp } from "../game";
+
 export class Spaceman extends Attackable {
 
     sprite: Phaser.Sprite;
@@ -20,9 +22,12 @@ export class Spaceman extends Attackable {
     lastThrowTime : number = 0;
     throwCooldown : number = 500; // ms
     throwCallback : () => void;
+    weaponName : string;
 
     constructor(game : Phaser.Game, name : string, healthText : Phaser.Text | undefined, throwCallback : () => void) {
-        super(100, 500, 15);
+        super(100, 500, gameApp.getCurrentPlayer().getBestWeapon().damage);
+        const bestWeapon = gameApp.getCurrentPlayer().getBestWeapon();
+        this.weaponName = bestWeapon.name;
         this.game = game;
         this.healthText = healthText;
         this.throwCallback = throwCallback;
@@ -46,6 +51,10 @@ export class Spaceman extends Attackable {
         this.healthbar = game.add.graphics(0,0);
         const style = { font: "bold 16px Arial", fill: "#ffffff" };
         this.healthLabel = this.game.add.text(this.game.width - 270, 20, "Player Health", style);
+        
+        const weaponStyle = { font: "bold 14px Arial", fill: "#ffa500" };
+        this.game.add.text(this.game.width - 270, 70, "Weapon: " + this.weaponName + " (" + this.attackDamage + " DMG)", weaponStyle);
+
         this.updateHealthBar();
     }
 

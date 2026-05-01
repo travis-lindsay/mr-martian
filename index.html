@@ -1100,9 +1100,19 @@
                                 <p style="font-size: 1.2em; color: orange;">{{ currentItem.description }}</p>
                                 <div v-if="currentItem.name === 'Pick Axe'" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 5px;">
                                     <span style="color: #2ec62c; font-weight: bold;">Stat Effect:</span> +5 Stone per harvest in Mines.
+                                    <br><span style="color: orange; font-weight: bold;">Combat Damage:</span> 10
                                 </div>
                                 <div v-if="currentItem.name === 'Shovel'" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 5px;">
-                                    <span style="color: #2ec62c; font-weight: bold;">Stat Effect:</span> Basic weapon for defense in the Final Game.
+                                    <span style="color: #2ec62c; font-weight: bold;">Stat Effect:</span> Basic weapon for defense.
+                                    <br><span style="color: orange; font-weight: bold;">Combat Damage:</span> 5
+                                </div>
+                                <div v-if="currentItem.name === 'Axe'" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 5px;">
+                                    <span style="color: #2ec62c; font-weight: bold;">Stat Effect:</span> Advanced weapon for defense.
+                                    <br><span style="color: orange; font-weight: bold;">Combat Damage:</span> 15
+                                </div>
+                                <div v-if="currentItem.name === 'Spear'" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 5px;">
+                                    <span style="color: #2ec62c; font-weight: bold;">Stat Effect:</span> Elite weapon for defense.
+                                    <br><span style="color: orange; font-weight: bold;">Combat Damage:</span> 20
                                 </div>
                                 <div v-if="currentItem.name === 'Anti-alien propaganda'" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 5px;">
                                     <span style="color: #2ec62c; font-weight: bold;">Usage:</span> Place on other players' buildings to increase their enemy count.

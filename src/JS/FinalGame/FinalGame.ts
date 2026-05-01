@@ -73,7 +73,15 @@ export class FinalGame {
         this.game.load.spritesheet('sharkborg', './src/IMG/finalgame/shark.png', 150, 200);
         this.game.load.spritesheet('alienballoon', './src/IMG/finalgame/alienballoon.png', 100, 150);
         this.game.load.image('ground', './src/IMG/finalgame/ground.png');
-        this.game.load.image('shovel', './src/IMG/tools/shovel.png');
+        
+        const bestWeapon = gameApp.getCurrentPlayer().getBestWeapon();
+        let weaponImg = './src/IMG/tools/shovel.png';
+        switch(bestWeapon.name) {
+            case 'Pick Axe': weaponImg = './src/IMG/tools/pickaxe.png'; break;
+            case 'Axe': weaponImg = './src/IMG/tools/axe.png'; break;
+            case 'Spear': weaponImg = './src/IMG/tools/spear.png'; break;
+        }
+        this.game.load.image('weapon', weaponImg);
     }
 
     create() {
@@ -203,7 +211,7 @@ export class FinalGame {
     }
 
     private throwShovel() {
-        let shovel = this.projectiles.create(this.spaceman.sprite.x, this.spaceman.sprite.y, 'shovel');
+        let shovel = this.projectiles.create(this.spaceman.sprite.x, this.spaceman.sprite.y, 'weapon');
         shovel.anchor.setTo(0.5, 0.5);
         shovel.scale.setTo(0.5, 0.5);
         if (this.spaceman.lastDirection == Direction.LEFT) {

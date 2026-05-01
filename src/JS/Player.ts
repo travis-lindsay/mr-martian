@@ -311,4 +311,20 @@ export class Player {
         const parts = ['Frame', 'Engine', 'Wheel'];
         return parts.filter(partName => this.hasRoverPart(partName)).length;
     }
+
+    getBestWeapon() {
+        const weapons = [
+            { name: 'Spear', damage: Spear.damage },
+            { name: 'Axe', damage: Axe.damage },
+            { name: 'Pick Axe', damage: PickAxe.damage },
+            { name: 'Shovel', damage: Shovel.damage }
+        ];
+
+        for (const weapon of weapons) {
+            if (this.suppliesList.some(item => item.name === weapon.name && item.amount > 0)) {
+                return weapon;
+            }
+        }
+        return weapons[weapons.length - 1]; // Fallback to shovel
+    }
     }
