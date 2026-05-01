@@ -20,7 +20,7 @@ export class Lab extends Building {
         // Time to construct the Farm
         this.totalHoursToConstruct = 3; //30
         this.currentHoursConstructed = 0;
-        this.stoneCostPerTic = 20;
+        this.stoneCostPerTic = 5;
     }
 
     upgrade() {
@@ -53,7 +53,7 @@ export class Lab extends Building {
 function UpgradeLab2(lab : Lab) {
     lab.name = "Advanced Lab";
     lab.desc = "Extra beakers, additional counter space, all makes for faster research time.";
-    lab.totalHoursToConstruct = 24;
+    lab.totalHoursToConstruct = 10;
     lab.currentHoursConstructed = 0;
     lab.totalResourceCount += 205;
     lab.resourcePerHour = 10;

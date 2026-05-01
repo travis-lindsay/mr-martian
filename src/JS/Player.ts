@@ -82,6 +82,15 @@ export class Player {
         }
     }
     
+    addSupplyWithCost(item: string, cost: number) {
+        if (this.stone >= cost) {
+            this.subtractStone(cost);
+            this.addSupply(item);
+            return true;
+        }
+        return false;
+    }
+
     addSupply(item : string)
     {
         let inventoryItem : InventoryItem | null = null;
