@@ -34,6 +34,7 @@ export class Building {
     bonusResourcePerHourDesc : string = "";
     propaganda : number = 0;
     nextUpgradeReqs : UpgradeReqs = { water : 0, food : 0, stone : 0 };
+    stoneCostPerTic : number = 0;
 
     constructor (player? : Player, coordinate? : Coordinate) {
         // Take a player object, so we can assign an owner of the place, as well as manipulate the clock upon construction
@@ -111,7 +112,12 @@ export class Building {
             gameApp.closeConstructionModal();
         }
         else {
+            if (this.player!.stone < this.stoneCostPerTic) {
+                // Not enough stone
+                return;
+            }
             this.currentHoursConstructed += 1;
+            this.player!.subtractStone(this.stoneCostPerTic);
             this.player!.clock.incrementTimeUsed(ActionType.Build);
             if (this.getIsConstructed()) {
                 Utils.removeImageFromCoordinate('CONSTRUCTION', this.coordinate);

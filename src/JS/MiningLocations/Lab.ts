@@ -20,6 +20,7 @@ export class Lab extends Building {
         // Time to construct the Farm
         this.totalHoursToConstruct = 3; //30
         this.currentHoursConstructed = 0;
+        this.stoneCostPerTic = 20;
     }
 
     upgrade() {

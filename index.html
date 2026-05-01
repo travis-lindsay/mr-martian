@@ -575,13 +575,18 @@
                                                               class="constructionCellEmpty"></span>
                                                     </div>
                                                 </div>
+                                                <div v-if="currentBuilding.stoneCostPerTic > 0" class="row justify-content-center" style="margin-top: 10px;">
+                                                    <div class="col-md-auto">
+                                                        <span style="color: orange; font-weight: bold;">Cost: {{ currentBuilding.stoneCostPerTic }} Stone / Hour</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer" style="border-top: solid #1d1c1c 2px;">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" @click="currentBuilding.construct();">
+                                    <button type="button" class="btn btn-primary" v-bind:class="{ disabled: currentPlayer.stone < currentBuilding.stoneCostPerTic }" @click="currentBuilding.construct();">
                                         Build
                                     </button>
                                 </div>
