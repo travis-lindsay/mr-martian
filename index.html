@@ -147,6 +147,15 @@
                                 <button class="btn btn-sm btn-success" @click="currentPlayer.changeMorale(10)">+10</button>
                             </div>
                         </div>
+                        <div class="row mb-2">
+                            <div class="col-4">Unlimited Time:</div>
+                            <div class="col-8">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="unlimitedTimeToggle" v-model="currentPlayer.clock.unlimitedTime">
+                                    <label class="custom-control-label" for="unlimitedTimeToggle" style="color: white;">{{ currentPlayer.clock.unlimitedTime ? 'ON' : 'OFF' }}</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="adminControlGroup">
                         <h5>Resources</h5>

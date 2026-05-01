@@ -8,6 +8,7 @@ export class Clock {
     totalTime : number = 24;
     isDone : boolean = false;
     randomEventController : RandomEventController;
+    unlimitedTime : boolean = false;
 
     constructor() {
         this.randomEventController = new RandomEventController();
@@ -15,7 +16,9 @@ export class Clock {
 
     incrementTimeUsed(actionType : ActionType) {
         if (!this.getIsDone()) {
-            this.usedTime += 1;
+            if (!this.unlimitedTime) {
+                this.usedTime += 1;
+            }
         } else {
             this.resetClock();
         }
